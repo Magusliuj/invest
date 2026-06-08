@@ -653,7 +653,7 @@
 <!-- CHART -->
 <div class="chart-section">
   <div class="chart-card">
-    <div class="chart-card-title">四层房产市场走势对比（2016–2026，基数 2016=100）</div>
+    <div class="chart-card-title">四层房产市场走势对比（2006–2026，基数 2006=100）</div>
     <canvas id="kChart" height="240"></canvas>
   </div>
 </div>
@@ -2756,12 +2756,12 @@ const ctx = document.getElementById('kChart').getContext('2d');
 new Chart(ctx, {
   type: 'line',
   data: {
-    labels: ['2016', '2017', '2018', '2019', '2020', '2021', '2022', '2023', '2024', '2025', '2026'],
+    labels: ['2006', '2007', '2008', '2009', '2010', '2011', '2012', '2013', '2014', '2015', '2016', '2017', '2018', '2019', '2020', '2021', '2022', '2023', '2024', '2025', '2026'],
     datasets: [
       {
         label: '第一层：顶级稀缺 SFH（Los Altos、Palo Alto、Atherton）',
-        // 2016起点=100。科技繁荣稳涨→疫情低利率大涨→高利率小幅调整→AI财富拉起
-        data: [100, 110, 120, 118, 124, 148, 141, 136, 146, 154, 159],
+        // 2006起点=100。次贷危机小幅回调→科技繁荣大涨→疫情低利率暴涨→高利率小幅调整→AI财富拉起
+        data: [100, 98, 88, 82, 86, 93, 104, 122, 140, 162, 180, 198, 216, 212, 223, 266, 254, 245, 263, 277, 286],
         borderColor: '#c0623a',
         backgroundColor: 'rgba(192,98,58,0.08)',
         borderWidth: 2.5,
@@ -2772,8 +2772,8 @@ new Chart(ctx, {
       },
       {
         label: '第二层：优质实用区域（Cupertino、San Mateo、Mountain View）',
-        // 随大市涨落，但比第一层敏感，高利率调整幅度稍大
-        data: [100, 108, 116, 114, 119, 140, 130, 124, 131, 136, 138],
+        // 随大市涨落，但比第一层敏感，次贷危机跌幅更大，高利率调整幅度也稍大
+        data: [100, 94, 78, 70, 73, 79, 90, 108, 126, 148, 165, 182, 198, 193, 201, 246, 228, 216, 229, 238, 244],
         borderColor: '#4a7c6f',
         borderWidth: 2,
         pointBackgroundColor: '#4a7c6f',
@@ -2783,8 +2783,8 @@ new Chart(ctx, {
       },
       {
         label: '第三层：普通 Condo / 交通盘（Santa Clara、普通 Townhome）',
-        // 2021随大市涨；高利率后跌回，AI时代没怎么受益
-        data: [100, 108, 116, 112, 112, 136, 120, 110, 106, 102, 100],
+        // 次贷危机跌幅显著；2021随大市涨；高利率后跌回，AI时代没怎么受益
+        data: [100, 87, 68, 57, 57, 60, 70, 86, 102, 120, 135, 150, 162, 154, 160, 197, 175, 160, 165, 169, 162],
         borderColor: '#3d6b9e',
         borderWidth: 2,
         pointBackgroundColor: '#3d6b9e',
@@ -2795,8 +2795,8 @@ new Chart(ctx, {
       },
       {
         label: '第四层：远郊通勤房（Antioch、Tracy、Stockton）',
-        // WFH期间暴涨（2021峰值），WFH退潮+高利率后跌幅最大
-        data: [100, 106, 112, 108, 118, 148, 124, 108, 100, 96, 92],
+        // 次贷危机重创（-66%峰值跌幅）；WFH期间暴涨（2021峰值），WFH退潮+高利率后跌幅最大
+        data: [100, 78, 55, 40, 36, 34, 40, 55, 68, 82, 95, 112, 122, 118, 127, 172, 156, 135, 131, 125, 118],
         borderColor: '#b04a38',
         borderWidth: 2,
         pointBackgroundColor: '#b04a38',
@@ -2830,7 +2830,7 @@ new Chart(ctx, {
         bodyColor: '#7a6f66',
         padding: 12,
         callbacks: {
-          label: (ctx) => ` ${ctx.dataset.label.split('（')[0]}：${ctx.parsed.y}（基数 100）`,
+          label: (ctx) => ` ${ctx.dataset.label.split('（')[0]}：${ctx.parsed.y}（2006=100）`,
         },
       },
     },
