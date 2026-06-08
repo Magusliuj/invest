@@ -542,6 +542,22 @@
   .ri-num { display: block; font-size: 1.4rem; font-weight: 800; color: var(--accent); }
   .ri-label { display: block; font-size: 0.78rem; color: var(--muted); margin-top: 4px; }
   .rate-footnote { margin: 0; font-size: 0.8rem; color: #999; line-height: 1.6; }
+  /* Matrix table */
+  .matrix-table th { text-align: center; font-size: 0.8rem; }
+  .mx-price { font-weight: 700; font-size: 1rem; white-space: nowrap; border-right: 2px solid #e0d8ce; }
+  .mx-row-a td { background: #faf8f5; }
+  .mx-row-b td { background: #f4f2ef; }
+  .mx-cell { text-align: center; padding: 8px 6px !important; vertical-align: middle; }
+  .mx-pay { display: block; font-weight: 700; font-size: 0.9rem; }
+  .mx-inc { display: block; font-size: 0.72rem; color: #888; margin-top: 2px; }
+  .mx-pct { display: block; font-size: 0.68rem; color: #bbb; }
+  .mx-na { text-align: center; color: #ccc; font-size: 1.1rem; }
+  .mx-best { background: #e0f0e8 !important; } .mx-best .mx-pay { color: #2a7a4a; }
+  .mx-good { background: #eaf4f0 !important; } .mx-good .mx-pay { color: var(--accent2); }
+  .mx-ok { background: #f0f4fc !important; } .mx-ok .mx-pay { color: var(--blue); }
+  .mx-warn { background: #fdf5ef !important; } .mx-warn .mx-pay { color: var(--accent); }
+  .mx-heavy { background: #fdeeed !important; } .mx-heavy .mx-pay { color: var(--down); }
+  .mx-cash { background: #f8f5ff !important; } .mx-cash .mx-pay { color: #7c6b9e; font-size: 0.82rem; }
 
   .conclusion {
     background: linear-gradient(135deg, #fef9f2, #fdf4eb);
@@ -2277,70 +2293,88 @@
       </div>
     </div>
 
-    <!-- TABLE 2: Down Payment Scenarios -->
+    <!-- TABLE 2: Down Payment Matrix -->
     <div class="afford-rate-section" style="margin-bottom:20px;">
-      <h3 style="margin:0 0 4px 0; font-size:1.05rem; color:var(--text)">首付金额 → 月供对照表（30年固定 · 利率 6.5%）</h3>
-      <p style="margin:0 0 16px 0; font-size:0.82rem; color:#999">月总支出 = 本息 + 房产税（1.25%/年）+ 保险。贷款额 ≤$1.25M 适用高余额普通利率 6.25%，标注 ★。</p>
+      <h3 style="margin:0 0 4px 0; font-size:1.05rem; color:var(--text)">首付 × 房价 月总支出矩阵（30年固定）</h3>
+      <p style="margin:0 0 16px 0; font-size:0.82rem; color:#999">每格上行 = 月总支出（本息+税+保险）· 下行 = 所需家庭年收入 · ★ = 贷款落入高余额普通区间（≤$1.25M，利率约6.25%）· — = 首付不足20%不可贷</p>
       <div class="rate-table-wrap">
-        <table class="rate-table">
+        <table class="rate-table matrix-table">
           <thead>
             <tr>
               <th>房价</th>
-              <th>首付</th>
-              <th>首付比例</th>
-              <th>贷款额</th>
-              <th>月供（本息）</th>
-              <th>月总支出</th>
-              <th>建议年收入</th>
+              <th>首付 $700K</th>
+              <th>首付 $1M</th>
+              <th>首付 $1.5M</th>
+              <th>首付 $2M</th>
+              <th>首付 $2.5M</th>
+              <th>首付 $3M</th>
             </tr>
           </thead>
           <tbody>
-            <!-- $3.0M -->
-            <tr style="background:#f7f9fd;">
-              <td rowspan="4" style="font-weight:700; font-size:1.05rem; vertical-align:middle; border-right:2px solid #e0d8ce;">$3.0M</td>
-              <td>$600K</td><td style="color:#999">20%</td><td>$2.4M</td><td>$15,175</td><td class="afford-key">$18,550</td><td class="afford-income">$795K+</td>
+            <tr class="mx-row-a">
+              <td class="mx-price">$2M</td>
+              <td class="mx-cell mx-ok"><span class="mx-pay">$10,478</span><span class="mx-inc">449K+/yr</span><span class="mx-pct">35%</span></td>
+              <td class="mx-cell mx-good"><span class="mx-pay">$8,415 ★</span><span class="mx-inc">361K+/yr</span><span class="mx-pct">50%</span></td>
+              <td class="mx-cell mx-best"><span class="mx-pay">$5,337 ★</span><span class="mx-inc">229K+/yr</span><span class="mx-pct">75%</span></td>
+              <td class="mx-cell mx-cash"><span class="mx-pay">全现金</span><span class="mx-inc">税险$2,258</span><span class="mx-pct">100%</span></td>
+              <td class="mx-cell mx-na">—</td>
+              <td class="mx-cell mx-na">—</td>
             </tr>
-            <tr style="background:#f7f9fd;">
-              <td>$900K</td><td style="color:#999">30%</td><td>$2.1M</td><td>$13,278</td><td class="afford-key">$16,650</td><td class="afford-income">$715K+</td>
+            <tr class="mx-row-b">
+              <td class="mx-price">$2.5M</td>
+              <td class="mx-cell mx-ok"><span class="mx-pay">$14,185</span><span class="mx-inc">609K+/yr</span><span class="mx-pct">28%</span></td>
+              <td class="mx-cell mx-ok"><span class="mx-pay">$12,289</span><span class="mx-inc">527K+/yr</span><span class="mx-pct">40%</span></td>
+              <td class="mx-cell mx-good"><span class="mx-pay">$8,961 ★</span><span class="mx-inc">384K+/yr</span><span class="mx-pct">60%</span></td>
+              <td class="mx-cell mx-best"><span class="mx-pay">$5,883 ★</span><span class="mx-inc">252K+/yr</span><span class="mx-pct">80%</span></td>
+              <td class="mx-cell mx-cash"><span class="mx-pay">全现金</span><span class="mx-inc">税险$2,804</span><span class="mx-pct">100%</span></td>
+              <td class="mx-cell mx-na">—</td>
             </tr>
-            <tr style="background:#f7f9fd;">
-              <td>$1.5M</td><td style="color:#999">50%</td><td>$1.5M</td><td>$9,485</td><td class="afford-key">$12,860</td><td class="afford-income">$550K+</td>
+            <tr class="mx-row-a">
+              <td class="mx-price">$3M</td>
+              <td class="mx-cell mx-warn"><span class="mx-pay">$17,918</span><span class="mx-inc">769K+/yr</span><span class="mx-pct">23%</span></td>
+              <td class="mx-cell mx-ok"><span class="mx-pay">$16,021</span><span class="mx-inc">687K+/yr</span><span class="mx-pct">33%</span></td>
+              <td class="mx-cell mx-ok"><span class="mx-pay">$12,860</span><span class="mx-inc">551K+/yr</span><span class="mx-pct">50%</span></td>
+              <td class="mx-cell mx-good"><span class="mx-pay">$9,532 ★</span><span class="mx-inc">409K+/yr</span><span class="mx-pct">67%</span></td>
+              <td class="mx-cell mx-best"><span class="mx-pay">$6,454 ★</span><span class="mx-inc">277K+/yr</span><span class="mx-pct">83%</span></td>
+              <td class="mx-cell mx-cash"><span class="mx-pay">全现金</span><span class="mx-inc">税险$3,375</span><span class="mx-pct">100%</span></td>
             </tr>
-            <tr style="background:#e8f4ed; font-weight:600;">
-              <td>$2.0M ★</td><td style="color:var(--accent2)">67%</td><td>$1.0M ★</td><td>$6,157</td><td class="afford-key" style="color:var(--up)">$9,530</td><td class="afford-income">$410K+</td>
+            <tr class="mx-row-b">
+              <td class="mx-price">$3.5M</td>
+              <td class="mx-cell mx-warn"><span class="mx-pay">$21,650</span><span class="mx-inc">929K+/yr</span><span class="mx-pct">20%</span></td>
+              <td class="mx-cell mx-warn"><span class="mx-pay">$19,753</span><span class="mx-inc">847K+/yr</span><span class="mx-pct">29%</span></td>
+              <td class="mx-cell mx-ok"><span class="mx-pay">$16,592</span><span class="mx-inc">712K+/yr</span><span class="mx-pct">43%</span></td>
+              <td class="mx-cell mx-ok"><span class="mx-pay">$13,431</span><span class="mx-inc">576K+/yr</span><span class="mx-pct">57%</span></td>
+              <td class="mx-cell mx-good"><span class="mx-pay">$10,103 ★</span><span class="mx-inc">433K+/yr</span><span class="mx-pct">71%</span></td>
+              <td class="mx-cell mx-best"><span class="mx-pay">$7,025 ★</span><span class="mx-inc">301K+/yr</span><span class="mx-pct">86%</span></td>
             </tr>
-            <!-- $3.5M -->
-            <tr style="background:#faf8f5; border-top:2px solid #e0d8ce;">
-              <td rowspan="4" style="font-weight:700; font-size:1.05rem; vertical-align:middle; border-right:2px solid #e0d8ce;">$3.5M</td>
-              <td>$700K</td><td style="color:#999">20%</td><td>$2.8M</td><td>$17,704</td><td class="afford-key">$21,650</td><td class="afford-income">$930K+</td>
+            <tr class="mx-row-a">
+              <td class="mx-price">$4M</td>
+              <td class="mx-cell mx-na">—</td>
+              <td class="mx-cell mx-heavy"><span class="mx-pay">$24,003</span><span class="mx-inc">1,029K+/yr</span><span class="mx-pct">25%</span></td>
+              <td class="mx-cell mx-warn"><span class="mx-pay">$20,349</span><span class="mx-inc">873K+/yr</span><span class="mx-pct">37.5%</span></td>
+              <td class="mx-cell mx-warn"><span class="mx-pay">$17,188</span><span class="mx-inc">737K+/yr</span><span class="mx-pct">50%</span></td>
+              <td class="mx-cell mx-ok"><span class="mx-pay">$14,027</span><span class="mx-inc">601K+/yr</span><span class="mx-pct">62.5%</span></td>
+              <td class="mx-cell mx-good"><span class="mx-pay">$10,699 ★</span><span class="mx-inc">459K+/yr</span><span class="mx-pct">75%</span></td>
             </tr>
-            <tr style="background:#faf8f5;">
-              <td>$1.0M</td><td style="color:#999">29%</td><td>$2.5M</td><td>$15,807</td><td class="afford-key">$19,750</td><td class="afford-income">$848K+</td>
-            </tr>
-            <tr style="background:#faf8f5;">
-              <td>$1.5M</td><td style="color:#999">43%</td><td>$2.0M</td><td>$12,646</td><td class="afford-key">$16,590</td><td class="afford-income">$712K+</td>
-            </tr>
-            <tr style="background:#e8f4ed; font-weight:600;">
-              <td>$2.0M ★</td><td style="color:var(--accent2)">57%</td><td>$1.5M</td><td>$9,485</td><td class="afford-key" style="color:var(--up)">$13,430</td><td class="afford-income">$576K+</td>
-            </tr>
-            <!-- $4.0M -->
-            <tr style="background:#f7f9fd; border-top:2px solid #e0d8ce;">
-              <td rowspan="4" style="font-weight:700; font-size:1.05rem; vertical-align:middle; border-right:2px solid #e0d8ce;">$4.0M</td>
-              <td>$800K</td><td style="color:#999">20%</td><td>$3.2M</td><td>$20,758</td><td class="afford-key">$25,325</td><td class="afford-income">$1.09M+</td>
-            </tr>
-            <tr style="background:#f7f9fd;">
-              <td>$1.0M</td><td style="color:#999">25%</td><td>$3.0M</td><td>$19,461</td><td class="afford-key">$24,028</td><td class="afford-income">$1.03M+</td>
-            </tr>
-            <tr style="background:#f7f9fd;">
-              <td>$1.5M</td><td style="color:#999">37.5%</td><td>$2.5M</td><td>$15,807</td><td class="afford-key">$20,374</td><td class="afford-income">$874K+</td>
-            </tr>
-            <tr style="background:#e8f4ed; font-weight:600;">
-              <td>$2.0M</td><td style="color:var(--accent2)">50%</td><td>$2.0M</td><td>$12,646</td><td class="afford-key" style="color:var(--up)">$17,213</td><td class="afford-income">$739K+</td>
+            <tr class="mx-row-b">
+              <td class="mx-price">$4.5M</td>
+              <td class="mx-cell mx-na">—</td>
+              <td class="mx-cell mx-heavy"><span class="mx-pay">$27,818</span><span class="mx-inc">1,193K+/yr</span><span class="mx-pct">22%</span></td>
+              <td class="mx-cell mx-heavy"><span class="mx-pay">$24,574</span><span class="mx-inc">1,054K+/yr</span><span class="mx-pct">33%</span></td>
+              <td class="mx-cell mx-warn"><span class="mx-pay">$20,920</span><span class="mx-inc">897K+/yr</span><span class="mx-pct">44%</span></td>
+              <td class="mx-cell mx-warn"><span class="mx-pay">$17,759</span><span class="mx-inc">762K+/yr</span><span class="mx-pct">56%</span></td>
+              <td class="mx-cell mx-ok"><span class="mx-pay">$14,598</span><span class="mx-inc">626K+/yr</span><span class="mx-pct">67%</span></td>
             </tr>
           </tbody>
         </table>
       </div>
-      <p class="rate-footnote">★ 贷款额 ≤$1,249,125 可申请高余额普通贷款（利率约 6.25%，比 Jumbo 低 0.25–0.5%），上表 $3M / $2M首付行按此利率计算。绿色行为 $2M 首付对应场景。</p>
+      <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:12px; font-size:0.78rem;">
+        <span style="background:#e8f4ed; padding:3px 10px; border-radius:8px; color:var(--up)">■ 轻松（月供&lt;$9K）</span>
+        <span style="background:#eef6f1; padding:3px 10px; border-radius:8px; color:var(--accent2)">■ 舒适（$9K–$13K）</span>
+        <span style="background:#f7f9fd; padding:3px 10px; border-radius:8px; color:var(--blue)">■ 合理（$13K–$18K）</span>
+        <span style="background:#fdf6f0; padding:3px 10px; border-radius:8px; color:var(--accent)">■ 偏重（$18K–$22K）</span>
+        <span style="background:#fdf0f0; padding:3px 10px; border-radius:8px; color:var(--down)">■ 很重（$22K+）</span>
+      </div>
     </div>
 
     <!-- TABLE 3: Rate Sensitivity -->
