@@ -428,6 +428,14 @@
   .zlabel { display: block; font-size: 10px; color: var(--subtle); margin-top: 2px; }
   .zip-school-note { font-size: 11px; color: var(--muted); padding: 6px 20px; background: #fafaf8; border-bottom: 1px solid var(--border); }
   .zip-school-note strong { color: var(--text); }
+  .zip-profile { font-size: 11px; color: var(--muted); padding: 4px 20px 6px; background: #f5f2ee; border-bottom: 1px solid var(--border); }
+  .zip-profile strong { color: var(--text); }
+  .zip-profile .ptag { display:inline-block; background: var(--tag-bg); border-radius:4px; padding:1px 6px; margin:1px 2px; font-size:10px; color:var(--text); }
+  .zip-multi { font-size: 11px; color: var(--muted); padding: 5px 20px 7px; background: #f0f4f8; border-bottom: 1px solid var(--border); line-height: 1.7; }
+  .zip-multi strong { color: var(--text); }
+  .ztag-good { display:inline-block; background:#e0f0e8; color:#1a6a3a; border-radius:4px; padding:1px 7px; margin:1px 3px; font-size:10px; font-weight:600; }
+  .ztag-mid  { display:inline-block; background:#fef3e0; color:#8a6010; border-radius:4px; padding:1px 7px; margin:1px 3px; font-size:10px; font-weight:600; }
+  .ztag-bad  { display:inline-block; background:#fde8e4; color:#8a2010; border-radius:4px; padding:1px 7px; margin:1px 3px; font-size:10px; font-weight:600; }
 
   /* ── LISTING ROW ── */
   .listing-row {
@@ -947,6 +955,131 @@
 
   <div class="risk-box" style="margin-bottom:32px; color:#5a3020; background:#fdf5f0; border-color:#e8c4a8; border-left-color:#c0623a;">
     ⚠️ <strong>买旧房的隐藏成本：</strong>湾区大量房子建于 1950–1970 年代，外观还过得去，但管线、电路、屋顶、地基往往老化严重，买下来直接住的风险很大。完整装修通常需要 <strong>$300K–$800K+</strong>，施工周期 <strong>1–2 年</strong>，期间还要另租房子住。所以以下案例特别标注了 🆕 新建 和 ✨ 精装翻新，这类房子溢价合理，买了就能住，是很多家庭更实际的选择。
+
+    <div style="display:flex; flex-wrap:wrap; gap:10px; margin-top:14px; font-size:0.82rem;">
+      <div style="background:#fff; border:1px solid #e8c4a8; border-radius:10px; padding:10px 14px; flex:1; min-width:140px;">
+        <div style="color:#8b5040; font-weight:700; margin-bottom:4px;">🔨 装修费</div>
+        <div style="color:#5a3020;">$300K – $800K+</div>
+      </div>
+      <div style="display:flex; align-items:center; color:#c0623a; font-weight:700; font-size:1rem;">+</div>
+      <div style="background:#fff; border:1px solid #e8c4a8; border-radius:10px; padding:10px 14px; flex:1; min-width:140px;">
+        <div style="color:#8b5040; font-weight:700; margin-bottom:4px;">🏠 过渡期租房</div>
+        <div style="color:#5a3020;">$6K/月 × 12–24月</div>
+        <div style="color:#a07050; font-size:0.75rem; margin-top:2px;">= $72K – $144K</div>
+      </div>
+      <div style="display:flex; align-items:center; color:#c0623a; font-weight:700; font-size:1rem;">=</div>
+      <div style="background:#fdf0e8; border:1.5px solid #c0623a; border-radius:10px; padding:10px 14px; flex:1; min-width:140px;">
+        <div style="color:#c0623a; font-weight:700; margin-bottom:4px;">💸 实际隐藏总成本</div>
+        <div style="color:#8b3020; font-weight:800; font-size:1rem;">$372K – $944K+</div>
+        <div style="color:#a07050; font-size:0.75rem; margin-top:2px;">买房当天就开始烧</div>
+      </div>
+    </div>
+
+    <!-- 图示 -->
+    <div style="display:flex; gap:14px; margin-top:18px; flex-wrap:wrap;">
+
+      <!-- 旧房 -->
+      <div style="flex:1; min-width:140px; text-align:center;">
+        <svg viewBox="0 0 120 105" xmlns="http://www.w3.org/2000/svg" style="width:100%; max-width:140px; height:auto;">
+          <rect width="120" height="105" fill="#fdf5f0" rx="10"/>
+          <!-- house body (slightly tilted/settled) -->
+          <rect x="18" y="50" width="82" height="48" fill="#c0987a" rx="2"/>
+          <!-- wall cracks -->
+          <polyline points="28,58 31,65 27,72" stroke="#8b5040" stroke-width="1.5" fill="none" opacity="0.8"/>
+          <polyline points="85,62 88,68 84,75" stroke="#8b5040" stroke-width="1.5" fill="none" opacity="0.8"/>
+          <line x1="55" y1="70" x2="60" y2="85" stroke="#8b5040" stroke-width="1" opacity="0.6"/>
+          <!-- sagging/damaged roof -->
+          <polygon points="8,52 60,14 112,52" fill="#7a4828"/>
+          <!-- roof dip (sagging middle) -->
+          <polyline points="8,52 35,44 60,42 85,44 112,52" fill="#6a3818" stroke="none"/>
+          <!-- missing shingles patches -->
+          <rect x="38" y="30" width="8" height="6" fill="#5a2808" opacity="0.7"/>
+          <rect x="68" y="22" width="9" height="6" fill="#5a2808" opacity="0.7"/>
+          <!-- crooked chimney -->
+          <rect x="70" y="10" width="10" height="22" fill="#9a6838" transform="rotate(8,75,21)"/>
+          <rect x="68" y="8" width="14" height="4" fill="#7a4820" transform="rotate(8,75,10)"/>
+          <!-- smoke (faint) -->
+          <ellipse cx="76" cy="5" rx="4" ry="3" fill="#c0a080" opacity="0.3"/>
+          <!-- door (peeling paint) -->
+          <rect x="48" y="68" width="22" height="30" fill="#6a3820" rx="1"/>
+          <line x1="52" y1="72" x2="52" y2="95" stroke="#5a2810" stroke-width="1" opacity="0.5"/>
+          <circle cx="67" cy="83" r="2" fill="#888"/>
+          <!-- boarded left window -->
+          <rect x="22" y="57" width="20" height="15" fill="#a08060" rx="1" stroke="#6a3820" stroke-width="1.5"/>
+          <line x1="22" y1="60" x2="42" y2="72" stroke="#7a4820" stroke-width="2" opacity="0.8"/>
+          <line x1="42" y1="60" x2="22" y2="72" stroke="#7a4820" stroke-width="2" opacity="0.8"/>
+          <!-- cracked right window -->
+          <rect x="76" y="57" width="20" height="15" fill="#90b8c8" rx="1" stroke="#6a3820" stroke-width="1.5"/>
+          <line x1="76" y1="65" x2="96" y2="65" stroke="#6a3820" stroke-width="0.8"/>
+          <line x1="86" y1="57" x2="86" y2="72" stroke="#6a3820" stroke-width="0.8"/>
+          <!-- crack lines on window glass -->
+          <line x1="78" y1="58" x2="85" y2="68" stroke="#c0623a" stroke-width="1.2"/>
+          <line x1="85" y1="68" x2="80" y2="72" stroke="#c0623a" stroke-width="1"/>
+          <line x1="85" y1="68" x2="93" y2="63" stroke="#c0623a" stroke-width="1"/>
+          <!-- warning labels -->
+          <rect x="5" y="55" width="28" height="13" fill="#c0623a" rx="3"/>
+          <text x="19" y="65" text-anchor="middle" fill="white" font-size="8" font-weight="bold" font-family="sans-serif">管线老化</text>
+          <rect x="87" y="55" width="28" height="13" fill="#c0623a" rx="3"/>
+          <text x="101" y="65" text-anchor="middle" fill="white" font-size="8" font-weight="bold" font-family="sans-serif">屋顶渗水</text>
+          <!-- overgrown grass -->
+          <rect x="0" y="97" width="120" height="8" fill="#a89060" rx="0"/>
+          <line x1="15" y1="97" x2="13" y2="90" stroke="#6a8040" stroke-width="1.5"/>
+          <line x1="20" y1="97" x2="22" y2="89" stroke="#6a8040" stroke-width="1.5"/>
+          <line x1="95" y1="97" x2="93" y2="91" stroke="#6a8040" stroke-width="1.5"/>
+          <line x1="100" y1="97" x2="102" y2="90" stroke="#6a8040" stroke-width="1.5"/>
+        </svg>
+        <div style="font-size:0.75rem; font-weight:700; color:#c0623a; margin-top:4px;">1950–70年代旧房</div>
+        <div style="font-size:0.7rem; color:#9a6040; margin-top:2px;">外观可、内里老化</div>
+      </div>
+
+      <!-- 箭头 + 成本 -->
+      <div style="display:flex; flex-direction:column; align-items:center; justify-content:center; min-width:80px; flex:0.6;">
+        <svg viewBox="0 0 80 60" xmlns="http://www.w3.org/2000/svg" style="width:80px; height:60px;">
+          <defs><marker id="ah" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#c0623a"/></marker></defs>
+          <line x1="8" y1="30" x2="68" y2="30" stroke="#c0623a" stroke-width="2.5" marker-end="url(#ah)" stroke-dasharray="5,3"/>
+          <text x="40" y="20" text-anchor="middle" fill="#c0623a" font-size="9" font-weight="700">$300K–800K+</text>
+          <text x="40" y="46" text-anchor="middle" fill="#a07050" font-size="8.5">1–2 年施工</text>
+        </svg>
+        <div style="font-size:0.68rem; color:#b07050; text-align:center; margin-top:2px;">+ 期间另租房</div>
+      </div>
+
+      <!-- 翻新后 / 新建 -->
+      <div style="flex:1; min-width:140px; text-align:center;">
+        <svg viewBox="0 0 120 100" xmlns="http://www.w3.org/2000/svg" style="width:100%; max-width:140px; height:auto;">
+          <!-- sky -->
+          <rect width="120" height="100" fill="#f0faf4" rx="10"/>
+          <!-- house body -->
+          <rect x="20" y="48" width="80" height="46" fill="#e8f4e8" rx="3" stroke="#4a7c6f" stroke-width="1.5"/>
+          <!-- roof clean -->
+          <polygon points="10,50 60,15 110,50" fill="#4a7c6f"/>
+          <!-- solar panels on roof -->
+          <rect x="42" y="28" width="12" height="8" fill="#3d6b9e" rx="1" opacity="0.8"/>
+          <rect x="56" y="23" width="12" height="8" fill="#3d6b9e" rx="1" opacity="0.8"/>
+          <!-- door modern -->
+          <rect x="48" y="66" width="24" height="28" fill="#2a5a48" rx="3"/>
+          <rect x="52" y="70" width="8" height="10" fill="#4a9c7c" rx="1" opacity="0.6"/>
+          <circle cx="69" cy="81" r="2.5" fill="#c8a030"/>
+          <!-- windows clean -->
+          <rect x="23" y="54" width="22" height="18" fill="#b8e4f8" rx="3" stroke="#4a7c6f" stroke-width="1.5"/>
+          <line x1="23" y1="63" x2="45" y2="63" stroke="#4a7c6f" stroke-width="0.8"/>
+          <line x1="34" y1="54" x2="34" y2="72" stroke="#4a7c6f" stroke-width="0.8"/>
+          <rect x="75" y="54" width="22" height="18" fill="#b8e4f8" rx="3" stroke="#4a7c6f" stroke-width="1.5"/>
+          <line x1="75" y1="63" x2="97" y2="63" stroke="#4a7c6f" stroke-width="0.8"/>
+          <line x1="86" y1="54" x2="86" y2="72" stroke="#4a7c6f" stroke-width="0.8"/>
+          <!-- checkmark badge -->
+          <circle cx="95" cy="20" r="10" fill="#3a8c5c"/>
+          <polyline points="89,20 93,25 101,15" stroke="white" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          <!-- ground -->
+          <rect x="0" y="94" width="120" height="6" fill="#c8e4c8" rx="0"/>
+          <!-- small garden -->
+          <circle cx="15" cy="93" r="5" fill="#4a9c5c" opacity="0.7"/>
+          <circle cx="105" cy="93" r="5" fill="#4a9c5c" opacity="0.7"/>
+        </svg>
+        <div style="font-size:0.75rem; font-weight:700; color:#3a8c5c; margin-top:4px;">🆕 新建 / ✨ 精装翻新</div>
+        <div style="font-size:0.7rem; color:#4a7c6f; margin-top:2px;">买了即住，溢价合理</div>
+      </div>
+
+    </div>
   </div>
 
   <!-- ═══ TIER 1 ═══ -->
@@ -972,6 +1105,7 @@
         </div>
       </div>
       <div class="zip-school-note">🏫 <strong>Encinal Elementary</strong> 9/10 · <strong>Hillview Middle</strong> 9/10 · <strong>Menlo-Atherton HS</strong> 8/10（但大多数居民子女就读私立名校如 Sacred Heart、Menlo School）</div>
+      <div class="zip-profile">👥 <strong>典型住户：</strong><span class="ptag">VC合伙人</span><span class="ptag">科技创始人</span><span class="ptag">退休高管</span><span class="ptag">超高净值家庭</span> · 年收入 $1M+，大量现金交易，子女多就读私立，极度注重隐私</div>
       <div class="listing-row">
         <div class="listing-card">
           <div class="lc-price">$22,000,000</div>
@@ -1023,6 +1157,7 @@
         </div>
       </div>
       <div class="zip-school-note">🏫 <strong>Aragon HS</strong> 8/10 · <strong>Burlingame HS</strong> 8/10 · K–8 一体制学区均分 9/10（无独立中学）— Hillsborough 全市无商业区、无公寓，纯住宅大地块私人城市，与 Atherton 并列为湾区最低密度豪宅区之一。同比下跌 24.1% 是高端修正，并非需求萎缩：去年有几笔 $10M+ 超高价成交拉高基数，导致今年中位数看起来下跌。</div>
+      <div class="zip-profile">👥 <strong>典型住户：</strong><span class="ptag">金融/PE高管</span><span class="ptag">传统富裕家庭</span><span class="ptag">旧金山老钱</span> · 注重隐私与排他性，子女普遍就读私立，无商业区是刻意为之的生活选择</div>
       <div class="listing-row">
         <div class="listing-card">
           <div class="lc-price">$4,500,000</div>
@@ -1081,6 +1216,7 @@
         </div>
       </div>
       <div class="zip-school-note">🏫 <strong>Los Altos High School</strong> 10/10 · <strong>Egan Junior High</strong> 8/10 · <strong>Loyola Elementary</strong> 10/10 · <strong>Covington Elementary</strong> 10/10 — 全湾区最顶尖学区之一</div>
+      <div class="zip-profile">👥 <strong>典型住户：</strong><span class="ptag">苹果/谷歌高管</span><span class="ptag">华裔科技家庭</span><span class="ptag">VC从业者</span> · 年收入 $500K–$1M+，极度重视公立学区，购房以学区为首要驱动</div>
       <div class="listing-row">
         <div class="listing-card">
           <div class="lc-price">$4,360,000</div>
@@ -1155,6 +1291,13 @@
         </div>
       </div>
       <div class="zip-school-note">🏫 <strong>Gunn High School</strong> 10/10 · <strong>Palo Alto High School</strong> 10/10（Niche A+）· <strong>JLS Middle</strong> 10/10 · <strong>Escondido Elementary</strong> 10/10</div>
+      <div class="zip-profile">👥 <strong>典型住户：</strong><span class="ptag">Stanford教授/研究员</span><span class="ptag">创业公司创始人</span><span class="ptag">谷歌/Meta早期员工</span> · 年收入 $500K+，学术与创业文化浓厚，多为長期持有</div>
+      <div class="zip-multi">🗺 <strong>Palo Alto 各 ZIP 差异：</strong>
+        <span class="ztag-good">94301 ★★★★★</span> Professorville / Downtown，最顶级，$4M+
+        <span class="ztag-good">94304 ★★★★☆</span> Barron Park / Palo Verde，安静住宅区
+        <span class="ztag-mid">94306 ★★★★☆</span> South PA / Greenmeadow，价格稍低
+        <span class="ztag-bad">94303 ★★☆☆☆</span> East PA，紧邻 East Palo Alto，学区和治安明显下降，慎选
+      </div>
       <div class="listing-row">
         <div class="listing-card">
           <div class="lc-price">$4,200,000</div>
@@ -1216,6 +1359,7 @@
         </div>
       </div>
       <div class="zip-school-note">🏫 <strong>Saratoga High School</strong> 10/10 · <strong>Redwood Middle School</strong> 10/10 · <strong>Marshall Lane Elementary</strong> 10/10 — 学区媲美 Cupertino 但地块更大、更安静，今年涨幅 12.3% 是第一层里表现最强的之一</div>
+      <div class="zip-profile">👥 <strong>典型住户：</strong><span class="ptag">华裔/印度裔科技高管</span><span class="ptag">医生/律师</span><span class="ptag">本地长期居民</span> · 极度学区导向，家庭稳定，偏好大地块低密度，生活节奏比 Cupertino 更安静</div>
       <div class="listing-row">
         <div class="listing-card">
           <div class="lc-price">$3,800,000</div>
@@ -1305,6 +1449,12 @@
         </div>
       </div>
       <div class="zip-school-note">🏫 <strong>Oak Knoll Elementary</strong> 10/10 · <strong>La Entrada Middle</strong> 10/10 · <strong>Hillview Middle</strong> 9/10 · <strong>Menlo-Atherton HS</strong> 8/10 · Sand Hill Rd VC 生态核心，紧邻 Atherton 和 Stanford</div>
+      <div class="zip-profile">👥 <strong>典型住户：</strong>西侧 <span class="ptag">VC/PE从业者</span><span class="ptag">Stanford教职</span><span class="ptag">Meta/Google高管</span>；东侧 <span class="ptag">蓝领工薪</span><span class="ptag">拉丁裔社区</span> · 同一城市名，两个截然不同的社区</div>
+      <div class="zip-multi">🗺 <strong>Menlo Park 内部差异（同一 ZIP 94025）：</strong>
+        <span class="ztag-good">西侧 Allied Arts / Sharon Heights / Central Menlo ★★★★★</span> VC 圈核心，Stanford 步行圈，$3.5M–7M+
+        <span class="ztag-mid">Central / Downtown 94025 ★★★☆☆</span> 商业混住，过渡地带，$2.5M 附近
+        <span class="ztag-bad">东侧 Belle Haven / North Fair Oaks ★★☆☆☆</span> 学区差，治安弱，租客多，与西侧同城不同世界
+      </div>
       <div class="mp-split">
         <div class="mp-side mp-west">
           <strong>🟢 西侧 — 接近第一层水平</strong>
@@ -1410,6 +1560,7 @@
         </div>
       </div>
       <div class="zip-school-note">🏫 <strong>Monta Vista High School</strong> 10/10 · <strong>Lincoln Elementary</strong> 10/10 · <strong>Hyde Middle</strong> 9/10 — 大量华人/印度裔科技家庭首选</div>
+      <div class="zip-profile">👥 <strong>典型住户：</strong><span class="ptag">华裔科技双职工</span><span class="ptag">印度裔工程师家庭</span><span class="ptag">Apple/谷歌员工</span> · 教育导向极强，家庭年收入 $300K–$600K，择校是购房第一驱动</div>
       <div class="listing-row">
         <div class="listing-card">
           <div class="lc-price t2">$3,650,000</div>
@@ -1471,6 +1622,7 @@
         </div>
       </div>
       <div class="zip-school-note">🏫 <strong>Los Gatos High School</strong> 9/10 · <strong>Fisher Middle</strong> 8/10 · <strong>Lexington Elementary</strong> 9/10 · 南湾精致小镇，生活品质高，但 Apple/Google 通勤 20–30 分钟，今年跌幅在第二层中偏大</div>
+      <div class="zip-profile">👥 <strong>典型住户：</strong><span class="ptag">Netflix/Apple高管</span><span class="ptag">本地长期居民</span><span class="ptag">注重生活质量的科技人</span> · 不愿住在 Cupertino/Sunnyvale 高密度社区，愿意以通勤时间换取小镇氛围</div>
       <div class="listing-row">
         <div class="listing-card">
           <div class="lc-price t2">$3,499,000</div>
@@ -1584,11 +1736,17 @@
         <div class="zip-stats">
           <div class="zstat"><span class="zval up">$2.9M</span><span class="zlabel">中位成交价</span></div>
           <div class="zstat"><span class="zval up">↑0.8%</span><span class="zlabel">同比涨幅</span></div>
-          <div class="zstat"><span class="zval neutral">稳健</span><span class="zlabel">市场状态</span></div>
+          <div class="zstat"><span class="zval neutral">16天</span><span class="zlabel">平均成交</span></div>
           <div class="zstat"><span class="zval school">★★★★☆</span><span class="zlabel">学区评级</span></div>
         </div>
       </div>
       <div class="zip-school-note">🏫 <strong>Burlingame High School</strong> 8/10 · <strong>Burlingame Intermediate</strong> 10/10 · <strong>Washington Elementary</strong> 9/10 · 半岛黄金地段，离 SFO 10分钟，SF/南湾通勤双便利</div>
+      <div class="zip-profile">👥 <strong>典型住户：</strong><span class="ptag">SF外迁年轻家庭</span><span class="ptag">科技专业人士</span><span class="ptag">双通勤需求家庭</span> · 一人上 SF，一人上南湾，Burlingame 是地理折中点；也吸引从 SF 逃出来要院子的高收入人群</div>
+      <div class="zip-multi">🗺 <strong>Burlingame 各 ZIP 差异：</strong>
+        <span class="ztag-good">94010 Burlingame Village / Broadway ★★★★☆</span> 学区最好，生活配套齐全，$2.8M–3.5M
+        <span class="ztag-mid">94010 Ray Park / Easton Addition ★★★☆☆</span> 安静住宅，稍远 Downtown，$2.5M 附近
+        <span class="ztag-bad">94010 靠近 101 / SFO 航线下方 ★★☆☆☆</span> 飞机噪音严重，白天不定期轰鸣，同价位坚决避开
+      </div>
       <div class="listing-row">
         <div class="listing-card">
           <div class="lc-price t2">$3,100,000</div>
@@ -1635,11 +1793,17 @@
         <div class="zip-stats">
           <div class="zstat"><span class="zval neutral">$2.0M</span><span class="zlabel">中位成交价</span></div>
           <div class="zstat"><span class="zval down">↓1.5%</span><span class="zlabel">同比涨幅</span></div>
-          <div class="zstat"><span class="zval neutral">稳定</span><span class="zlabel">市场状态</span></div>
+          <div class="zstat"><span class="zval neutral">18天</span><span class="zlabel">平均成交</span></div>
           <div class="zstat"><span class="zval school">★★★☆☆</span><span class="zlabel">学区评级</span></div>
         </div>
       </div>
       <div class="zip-school-note">🏫 <strong>Mountain View High</strong> 7/10 · <strong>Graham Middle</strong> 8/10 · <strong>Castro Elementary</strong> 8/10 · Google/LinkedIn 核心通勤，但高中学区相对薄弱 · ⚠️ <strong>实地看房提醒：</strong>高价新建盘 ≠ 优质街区。典型案例：<strong>343 N. Rengstorff Ave</strong>（MONTECITO 社区新建联排，3卧/3.5浴/1,614 sqft，2021年成交 $163万）——紧邻 Hwy 101 高架 + 周边工业厂房，新房品质高但街区氛围差；同一条街多栋同类项目，驾车路过和步行体验完全不同。选址须下车步行确认</div>
+      <div class="zip-profile">👥 <strong>典型住户：</strong><span class="ptag">谷歌/LinkedIn工程师</span><span class="ptag">H1B外籍科技工作者</span><span class="ptag">租转买首次置业</span> · 多为单身或无孩阶段，通勤便利优先，对高中学区要求低</div>
+      <div class="zip-multi">🗺 <strong>Mountain View 各 ZIP 差异：</strong>
+        <span class="ztag-good">94040 ★★★★☆</span> 偏南/偏山侧，Cuesta Park 区，$3.5M+ 好房集中地
+        <span class="ztag-mid">94041 ★★★☆☆</span> Downtown 附近，便利但密度高，公寓多
+        <span class="ztag-bad">94043 ★★☆☆☆</span> North MTV，Moffett Field 旁，工业用地混杂，噪音重，不宜购房
+      </div>
       <div class="listing-row">
         <div class="listing-card" style="background:#f6fdf8; border-left:3px solid #4a7c6f;">
           <div class="lc-price t2">$4,050,000</div>
@@ -1699,11 +1863,18 @@
         <div class="zip-stats">
           <div class="zstat"><span class="zval neutral">$1.9M</span><span class="zlabel">中位成交价</span></div>
           <div class="zstat"><span class="zval down">↓7.2%</span><span class="zlabel">同比涨幅</span></div>
-          <div class="zstat"><span class="zval neutral">$1.27K</span><span class="zlabel">均价/sqft</span></div>
+          <div class="zstat"><span class="zval neutral">24天</span><span class="zlabel">平均成交</span></div>
           <div class="zstat"><span class="zval school">★★★☆☆</span><span class="zlabel">学区评级</span></div>
         </div>
       </div>
       <div class="zip-school-note">🏫 <strong>Homestead High School</strong> 7/10 · <strong>Sunnyvale Middle</strong> 8/10 · <strong>Cherry Chase Elementary</strong> 10/10 · 大量 tech 公司通勤，但学区整体弱于 Cupertino · ⚠️ <strong>实地看房提醒：</strong>典型案例：<strong>1076 Aster Ave</strong>（Lawrence Station 社区新建联排，3卧/2.5浴/1,760 sqft，2025年2月成交 $188万）——紧邻 Lawrence Caltrain 站，周边 Sonora Court 一带仍在将工业厂房陆续改建为住宅，新旧混杂、施工噪音持续多年；对面正在建经济适用房项目（1171 Sonora Ct，172套低收入公寓）。楼新但配套和邻居质量需实地核查</div>
+      <div class="zip-profile">👥 <strong>典型住户：</strong><span class="ptag">Apple/LinkedIn员工</span><span class="ptag">华裔/印度裔科技移民</span><span class="ptag">性价比刚需家庭</span> · 买不起 Cupertino 的理性替代，Birdland 子区买家特别看重 Cupertino 学区划区</div>
+      <div class="zip-multi">🗺 <strong>Sunnyvale 各 ZIP 差异：</strong>
+        <span class="ztag-good">94087 ★★★★☆</span> South Sunnyvale，Birdland / Cupertino 边界，$2.5M–4M+，最佳
+        <span class="ztag-mid">94086 ★★★☆☆</span> Central Sunnyvale，Downtown 附近，$1.8M 均价，一般
+        <span class="ztag-bad">94085 ★★☆☆☆</span> North Sunnyvale，Lawrence Expwy 以北，工业区夹杂，明显低档
+        <span class="ztag-bad">94089 ★☆☆☆☆</span> North Sunnyvale / Moffett，工业仓储密集，不建议购房
+      </div>
       <div class="listing-row">
         <div class="listing-card" style="background:#f6fdf8; border-left:3px solid #4a7c6f;">
           <div class="lc-price t2">$3,000,000</div>
@@ -1770,6 +1941,13 @@
         </div>
       </div>
       <div class="zip-school-note">🏫 <strong>Hillsdale High School</strong> 9/10 · <strong>Abbott Middle</strong> 4/10（区域内差异大）· <strong>Baywood Elementary</strong> 9/10 · 半岛中段，Caltrain 沿线，通勤便利</div>
+      <div class="zip-profile">👥 <strong>典型住户：</strong><span class="ptag">半岛中产双职工</span><span class="ptag">SF外迁家庭</span><span class="ptag">金融/医疗从业者</span> · 族裔多元，生活配套完善，追求半岛生活质量但预算低于 Burlingame</div>
+      <div class="zip-multi">🗺 <strong>San Mateo 各 ZIP 差异：</strong>
+        <span class="ztag-good">94402 ★★★★☆</span> West SM，Baywood / Beresford，最好，学区强，$2.4M+
+        <span class="ztag-mid">94403 ★★★☆☆</span> South SM / Fiesta Gardens，中等，$2M 附近
+        <span class="ztag-mid">94401 ★★★☆☆</span> North SM，靠近 101，密度高，治安稍弱
+        <span class="ztag-bad">94404 ★★☆☆☆</span> Foster City / East SM，填海地，海平面风险（独立 ZIP）
+      </div>
       <div class="listing-row">
         <div class="listing-card">
           <div class="lc-price t2">$2,700,000</div>
@@ -1809,6 +1987,7 @@
         </div>
       </div>
       <div class="zip-school-note">🏫 <strong>Fairmount Elementary</strong> 9/10 · <strong>James Lick Middle</strong> 7/10 · <strong>Mission High</strong> 6/10 · Walk Score 94分 · ⚠️ <strong>SF 特例</strong>：无绑定顶级学区，溢价逻辑为生活方式 + AI 人才圈，而非学区稀缺性。适合无需考虑中小学学区、在 OpenAI/Anthropic 通勤圈内工作的高收入人群。</div>
+      <div class="zip-profile">👥 <strong>典型住户：</strong><span class="ptag">AI创业公司员工</span><span class="ptag">高收入DINK夫妻</span><span class="ptag">OpenAI/Anthropic员工</span> · 无子女或幼子阶段，极度重视步行生活质感，年收入 $400K+，选择租金换购房</div>
       <div class="listing-row">
         <div class="listing-card">
           <div class="lc-price t2">$4,800,000</div>
@@ -1887,6 +2066,12 @@
         </div>
       </div>
       <div class="zip-school-note">🏫 <strong>Santa Clara High School</strong> 6/10（Adrian Wilcox HS 8/10）· <strong>Buchser Middle</strong> 8/10 · <strong>Laurelwood Elementary</strong> 6/10 · K 型下半边最典型代表，功能性地段，无学区溢价</div>
+      <div class="zip-profile">👥 <strong>典型住户：</strong><span class="ptag">Intel/Nvidia工程师</span><span class="ptag">近期新移民</span><span class="ptag">预算受限科技工作者</span> · 孩子送私校或已过学龄，通勤便利是购房首要考量，族裔多元</div>
+      <div class="zip-multi">🗺 <strong>Santa Clara 各 ZIP 差异：</strong>
+        <span class="ztag-good">95051 ★★★☆☆</span> West SC，Nvidia/Intel 步行圈，住宅区为主，相对较好
+        <span class="ztag-mid">95050 ★★☆☆☆</span> Central SC，老城区，学区弱，商业混杂
+        <span class="ztag-bad">95054 ★★☆☆☆</span> North SC，101/237 高速夹击，工业地块紧邻，不建议
+      </div>
       <div class="listing-row">
         <div class="listing-card">
           <div class="lc-price t3">$1,550,000</div>
@@ -1939,6 +2124,14 @@
         </div>
       </div>
       <div class="zip-school-note">🏫 <strong>Mission San Jose HS</strong> 10/10 · <strong>Hopkins Junior High</strong> 9/10 · <strong>Weibel Elementary</strong> 10/10 · ⚠️ <strong>通勤实况：</strong>BART 可达但换乘复杂；驾车走 680/880 早晚高峰实际 <strong>2小时以上</strong>，堵车是常态。学区是湾区顶尖，但通勤代价不能忽视。主要买家群为印度裔科技家庭，社区氛围浓厚</div>
+      <div class="zip-profile">👥 <strong>典型住户：</strong><span class="ptag">印度裔科技家庭</span><span class="ptag">学区驱动型购房</span><span class="ptag">接受超长通勤</span> · 社区凝聚力强，以学区换通勤的取舍群体，扩展家庭同住常见</div>
+      <div class="zip-multi">🗺 <strong>Fremont 各 ZIP 差异：</strong>
+        <span class="ztag-good">94539 ★★★★☆</span> Mission San Jose，顶尖学区，$2M+，本区最佳
+        <span class="ztag-good">94555 ★★★★☆</span> Ardenwood，新房多，学区好，邻近 Dumbarton Bridge 通勤
+        <span class="ztag-mid">94538 ★★★☆☆</span> Irvington，学区次于 MSJ，$1.6M 附近，可接受
+        <span class="ztag-bad">94536 ★★☆☆☆</span> Centerville，老城区，学区弱，增值逻辑最薄
+        <span class="ztag-bad">94537/94541 ★★☆☆☆</span> South/North Fremont，混杂地段，不建议
+      </div>
       <div class="listing-row">
         <div class="listing-card">
           <div class="lc-price t3">$2,200,000</div>
@@ -1982,6 +2175,7 @@
         </div>
       </div>
       <div class="zip-school-note">🏫 <strong>Milpitas High School</strong> 6/10 · <strong>Thomas Russell Middle</strong> 7/10 · <strong>Zanker Elementary</strong> 8/10 · BART（Milpitas 站）直达，South Bay 性价比入场选项，但学区无法构成稀缺溢价，增值逻辑薄弱 · ⚠️ <strong>气味问题：</strong>紧邻 Newby Island 垃圾填埋场，风向不利时全城可闻异味，是 Milpitas 长期被压价的重要原因之一，实地看房必须在不同风向下多次体验</div>
+      <div class="zip-profile">👥 <strong>典型住户：</strong><span class="ptag">各族裔科技工人</span><span class="ptag">被Cupertino挤出的预算型买家</span><span class="ptag">近期新移民</span> · 过渡型社区，以低价和BART可达为核心诉求，长期居住意愿偏低</div>
       <div class="listing-row">
         <div class="listing-card">
           <div class="lc-price t3">$1,550,000</div>
@@ -2025,6 +2219,7 @@
         </div>
       </div>
       <div class="zip-school-note">🏫 <strong>Bowditch Middle School</strong> 7/10 · <strong>Foster City Elementary</strong> 8/10 · ⚠️ 全城建于填海造地之上，海拔接近零米，依靠堤坝防洪 · 海平面上升风险是长期结构性硬伤</div>
+      <div class="zip-profile">👥 <strong>典型住户：</strong><span class="ptag">Gilead/Sony员工</span><span class="ptag">追求好学区的中产家庭</span><span class="ptag">半岛通勤族</span> · 无力负担 Burlingame/San Mateo 核心区，选择 Foster City 作为折中，气候风险意识普遍不足</div>
       <div class="listing-row">
         <div class="listing-card">
           <div class="lc-price t3">$1,950,000</div>
@@ -2079,6 +2274,7 @@
         </div>
       </div>
       <div class="zip-school-note">🏫 <strong>Antioch High School</strong> 3/10 · <strong>Antioch Middle</strong> 2/10 · <strong>Fremont Elementary</strong> 1/10 · 距离湾区核心 60–80 分钟通勤 · WFH 减少后通勤成本重新成为障碍</div>
+      <div class="zip-profile">👥 <strong>典型住户：</strong><span class="ptag">蓝领工人</span><span class="ptag">服务业从业者</span><span class="ptag">被湾区价格完全挤出的家庭</span> · WFH 期间吸引了一批科技工作者，WFH 退潮后部分已迁出或上市出售</div>
       <div class="listing-row">
         <div class="listing-card">
           <div class="lc-price t4">$625,000</div>
@@ -2119,6 +2315,7 @@
         </div>
       </div>
       <div class="zip-school-note">🏫 <strong>West High School</strong> 5/10 · <strong>Monte Vista Middle</strong> 4/10 · <strong>Poet Christian Elementary</strong> 4/10 · 距离湾区 80–100 分钟 · 37天成交周期（对比核心区 9–11天）是流动性差的直接体现</div>
+      <div class="zip-profile">👥 <strong>典型住户：</strong><span class="ptag">仓储/物流工人</span><span class="ptag">WFH科技移民（减少中）</span><span class="ptag">中央谷地本地家庭</span> · WFH 退潮后超长通勤难以持续，外来科技工作者比例下降，需求弱化趋势明显</div>
       <div class="listing-row">
         <div class="listing-card">
           <div class="lc-price t4">$668,000</div>
@@ -2939,7 +3136,7 @@
     </div>
 
     <div id="bazi-body">
-      <p style="font-size:0.82rem; color:var(--muted); margin-bottom:20px; line-height:1.7;">以 1996年6月20日 与 1998年9月20日 两组生辰推算四柱，结合五行喜忌判断方位吉凶，映射湾区各区域格局。日柱为估算值，时柱未知，仅供趣味参考。</p>
+      <p style="font-size:0.82rem; color:var(--muted); margin-bottom:20px; line-height:1.7; display:none;">以 1996年6月20日 与 1998年9月20日 两组生辰推算四柱，结合五行喜忌判断方位吉凶，映射湾区各区域格局。日柱为估算值，时柱未知，仅供趣味参考。</p>
 
       <div style="display:flex; align-items:center; gap:8px; margin-bottom:10px; cursor:pointer; user-select:none;" onclick="var b=document.getElementById('bazi-pillars'); b.style.display=b.style.display==='none'?'grid':'none'; this.querySelector('.bp-arrow').textContent=b.style.display==='none'?'▶ 展开':'▼ 收起';">
         <span style="font-size:0.82rem; color:var(--muted); font-weight:600;">四柱详情</span>
