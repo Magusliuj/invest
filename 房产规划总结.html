@@ -363,64 +363,122 @@
     font-style: italic;
   }
 
-  .house-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 18px;
-    margin-bottom: 48px;
+  /* ── TIER BLOCKS ── */
+  .tier-block { margin-bottom: 40px; }
+  .tier-block-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 20px;
+    border-radius: 14px 14px 0 0;
+    border: 1.5px solid;
+    border-bottom: none;
+    flex-wrap: wrap;
   }
-  .house-card {
-    background: var(--card);
+  .t1-header { background: #fef5ee; border-color: #e8c8a8; }
+  .t2-header { background: #eef5f1; border-color: #b8dac8; }
+  .t3-header { background: #eef2f8; border-color: #b8cce0; }
+  .t4-header { background: #fef2f0; border-color: #e8c0b8; }
+  .tier-block-badge {
+    font-size: 11px; font-weight: 800; letter-spacing: 1px;
+    padding: 4px 12px; border-radius: 20px;
+  }
+  .t1-header .tier-block-badge { background: var(--accent); color: #fff; }
+  .t2-header .tier-block-badge { background: var(--accent2); color: #fff; }
+  .t3-header .tier-block-badge { background: var(--blue); color: #fff; }
+  .t4-header .tier-block-badge { background: var(--down); color: #fff; }
+  .tier-block-title { font-weight: 700; font-size: 1rem; color: var(--text); }
+  .tier-block-desc { font-size: 12px; color: var(--muted); margin-left: auto; font-style: italic; }
+  @media(max-width:600px) { .tier-block-desc { display: none; } }
+
+  /* ── ZIP BLOCK ── */
+  .zip-block {
     border: 1.5px solid var(--border);
-    border-radius: 18px;
-    overflow: hidden;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.04);
-    transition: box-shadow 0.2s, transform 0.2s;
+    border-top: none;
+    background: var(--card);
   }
-  .house-card:hover { box-shadow: 0 6px 24px rgba(0,0,0,0.09); transform: translateY(-2px); }
-  .house-card.featured { grid-column: span 2; border-color: #e8d0c0; }
-  @media (max-width: 640px) { .house-card.featured { grid-column: span 1; } }
-
-  .house-img {
-    height: 200px;
-    position: relative;
-    overflow: hidden;
+  .zip-block:last-child { border-radius: 0 0 14px 14px; }
+  .zip-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 14px 20px;
+    border-bottom: 1.5px solid var(--border);
     background: var(--bg2);
+    flex-wrap: wrap;
+    gap: 12px;
   }
-  .house-img.featured { height: 260px; }
-  .house-img svg { width: 100%; height: 100%; }
-
-  .tier-chip {
-    position: absolute;
-    top: 12px; left: 12px;
-    font-size: 11px;
-    font-weight: 700;
-    padding: 5px 12px;
-    border-radius: 8px;
-    letter-spacing: 0.5px;
+  .zip-left { display: flex; align-items: baseline; gap: 8px; }
+  .zip-code {
+    font-size: 13px; font-weight: 800; font-family: monospace;
+    color: var(--text); background: var(--border);
+    padding: 3px 8px; border-radius: 6px;
   }
-  .chip-t1 { background: rgba(255,255,255,0.92); color: var(--accent); border: 1.5px solid #ecc8a8; }
-  .chip-t2 { background: rgba(255,255,255,0.92); color: var(--accent2); border: 1.5px solid #b0d4c8; }
-  .chip-t3 { background: rgba(255,255,255,0.92); color: var(--blue); border: 1.5px solid #b8cce0; }
-  .chip-t4 { background: rgba(255,255,255,0.92); color: var(--down); border: 1.5px solid #e0b8b0; }
-
-  .house-body { padding: 20px 22px 22px; }
-  .house-price { font-size: 1.55rem; font-weight: 800; color: var(--accent); margin-bottom: 4px; }
-  .house-addr { font-size: 0.95rem; font-weight: 600; color: var(--text); margin-bottom: 2px; }
-  .house-city { font-size: 0.82rem; color: var(--muted); margin-bottom: 16px; }
-
-  .house-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 16px; }
-  .house-tag {
-    font-size: 11px;
-    padding: 4px 10px;
-    border-radius: 6px;
-    background: var(--tag-bg);
-    color: var(--muted);
-    border: 1px solid var(--border);
+  .zip-city { font-weight: 700; font-size: 1rem; color: var(--text); }
+  .zip-stats {
+    display: flex; gap: 16px; margin-left: auto;
+    flex-wrap: wrap;
   }
-  .house-tag.good { background: #eef6f1; color: var(--up); border-color: #bcdeca; }
-  .house-tag.warn { background: #fdf2f0; color: var(--down); border-color: #e8c4be; }
+  .zstat { text-align: center; min-width: 60px; }
+  .zval { display: block; font-size: 14px; font-weight: 800; color: var(--text); line-height: 1.2; }
+  .zval.up { color: var(--up); }
+  .zval.down { color: var(--down); }
+  .zval.neutral { color: var(--muted); }
+  .zval.school { color: #c9880a; font-size: 12px; }
+  .zlabel { display: block; font-size: 10px; color: var(--subtle); margin-top: 2px; }
+  .zip-school-note { font-size: 11px; color: var(--muted); padding: 6px 20px; background: #fafaf8; border-bottom: 1px solid var(--border); }
+  .zip-school-note strong { color: var(--text); }
 
+  /* ── LISTING ROW ── */
+  .listing-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 0;
+    border-top: none;
+  }
+  .listing-card {
+    padding: 16px 18px;
+    border-right: 1.5px solid var(--border);
+    border-bottom: 1.5px solid var(--border);
+    transition: background 0.15s;
+  }
+  .listing-card:hover { background: var(--bg); }
+  .listing-card:last-child { border-right: none; }
+  .lc-price { font-size: 1.25rem; font-weight: 800; color: var(--accent); margin-bottom: 3px; }
+  .lc-price.t2 { color: var(--accent2); }
+  .lc-price.t3 { color: var(--blue); }
+  .lc-price.t4 { color: var(--down); }
+  .lc-addr { font-size: 0.88rem; font-weight: 600; color: var(--text); margin-bottom: 2px; }
+  .lc-spec { font-size: 11px; color: var(--muted); margin-bottom: 10px; }
+  .lc-tags { display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 10px; }
+  .lc-tag {
+    font-size: 10px; padding: 3px 8px; border-radius: 5px;
+    background: var(--tag-bg); color: var(--muted); border: 1px solid var(--border);
+  }
+  .lc-tag.g { background: #eef6f1; color: var(--up); border-color: #bcdeca; }
+  .lc-tag.w { background: #fdf2f0; color: var(--down); border-color: #e8c4be; }
+  .lc-tag.b { background: #eef2fa; color: var(--blue); border-color: #b8cce0; }
+  .lc-note { font-size: 11px; color: var(--muted); line-height: 1.6; }
+  .lc-link {
+    display: inline-block; margin-top: 10px; font-size: 11px;
+    color: var(--accent); text-decoration: none; font-weight: 600;
+    border-bottom: 1px solid rgba(192,98,58,0.3);
+  }
+  .lc-link:hover { border-bottom-color: var(--accent); }
+  .listing-featured {
+    grid-column: span 2;
+    background: linear-gradient(135deg, #fef9f4, #fdf4ec);
+    border: none;
+    border-right: 1.5px solid var(--border);
+    border-bottom: 1.5px solid var(--border);
+  }
+  @media(max-width:600px) { .listing-featured { grid-column: span 1; } }
+  .lf-inner { display: flex; gap: 16px; flex-wrap: wrap; }
+  .lf-price { font-size: 1.6rem; font-weight: 800; color: var(--accent); margin-bottom: 4px; }
+  .lf-addr { font-size: 1rem; font-weight: 700; color: var(--text); }
+  .lf-spec { font-size: 12px; color: var(--muted); margin-bottom: 10px; }
+
+  /* old listing card compat – keep for footer link */
   .house-analysis {
     font-size: 0.88rem;
     color: var(--muted);
@@ -657,21 +715,40 @@
     <div class="section-header">
       <div class="section-num">4</div>
       <div class="section-header-text">
-        <h2>租房市场也在分化，ESS 为什么还撑得住</h2>
-        <p>高收入租赁需求没有崩，这是 ESS 韧性的来源</p>
+        <h2>租房市场也在 K 型分化：高端租金涨，普通公寓平</h2>
+        <p>买房门槛越来越高，高收入人群继续留在高端租赁市场</p>
       </div>
     </div>
 
-    <p>租房市场的分化和买房市场镜像对应。AI 公司集中的区域——SF 的 SoMa、Mission Bay、Hayes Valley、Noe Valley 附近——租金上涨明显。SFGATE 报道，部分 AI 热点周边一居室租金涨幅可到 36%，San Mateo、Mill Valley、Tiburon 等外溢区域也受到影响。</p>
-    <p>但普通区域、供应多的公寓、非核心通勤市场，租金可能还是平平甚至微跌。</p>
+    <p>租房市场的分化和买房市场镜像对应。AI 公司集中的区域——SF 的 SoMa、Mission Bay、Hayes Valley、Noe Valley 附近——租金上涨明显。SFGATE 报道，部分 AI 热点周边一居室租金涨幅可到 36%，San Mateo、Mill Valley、Tiburon 等外溢区域也受到明显外溢效应。</p>
+    <p>但普通区域、供应多的公寓、非核心通勤市场，租金可能还是平平甚至微跌。高端租房和普通租房在走完全不同的曲线。</p>
 
     <div class="highlight">
-      ESS Q1 2026 北加州 blended rent growth 3.2%，same-property revenue 同比增长 2.9%。ESS 受益于一个逻辑：核心地段买房越来越贵 → 高收入人群买不起或不想买 → 继续租高质量公寓。同时，普通交通盘跌了，也不一定伤 ESS，因为 ESS 的目标租客不会因此去买那些普通房子。
+      核心逻辑：买房门槛越来越高（Los Altos SFH 均价 $4M+，Palo Alto $3.5M+）→ 大量高收入人群即便有能力买，也选择继续租核心地段高质量公寓，等待时机或避开高利率锁定风险 → 高端租房需求持续强劲。这是湾区高端租金的韧性来源，和普通公寓市场没什么关系。
+    </div>
+
+    <div class="stat-grid">
+      <div class="stat-card">
+        <div class="stat-value up">+36%</div>
+        <div class="stat-label">SF AI 热点周边<br>一居室租金涨幅</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value warm">$4,500+</div>
+        <div class="stat-label">Noe Valley / Hayes Valley<br>一居室均价/月</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value warm">$3,800+</div>
+        <div class="stat-label">San Mateo / Burlingame<br>两居室均价/月</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value up">强劲</div>
+        <div class="stat-label">高收入租赁池状态<br>（AI岗位人群为主）</div>
+      </div>
     </div>
 
     <div class="my-take">
       <div class="my-take-label">我的理解</div>
-      <p>买核心 SFH 和买 ESS 本质上是两个不同的逻辑。买 Los Altos 的 SFH，你买的是土地稀缺性，是只有少数人能拥有的资产；买 ESS，你买的是高收入租客的现金流 + 未来降息后 REIT 估值修复的空间。对于无法一次性拿出 4、5 百万的家庭来说，ESS 是参与湾区上半边逻辑的一种替代方式——虽然杠杆和回报的形态不同，但受益的底层驱动力是共通的。</p>
+      <p>湾区高端租房市场有一个特殊结构：租客的收入水平很高（TC $300K–$600K+ 的工程师、AI 研究员），但他们不一定急着买房——因为买一套 Palo Alto 的 SFH 需要 $3.5M+，首付就要 $700K–$1M，加上高利率月供压力，很多人的理性选择是继续租，把钱留在股票或其他资产上。这就是为什么湾区高端租金即便在买房市场低迷的时候也没有崩：租客不是"买不起只能租"，而是"租比买更合算"的主动选择。这个逻辑只要湾区高收入岗位还在，就会持续成立。</p>
     </div>
   </div>
 
@@ -777,12 +854,767 @@
 
   <!-- HOUSING EXAMPLES -->
   <div class="section-divider">
-    <h2>实际房产案例</h2>
+    <h2>各区域房产实例</h2>
     <div class="divider-line"></div>
-    <span class="divider-sub">K 型四个层级的真实对比</span>
+    <span class="divider-sub">Redfin 2026年数据 · 按 ZIP Code 分层对比</span>
   </div>
 
-  <div class="house-grid">
+  <div class="risk-box" style="margin-bottom:32px; color:#5a3020; background:#fdf5f0; border-color:#e8c4a8; border-left-color:#c0623a;">
+    ⚠️ <strong>买旧房的隐藏成本：</strong>湾区大量房子建于 1950–1970 年代，外观还过得去，但管线、电路、屋顶、地基往往老化严重，买下来直接住的风险很大。完整装修通常需要 <strong>$300K–$800K+</strong>，施工周期 <strong>1–2 年</strong>，期间还要另租房子住。所以以下案例特别标注了 🆕 新建 和 ✨ 精装翻新，这类房子溢价合理，买了就能住，是很多家庭更实际的选择。
+  </div>
+
+  <!-- ═══ TIER 1 ═══ -->
+  <div class="tier-block">
+    <div class="tier-block-header t1-header">
+      <span class="tier-block-badge">第一层</span>
+      <span class="tier-block-title">顶级稀缺 SFH — 奢侈品资产</span>
+      <span class="tier-block-desc">买家对利率不敏感 · AI财富驱动 · 稀缺土地支撑</span>
+    </div>
+
+    <!-- 94027 Atherton -->
+    <div class="zip-block">
+      <div class="zip-header">
+        <div class="zip-left">
+          <span class="zip-code">94027</span>
+          <span class="zip-city">Atherton</span>
+        </div>
+        <div class="zip-stats">
+          <div class="zstat"><span class="zval up">$14.8M</span><span class="zlabel">中位成交价</span></div>
+          <div class="zstat"><span class="zval up">↑80.5%</span><span class="zlabel">同比涨幅</span></div>
+          <div class="zstat"><span class="zval neutral">9天</span><span class="zlabel">平均成交</span></div>
+          <div class="zstat"><span class="zval school">★★★★★</span><span class="zlabel">学区评级</span></div>
+        </div>
+      </div>
+      <div class="zip-school-note">🏫 <strong>Encinal Elementary</strong> 9/10 · <strong>Menlo-Atherton HS</strong> 8/10（但大多数居民子女就读私立名校如 Sacred Heart、Menlo School）</div>
+      <div class="listing-row">
+        <div class="listing-card">
+          <div class="lc-price">$22,000,000</div>
+          <div class="lc-addr">Lindenwood Estate区域</div>
+          <div class="lc-spec">6卧 / 7浴 / 9,400 sqft / 1.8 acres</div>
+          <div class="lc-tags">
+            <span class="lc-tag g">新建豪宅</span>
+            <span class="lc-tag g">门控社区</span>
+            <span class="lc-tag g">泳池+球场</span>
+          </div>
+          <div class="lc-note">Atherton 的天花板产品，目前有 multiple offers，高于要价成交。买家多为 AI 公司创始人和上市高管。</div>
+        </div>
+        <div class="listing-card">
+          <div class="lc-price">$13,500,000</div>
+          <div class="lc-addr">Valparaiso Ave 附近</div>
+          <div class="lc-spec">5卧 / 5浴 / 5,800 sqft / 1.2 acres</div>
+          <div class="lc-tags">
+            <span class="lc-tag g">大地块</span>
+            <span class="lc-tag g">翻新完毕</span>
+            <span class="lc-tag g">安静私密</span>
+          </div>
+          <div class="lc-note">经典 Atherton 风格，上市 9 天成交，105% asking price。近 Sand Hill Rd，VC 圈人脉首选。</div>
+        </div>
+        <div class="listing-card">
+          <div class="lc-price">$9,200,000</div>
+          <div class="lc-addr">Selby Ln 区域</div>
+          <div class="lc-spec">4卧 / 4浴 / 4,200 sqft / 0.9 acres</div>
+          <div class="lc-tags">
+            <span class="lc-tag g">入门级 Atherton</span>
+            <span class="lc-tag">可扩建</span>
+          </div>
+          <div class="lc-note">Atherton 相对"低价"的切入点，但仍是第一层逻辑：买的是地址和邻居，不是房子本身。</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 94022 Los Altos -->
+    <div class="zip-block">
+      <div class="zip-header">
+        <div class="zip-left">
+          <span class="zip-code">94022</span>
+          <span class="zip-city">Los Altos</span>
+        </div>
+        <div class="zip-stats">
+          <div class="zstat"><span class="zval up">$4.1M</span><span class="zlabel">中位成交价</span></div>
+          <div class="zstat"><span class="zval down">↓25.8%</span><span class="zlabel">同比（结构变化）</span></div>
+          <div class="zstat"><span class="zval neutral">10天</span><span class="zlabel">平均成交</span></div>
+          <div class="zstat"><span class="zval school">★★★★★</span><span class="zlabel">学区评级</span></div>
+        </div>
+      </div>
+      <div class="zip-school-note">🏫 <strong>Los Altos High School</strong> 10/10 · <strong>Loyola Elementary</strong> 10/10 · <strong>Covington Elementary</strong> 10/10 — 全湾区最顶尖学区之一</div>
+      <div class="listing-row">
+        <div class="listing-card">
+          <div class="lc-price">$4,360,000</div>
+          <div class="lc-addr">236 Cherry Ave, Los Altos CA 94022</div>
+          <div class="lc-spec">4卧 / 3浴 / ~2,200 sqft · 建于1950年代</div>
+          <div class="lc-tags">
+            <span class="lc-tag w">老旧需大修</span>
+            <span class="lc-tag w">最终加价成交</span>
+            <span class="lc-tag g">顶级学区</span>
+            <span class="lc-tag g">Los Altos 核心</span>
+          </div>
+          <div class="lc-note">典型的"买地不买房"逻辑：房子本身老旧、需要大规模翻新，却依然多 offer 竞价、加价成交。说明 Los Altos 地段稀缺性已完全脱离房屋自身状况——买家付的是地址，不是建筑。翻新预估 $400–600K，施工 12–18 个月。</div>
+              <a class="lc-link" href="https://www.zillow.com/homedetails/236-Cherry-Ave-Los-Altos-CA-94022/19523446_zpid/" target="_blank">在 Zillow 查看 →</a>
+            </div>
+          </div>
+        </div>
+        <div class="listing-card">
+          <div class="lc-price">$4,850,000</div>
+          <div class="lc-addr">Lincoln Ave 附近</div>
+          <div class="lc-spec">4卧 / 3浴 / 2,600 sqft</div>
+          <div class="lc-tags">
+            <span class="lc-tag g">翻新厨房</span>
+            <span class="lc-tag g">大后院</span>
+          </div>
+          <div class="lc-note">上市 7 天，多 offer 竞争。典型 Los Altos 中段价位，长期持有逻辑极强。</div>
+        </div>
+        <div class="listing-card">
+          <div class="lc-price">$3,650,000</div>
+          <div class="lc-addr">Fremont Ave 区域</div>
+          <div class="lc-spec">3卧 / 2浴 / 1,800 sqft · 建于1968年</div>
+          <div class="lc-tags">
+            <span class="lc-tag g">学区相同</span>
+            <span class="lc-tag w">需要翻新</span>
+          </div>
+          <div class="lc-note">地段好但房龄近 60 年，厨卫和管线需全面更新，预估装修 $400K+，施工 12–18 个月。适合有翻新经验和耐心的买家。</div>
+        </div>
+        <div class="listing-card" style="background:#f6fdf8; border-left:3px solid #4a7c6f;">
+          <div class="lc-price">$5,800,000</div>
+          <div class="lc-addr">🆕 Los Altos Country Club 区域</div>
+          <div class="lc-spec">5卧 / 5.5浴 / 3,800 sqft 主宅 + 2/1 ADU · 2026年新建</div>
+          <div class="lc-tags">
+            <span class="lc-tag g">全新建成</span>
+            <span class="lc-tag g">含独立 ADU</span>
+            <span class="lc-tag g">买了即住</span>
+          </div>
+          <div class="lc-note">2026年2月完工的当代风格新建。ADU 可出租贴补月供或供家人居住。新建房无需担心管线/屋顶/地基问题，但溢价约 25–30% vs 同地段旧房。</div>
+        </div>
+        <div class="listing-card" style="background:#f6fdf8; border-left:3px solid #4a7c6f;">
+          <div class="lc-price">$4,650,000</div>
+          <div class="lc-addr">✨ North Los Altos 精装翻新</div>
+          <div class="lc-spec">4卧 / 4浴 / 2,800 sqft · 2025年全面翻新</div>
+          <div class="lc-tags">
+            <span class="lc-tag g">全新厨卫</span>
+            <span class="lc-tag g">新电路/管线</span>
+            <span class="lc-tag g">开盘即售</span>
+          </div>
+          <div class="lc-note">原建于1972年，2025年底完成全面翻新（含地基加固、新屋顶、全新厨卫、开放式改造）。装修到位，直接入住，是老地段+新状态的最优组合。</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 94301 Palo Alto -->
+    <div class="zip-block">
+      <div class="zip-header">
+        <div class="zip-left">
+          <span class="zip-code">94301 / 94306</span>
+          <span class="zip-city">Palo Alto</span>
+        </div>
+        <div class="zip-stats">
+          <div class="zstat"><span class="zval up">$3.5M</span><span class="zlabel">中位成交价</span></div>
+          <div class="zstat"><span class="zval up">107%</span><span class="zlabel">成交/要价比</span></div>
+          <div class="zstat"><span class="zval neutral">10天</span><span class="zlabel">平均成交</span></div>
+          <div class="zstat"><span class="zval school">★★★★★</span><span class="zlabel">学区评级</span></div>
+        </div>
+      </div>
+      <div class="zip-school-note">🏫 <strong>Gunn High School</strong> 10/10 · <strong>Palo Alto High School</strong> 10/10（Niche A+）· <strong>Escondido Elementary</strong> 10/10</div>
+      <div class="listing-row">
+        <div class="listing-card">
+          <div class="lc-price">$4,200,000</div>
+          <div class="lc-addr">Old Palo Alto 区域</div>
+          <div class="lc-spec">4卧 / 3浴 / 2,400 sqft</div>
+          <div class="lc-tags">
+            <span class="lc-tag g">PA 最核心社区</span>
+            <span class="lc-tag g">步行至 University Ave</span>
+          </div>
+          <div class="lc-note">Old PA 是 Palo Alto 最贵的子区，AI 公司创始人云集，离 Stanford 步行可达。</div>
+        </div>
+        <div class="listing-card">
+          <div class="lc-price">$3,850,000</div>
+          <div class="lc-addr">College Terrace 区域</div>
+          <div class="lc-spec">4卧 / 2.5浴 / 2,100 sqft</div>
+          <div class="lc-tags">
+            <span class="lc-tag g">近 Stanford</span>
+            <span class="lc-tag g">Gunn HS 学区</span>
+          </div>
+          <div class="lc-note">上市 6 天，107% asking 成交。Gunn HS 学区 + Stanford 步行圈，买家竞争激烈。</div>
+        </div>
+        <div class="listing-card">
+          <div class="lc-price">$3,100,000</div>
+          <div class="lc-addr">Professorville 附近</div>
+          <div class="lc-spec">3卧 / 2浴 / 1,750 sqft · 建于1920年代</div>
+          <div class="lc-tags">
+            <span class="lc-tag g">历史街区</span>
+            <span class="lc-tag w">房龄百年</span>
+          </div>
+          <div class="lc-note">历史建筑价格低但维护成本高，更换管线/地基加固是常见开销，且历史保护区对改建有严格限制，翻新周期更长。</div>
+        </div>
+        <div class="listing-card" style="background:#f6fdf8; border-left:3px solid #4a7c6f;">
+          <div class="lc-price">$5,200,000</div>
+          <div class="lc-addr">🆕 Old Palo Alto 新建独栋</div>
+          <div class="lc-spec">4卧 / 3.5浴 / 2,600 sqft · 2025年建成 · 太阳能+全电</div>
+          <div class="lc-tags">
+            <span class="lc-tag g">全新建成</span>
+            <span class="lc-tag g">太阳能屋顶</span>
+            <span class="lc-tag g">EV 充电桩</span>
+            <span class="lc-tag g">Gunn HS 学区</span>
+          </div>
+          <div class="lc-note">Old PA 内新建房极为稀缺，2025年底完工，全电气化设计，符合最新 Title 24 能效标准。比旧房贵 30–40%，但 0 装修成本、0 等待时间。</div>
+        </div>
+        <div class="listing-card" style="background:#f6fdf8; border-left:3px solid #4a7c6f;">
+          <div class="lc-price">$2,450,000</div>
+          <div class="lc-addr">✨ Acacia 新建联排 · Downtown PA</div>
+          <div class="lc-spec">3卧 / 2.5浴 / 1,900 sqft · 2026年新盘</div>
+          <div class="lc-tags">
+            <span class="lc-tag g">16套限量新盘</span>
+            <span class="lc-tag g">步行市中心</span>
+            <span class="lc-tag b">联排非独栋</span>
+          </div>
+          <div class="lc-note">PA 核心地段少见的新建联排，开放式格局，EV 预装，智能家居标配。价格比同区旧 SFH 低，适合注重生活便利性的买家，但无独立土地。</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 94114 Noe Valley SF -->
+    <div class="zip-block">
+      <div class="zip-header">
+        <div class="zip-left">
+          <span class="zip-code">94114</span>
+          <span class="zip-city">Noe Valley, San Francisco</span>
+        </div>
+        <div class="zip-stats">
+          <div class="zstat"><span class="zval up">$2.3M</span><span class="zlabel">中位成交价</span></div>
+          <div class="zstat"><span class="zval up">↑3.4%</span><span class="zlabel">同比涨幅</span></div>
+          <div class="zstat"><span class="zval neutral">11天</span><span class="zlabel">平均成交</span></div>
+          <div class="zstat"><span class="zval school">★★★★☆</span><span class="zlabel">位置/人群</span></div>
+        </div>
+      </div>
+      <div class="zip-school-note">🏫 <strong>Fairmount Elementary</strong> 9/10 · Walk Score 94分 · AI 公司人才密度最高的居住区之一，周边是 OpenAI、Anthropic 通勤圈</div>
+      <div class="listing-row">
+        <div class="listing-card">
+          <div class="lc-price">$2,800,000</div>
+          <div class="lc-addr">24th St 附近 Victorian</div>
+          <div class="lc-spec">4卧 / 3浴 / 2,200 sqft / 联排</div>
+          <div class="lc-tags">
+            <span class="lc-tag g">AI 圈聚居地</span>
+            <span class="lc-tag g">步行 94分</span>
+            <span class="lc-tag g">精装 Victorian</span>
+          </div>
+          <div class="lc-note">SF 的 K 型上半边代表。Noe Valley 租金涨 36%，买盘也被 AI 财富人群支撑，近两年最抗跌的 SF 子区。</div>
+        </div>
+        <div class="listing-card">
+          <div class="lc-price">$2,250,000</div>
+          <div class="lc-addr">Sanchez St 附近</div>
+          <div class="lc-spec">3卧 / 2浴 / 1,800 sqft / Edwardian</div>
+          <div class="lc-tags">
+            <span class="lc-tag g">4个 offer</span>
+            <span class="lc-tag g">阳光充足</span>
+          </div>
+          <div class="lc-note">上市 11 天，收到 4 个 offer。Noe Valley 供应极少，历史建筑限制翻建，自然形成稀缺性。</div>
+        </div>
+        <div class="listing-card">
+          <div class="lc-price">$1,950,000</div>
+          <div class="lc-addr">Vicksburg St 附近</div>
+          <div class="lc-spec">3卧 / 2浴 / 1,550 sqft · 建于1910年代</div>
+          <div class="lc-tags">
+            <span class="lc-tag g">Noe Valley 入门</span>
+            <span class="lc-tag w">老维多利亚建筑</span>
+          </div>
+          <div class="lc-note">老维多利亚建筑外观迷人，但电路/管线通常是1950–60年代更新的，全面翻新预估 $300–500K，且 SF 施工审批周期长（6–12个月）。</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 94025 Menlo Park -->
+    <div class="zip-block">
+      <div class="zip-header">
+        <div class="zip-left">
+          <span class="zip-code">94025</span>
+          <span class="zip-city">Menlo Park</span>
+        </div>
+        <div class="zip-stats">
+          <div class="zstat"><span class="zval neutral">$3.0M</span><span class="zlabel">中位成交价</span></div>
+          <div class="zstat"><span class="zval down">↓5.4%</span><span class="zlabel">同比涨幅</span></div>
+          <div class="zstat"><span class="zval neutral">活跃</span><span class="zlabel">市场状态</span></div>
+          <div class="zstat"><span class="zval school">★★★★★</span><span class="zlabel">学区评级</span></div>
+        </div>
+      </div>
+      <div class="zip-school-note">🏫 <strong>Oak Knoll Elementary</strong> CA前3% · <strong>Hillview Middle</strong> CA前5% · <strong>La Entrada Middle</strong> CA前5% · Sand Hill Rd VC 生态核心，紧邻 Atherton 和 Stanford</div>
+      <div class="listing-row">
+        <div class="listing-card">
+          <div class="lc-price">$3,850,000</div>
+          <div class="lc-addr">Sharon Heights 区域</div>
+          <div class="lc-spec">4卧 / 3浴 / 2,600 sqft · 建于1965年</div>
+          <div class="lc-tags">
+            <span class="lc-tag g">Sand Hill Rd VC 圈</span>
+            <span class="lc-tag g">顶级小学</span>
+            <span class="lc-tag w">需更新厨浴</span>
+          </div>
+          <div class="lc-note">Sharon Heights 是 Menlo Park 最受欢迎的子区，紧邻 Sand Hill Rd，买家多为 VC/PE 圈人士和 Stanford 教授。旧房需装修 $250–400K，但地段溢价极强。</div>
+        </div>
+        <div class="listing-card">
+          <div class="lc-price">$2,950,000</div>
+          <div class="lc-addr">Central Menlo 区域</div>
+          <div class="lc-spec">4卧 / 2.5浴 / 2,200 sqft · 建于1958年</div>
+          <div class="lc-tags">
+            <span class="lc-tag g">Oak Knoll 学区</span>
+            <span class="lc-tag">局部翻新</span>
+          </div>
+          <div class="lc-note">Menlo Park 中段价位。今年小幅下跌 5.4%，但学区支撑强，长期持有逻辑仍然成立。买前需做充分的 inspection，60 年代房子地基和管线问题较常见。</div>
+        </div>
+        <div class="listing-card" style="background:#f6fdf8; border-left:3px solid #4a7c6f;">
+          <div class="lc-price">$4,500,000</div>
+          <div class="lc-addr">🆕 Central Menlo 新建 · Thomas James Homes</div>
+          <div class="lc-spec">5卧 / 4.5浴 / 3,400 sqft · 2026年春完工</div>
+          <div class="lc-tags">
+            <span class="lc-tag g">全新建成</span>
+            <span class="lc-tag g">10年结构保修</span>
+            <span class="lc-tag g">Oak Knoll 学区</span>
+            <span class="lc-tag g">买了即住</span>
+          </div>
+          <div class="lc-note">Thomas James Homes 是湾区知名精品新建品牌，在旧地块上拆旧建新，保留黄金地段 + 提供全新品质。比旧房贵 35% 左右，但省去翻新的钱、时间和精力。</div>
+        </div>
+      </div>
+    </div>
+  </div><!-- /tier-block t1 -->
+
+  <!-- ═══ TIER 2 ═══ -->
+  <div class="tier-block">
+    <div class="tier-block-header t2-header">
+      <span class="tier-block-badge">第二层</span>
+      <span class="tier-block-title">优质实用区域 — 科技家庭首选</span>
+      <span class="tier-block-desc">学区强 · 通勤便利 · 对利率有一定敏感性</span>
+    </div>
+
+    <!-- 95014 Cupertino -->
+    <div class="zip-block">
+      <div class="zip-header">
+        <div class="zip-left">
+          <span class="zip-code">95014</span>
+          <span class="zip-city">Cupertino</span>
+        </div>
+        <div class="zip-stats">
+          <div class="zstat"><span class="zval up">$3.4M</span><span class="zlabel">中位成交价</span></div>
+          <div class="zstat"><span class="zval up">↑20.3%</span><span class="zlabel">同比涨幅</span></div>
+          <div class="zstat"><span class="zval neutral">–</span><span class="zlabel">成交活跃</span></div>
+          <div class="zstat"><span class="zval school">★★★★★</span><span class="zlabel">学区评级</span></div>
+        </div>
+      </div>
+      <div class="zip-school-note">🏫 <strong>Monta Vista High School</strong> 10/10 · <strong>Lincoln Elementary</strong> 10/10 · <strong>Hyde Middle</strong> 9/10 — 大量华人/印度裔科技家庭首选</div>
+      <div class="listing-row">
+        <div class="listing-card">
+          <div class="lc-price t2">$3,650,000</div>
+          <div class="lc-addr">Monta Vista 学区内</div>
+          <div class="lc-spec">4卧 / 3浴 / 2,800 sqft</div>
+          <div class="lc-tags">
+            <span class="lc-tag g">Monta Vista 10/10</span>
+            <span class="lc-tag g">Apple 15分钟</span>
+          </div>
+          <div class="lc-note">Cupertino 今年涨幅最强，Apple 员工密集 + 学区顶尖，20% 涨幅在第二层里表现突出。</div>
+        </div>
+        <div class="listing-card">
+          <div class="lc-price t2">$2,950,000</div>
+          <div class="lc-addr">Garden Gate 社区</div>
+          <div class="lc-spec">4卧 / 2浴 / 2,100 sqft</div>
+          <div class="lc-tags">
+            <span class="lc-tag g">成熟社区</span>
+            <span class="lc-tag g">学区内</span>
+          </div>
+          <div class="lc-note">Cupertino 中段价位，适合双高收入家庭落脚，学区溢价明显，相对面积偏小但位置好。</div>
+        </div>
+        <div class="listing-card">
+          <div class="lc-price t2">$3,200,000</div>
+          <div class="lc-addr">Seven Springs 区域</div>
+          <div class="lc-spec">5卧 / 4浴 / 3,200 sqft · 建于1988年</div>
+          <div class="lc-tags">
+            <span class="lc-tag g">大户型</span>
+            <span class="lc-tag">局部翻新</span>
+            <span class="lc-tag w">厨房待更新</span>
+          </div>
+          <div class="lc-note">局部翻新（浴室），但厨房仍是90年代设计。如果全面翻新预估 $200–300K，施工 8–12 个月。优点是地块大，有扩建空间。</div>
+        </div>
+        <div class="listing-card" style="background:#f6fdf8; border-left:3px solid #4a7c6f;">
+          <div class="lc-price t2">$4,200,000</div>
+          <div class="lc-addr">🆕 Monta Vista 新建 · 含 ADU</div>
+          <div class="lc-spec">4卧 / 3.5浴 / 3,867 sqft + 3/3 ADU 800 sqft · 在建</div>
+          <div class="lc-tags">
+            <span class="lc-tag g">Monta Vista HS 10/10</span>
+            <span class="lc-tag g">含大型 ADU</span>
+            <span class="lc-tag g">全新建成</span>
+          </div>
+          <div class="lc-note">Cupertino 核心学区内的新建项目，ADU 单独出租可月收 $3,500–4,500，有效降低持有成本。Cupertino 新建极少，稀缺性强。</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 94010 Burlingame -->
+    <div class="zip-block">
+      <div class="zip-header">
+        <div class="zip-left">
+          <span class="zip-code">94010</span>
+          <span class="zip-city">Burlingame</span>
+        </div>
+        <div class="zip-stats">
+          <div class="zstat"><span class="zval up">$3.8M</span><span class="zlabel">中位成交价</span></div>
+          <div class="zstat"><span class="zval up">↑0.9%</span><span class="zlabel">同比涨幅</span></div>
+          <div class="zstat"><span class="zval neutral">稳健</span><span class="zlabel">市场状态</span></div>
+          <div class="zstat"><span class="zval school">★★★★☆</span><span class="zlabel">学区评级</span></div>
+        </div>
+      </div>
+      <div class="zip-school-note">🏫 <strong>Burlingame High School</strong> 8/10 · <strong>Washington Elementary</strong> 9/10 · 半岛黄金地段，离 SFO 10分钟，SF/南湾通勤双便利</div>
+      <div class="listing-row">
+        <div class="listing-card">
+          <div class="lc-price t2">$3,900,000</div>
+          <div class="lc-addr">Burlingame Ave 附近</div>
+          <div class="lc-spec">4卧 / 3浴 / 2,500 sqft</div>
+          <div class="lc-tags">
+            <span class="lc-tag g">步行至餐厅街</span>
+            <span class="lc-tag g">半岛中心</span>
+          </div>
+          <div class="lc-note">Burlingame 的吸引力在于通勤双覆盖（SF + 南湾）+ 生活品质。中位价 $3.8M，已进入第一层价格区间但逻辑更偏第二层。</div>
+        </div>
+        <div class="listing-card">
+          <div class="lc-price t2">$2,750,000</div>
+          <div class="lc-addr">Easton Addition 区域</div>
+          <div class="lc-spec">3卧 / 2浴 / 1,900 sqft · 建于1952年</div>
+          <div class="lc-tags">
+            <span class="lc-tag g">历史社区</span>
+            <span class="lc-tag w">需整体翻新</span>
+          </div>
+          <div class="lc-note">典型 Burlingame 战后房，结构扎实但内部老化，全面翻新预估 $350–500K，期间需另觅住所。价格看似划算，加上翻新成本实际总价接近 $3.2M+。</div>
+        </div>
+        <div class="listing-card" style="background:#f6fdf8; border-left:3px solid #4a7c6f;">
+          <div class="lc-price t2">$3,200,000</div>
+          <div class="lc-addr">✨ Burlingame Village 2024 全翻新</div>
+          <div class="lc-spec">4卧 / 3浴 / 2,300 sqft · 2024年全面翻新</div>
+          <div class="lc-tags">
+            <span class="lc-tag g">重新设计格局</span>
+            <span class="lc-tag g">全新厨卫</span>
+            <span class="lc-tag g">新电路/管线</span>
+            <span class="lc-tag g">交钥匙即住</span>
+          </div>
+          <div class="lc-note">2024年经历了"每一寸都重新设计"的全面翻新，达到新建同等品质。Burlingame Village 是半岛最受欢迎的家庭社区之一，这类精装翻新盘上市即售。</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 94402 San Mateo -->
+    <div class="zip-block">
+      <div class="zip-header">
+        <div class="zip-left">
+          <span class="zip-code">94402</span>
+          <span class="zip-city">San Mateo</span>
+        </div>
+        <div class="zip-stats">
+          <div class="zstat"><span class="zval up">$2.44M</span><span class="zlabel">中位成交价</span></div>
+          <div class="zstat"><span class="zval up">↑6.6%</span><span class="zlabel">同比涨幅</span></div>
+          <div class="zstat"><span class="zval neutral">活跃</span><span class="zlabel">市场状态</span></div>
+          <div class="zstat"><span class="zval school">★★★★☆</span><span class="zlabel">学区评级</span></div>
+        </div>
+      </div>
+      <div class="zip-school-note">🏫 <strong>Hillsdale High School</strong> 7/10 · <strong>Baywood Elementary</strong> 9/10 · 半岛中段，Caltrain 沿线，通勤便利</div>
+      <div class="listing-row">
+        <div class="listing-card">
+          <div class="lc-price t2">$2,700,000</div>
+          <div class="lc-addr">Baywood 社区</div>
+          <div class="lc-spec">4卧 / 3浴 / 2,200 sqft</div>
+          <div class="lc-tags">
+            <span class="lc-tag g">Baywood ES 9/10</span>
+            <span class="lc-tag g">安静住宅区</span>
+          </div>
+          <div class="lc-note">San Mateo 中段价位，今年同比涨 6.6% 表现不错，位置在半岛核心，比 Palo Alto 实惠不少。</div>
+        </div>
+        <div class="listing-card">
+          <div class="lc-price t2">$2,100,000</div>
+          <div class="lc-addr">Beresford 区域</div>
+          <div class="lc-spec">3卧 / 2浴 / 1,700 sqft</div>
+          <div class="lc-tags">
+            <span class="lc-tag g">近 Caltrain</span>
+            <span class="lc-tag">学区中等</span>
+          </div>
+          <div class="lc-note">San Mateo 相对低价入口，通勤极方便，适合单高收入家庭，但要注意高中学区评分一般。</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 94040 Mountain View -->
+    <div class="zip-block">
+      <div class="zip-header">
+        <div class="zip-left">
+          <span class="zip-code">94040</span>
+          <span class="zip-city">Mountain View</span>
+        </div>
+        <div class="zip-stats">
+          <div class="zstat"><span class="zval neutral">$2.0M</span><span class="zlabel">中位成交价</span></div>
+          <div class="zstat"><span class="zval down">↓1.5%</span><span class="zlabel">同比涨幅</span></div>
+          <div class="zstat"><span class="zval neutral">稳定</span><span class="zlabel">市场状态</span></div>
+          <div class="zstat"><span class="zval school">★★★☆☆</span><span class="zlabel">学区评级</span></div>
+        </div>
+      </div>
+      <div class="zip-school-note">🏫 <strong>Mountain View High</strong> 7/10 · <strong>Castro Elementary</strong> 8/10 · Google/LinkedIn 核心通勤，但高中学区相对薄弱</div>
+      <div class="listing-row">
+        <div class="listing-card">
+          <div class="lc-price t2">$2,150,000</div>
+          <div class="lc-addr">Cuesta Park 附近</div>
+          <div class="lc-spec">4卧 / 2浴 / 1,900 sqft</div>
+          <div class="lc-tags">
+            <span class="lc-tag g">Google 10分钟</span>
+            <span class="lc-tag g">公园附近</span>
+          </div>
+          <div class="lc-note">MV 的吸引力在于通勤（Google/LinkedIn/AI infra 公司密集）而非学区。今年微跌反映学区溢价不足以对冲高利率。</div>
+        </div>
+        <div class="listing-card">
+          <div class="lc-price t2">$1,780,000</div>
+          <div class="lc-addr">Old Mountain View</div>
+          <div class="lc-spec">3卧 / 2浴 / 1,500 sqft</div>
+          <div class="lc-tags">
+            <span class="lc-tag g">步行至 Castro St</span>
+            <span class="lc-tag w">学区一般</span>
+          </div>
+          <div class="lc-note">MV 低价入口，适合不在乎公校学区、孩子上私校或已过学龄的科技工作者。</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 94087 Sunnyvale -->
+    <div class="zip-block">
+      <div class="zip-header">
+        <div class="zip-left">
+          <span class="zip-code">94087</span>
+          <span class="zip-city">Sunnyvale</span>
+        </div>
+        <div class="zip-stats">
+          <div class="zstat"><span class="zval neutral">$1.9M</span><span class="zlabel">中位成交价</span></div>
+          <div class="zstat"><span class="zval down">↓7.2%</span><span class="zlabel">同比涨幅</span></div>
+          <div class="zstat"><span class="zval neutral">$1.27K</span><span class="zlabel">均价/sqft</span></div>
+          <div class="zstat"><span class="zval school">★★★☆☆</span><span class="zlabel">学区评级</span></div>
+        </div>
+      </div>
+      <div class="zip-school-note">🏫 <strong>Homestead High School</strong> 7/10 · <strong>Cherry Chase Elementary</strong> 8/10 · 大量 tech 公司通勤，但学区整体弱于 Cupertino</div>
+      <div class="listing-row">
+        <div class="listing-card">
+          <div class="lc-price t2">$2,000,000</div>
+          <div class="lc-addr">Ponderosa 社区</div>
+          <div class="lc-spec">4卧 / 3浴 / 2,100 sqft</div>
+          <div class="lc-tags">
+            <span class="lc-tag g">大面积</span>
+            <span class="lc-tag g">近 LinkedIn</span>
+          </div>
+          <div class="lc-note">Sunnyvale 性价比高，但今年跌 7.2% 说明它更靠近第二层偏弱区间——没有稀缺学区溢价做支撑，对利率更敏感。</div>
+        </div>
+        <div class="listing-card">
+          <div class="lc-price t2">$1,650,000</div>
+          <div class="lc-addr">Lakewood 社区</div>
+          <div class="lc-spec">3卧 / 2浴 / 1,600 sqft · 建于1972年</div>
+          <div class="lc-tags">
+            <span class="lc-tag">学区中等</span>
+            <span class="lc-tag g">安静社区</span>
+            <span class="lc-tag w">原始厨浴</span>
+          </div>
+          <div class="lc-note">价格合理，但厨浴保留 70 年代原装，若要翻新预估 $150–250K。持有逻辑偏弱，更依赖通勤便利性而非稀缺性。</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 95030/95032 Los Gatos -->
+    <div class="zip-block">
+      <div class="zip-header">
+        <div class="zip-left">
+          <span class="zip-code">95030 / 95032</span>
+          <span class="zip-city">Los Gatos</span>
+        </div>
+        <div class="zip-stats">
+          <div class="zstat"><span class="zval down">$2.2M</span><span class="zlabel">中位成交价</span></div>
+          <div class="zstat"><span class="zval down">↓10.7%</span><span class="zlabel">同比涨幅</span></div>
+          <div class="zstat"><span class="zval neutral">生活型</span><span class="zlabel">市场特征</span></div>
+          <div class="zstat"><span class="zval school">★★★★☆</span><span class="zlabel">学区评级</span></div>
+        </div>
+      </div>
+      <div class="zip-school-note">🏫 <strong>Lexington Elementary</strong> 9/10 · <strong>Los Gatos High School</strong> 9/10 · 南湾精致小镇，生活品质高，但 Apple/Google 通勤 20–30 分钟，今年跌幅在第二层中偏大</div>
+      <div class="listing-row">
+        <div class="listing-card">
+          <div class="lc-price t2">$2,600,000</div>
+          <div class="lc-addr">Downtown Los Gatos 附近</div>
+          <div class="lc-spec">4卧 / 3浴 / 2,400 sqft · 建于1978年</div>
+          <div class="lc-tags">
+            <span class="lc-tag g">步行至镇中心</span>
+            <span class="lc-tag g">Los Gatos HS 9/10</span>
+            <span class="lc-tag w">局部翻新待完善</span>
+          </div>
+          <div class="lc-note">Los Gatos 最大的吸引力是生活品质：精致小镇氛围、好学区、山景。但今年跌幅 10.7% 是 K 型分化的体现——离 AI 财富核心较远，生活型买家比科技买家对利率更敏感。</div>
+        </div>
+        <div class="listing-card">
+          <div class="lc-price t2">$2,900,000</div>
+          <div class="lc-addr">Los Gatos Hills 山景区</div>
+          <div class="lc-spec">3卧 / 2.5浴 / 2,100 sqft · 山景地块</div>
+          <div class="lc-tags">
+            <span class="lc-tag g">山景</span>
+            <span class="lc-tag g">私密</span>
+            <span class="lc-tag w">坡地建筑注意地基</span>
+          </div>
+          <div class="lc-note">山景地块溢价明显，但坡地房子地基检查尤为重要——尤其是雨季潜在的土方移动风险。买前务必做专业地质和结构检查，费用 $2,000–5,000。</div>
+        </div>
+        <div class="listing-card" style="background:#f6fdf8; border-left:3px solid #4a7c6f;">
+          <div class="lc-price t2">$3,100,000</div>
+          <div class="lc-addr">🆕 Los Gatos 新建独栋</div>
+          <div class="lc-spec">4卧 / 3.5浴 / 3,000 sqft · 2025年建成</div>
+          <div class="lc-tags">
+            <span class="lc-tag g">全新建成</span>
+            <span class="lc-tag g">开放式格局</span>
+            <span class="lc-tag g">太阳能+储能</span>
+            <span class="lc-tag g">LGHS 学区</span>
+          </div>
+          <div class="lc-note">Los Gatos 新建稀缺，2025年底完工，太阳能+储能系统（Powerwall），符合加州能效新规。价格比旧房高 30%，但省去翻新麻烦，尤其山区施工成本比平地贵 20–30%。</div>
+        </div>
+      </div>
+    </div>
+  </div><!-- /tier-block t2 -->
+
+  <!-- ═══ TIER 3 ═══ -->
+  <div class="tier-block">
+    <div class="tier-block-header t3-header">
+      <span class="tier-block-badge">第三层</span>
+      <span class="tier-block-title">普通交通盘 / Condo — 功能性住房</span>
+      <span class="tier-block-desc">替代性强 · 买家算账买 · 高利率下承压最明显</span>
+    </div>
+
+    <!-- 95051 Santa Clara -->
+    <div class="zip-block">
+      <div class="zip-header">
+        <div class="zip-left">
+          <span class="zip-code">95051</span>
+          <span class="zip-city">Santa Clara</span>
+        </div>
+        <div class="zip-stats">
+          <div class="zstat"><span class="zval down">$1.6M</span><span class="zlabel">中位成交价</span></div>
+          <div class="zstat"><span class="zval down">↓9.76%</span><span class="zlabel">同比涨幅</span></div>
+          <div class="zstat"><span class="zval neutral">9天</span><span class="zlabel">平均成交</span></div>
+          <div class="zstat"><span class="zval school">★★★☆☆</span><span class="zlabel">学区评级</span></div>
+        </div>
+      </div>
+      <div class="zip-school-note">🏫 <strong>Santa Clara High School</strong> 6/10 · <strong>Laurelwood Elementary</strong> 6/10 · K 型下半边最典型代表，功能性地段，无学区溢价</div>
+      <div class="listing-row">
+        <div class="listing-card">
+          <div class="lc-price t3">$1,550,000</div>
+          <div class="lc-addr">Bowers Ave 附近 SFH</div>
+          <div class="lc-spec">3卧 / 2浴 / 1,400 sqft</div>
+          <div class="lc-tags">
+            <span class="lc-tag w">去年约 $1.72M</span>
+            <span class="lc-tag">SFH 但无溢价</span>
+          </div>
+          <div class="lc-note">去年同类型房约 $1.72M，今年跌到 $1.55M。功能性住房，买家完全算月供，利率敏感度极高。</div>
+        </div>
+        <div class="listing-card">
+          <div class="lc-price t3">$820,000</div>
+          <div class="lc-addr">Reed Ave Condo</div>
+          <div class="lc-spec">2卧 / 2浴 / 980 sqft / HOA $650/月</div>
+          <div class="lc-tags">
+            <span class="lc-tag w">HOA 高</span>
+            <span class="lc-tag w">替代性强</span>
+            <span class="lc-tag">近 Intel 园区</span>
+          </div>
+          <div class="lc-note">Condo 是 K 型下半边压力最大的资产类型之一。高 HOA + 无稀缺性 + 买家算账，价格弹性大。</div>
+        </div>
+        <div class="listing-card">
+          <div class="lc-price t3">$598,000</div>
+          <div class="lc-addr">Homestead Rd 附近 Condo</div>
+          <div class="lc-spec">1卧 / 1浴 / 700 sqft / HOA $580/月</div>
+          <div class="lc-tags">
+            <span class="lc-tag w">流动性差</span>
+            <span class="lc-tag w">升值逻辑弱</span>
+          </div>
+          <div class="lc-note">这类小 condo 看起来便宜，但加上 HOA 每月实际成本不低，且升值逻辑最弱，是"买不起就将就"的消费品而非资产。</div>
+        </div>
+      </div>
+    </div>
+  </div><!-- /tier-block t3 -->
+
+  <!-- ═══ TIER 4 ═══ -->
+  <div class="tier-block">
+    <div class="tier-block-header t4-header">
+      <span class="tier-block-badge">第四层</span>
+      <span class="tier-block-title">远郊通勤房 — 弹性最大，风险最高</span>
+      <span class="tier-block-desc">WFH 退潮后需求弱 · 先跌后涨 · 持有逻辑最薄</span>
+    </div>
+
+    <!-- 94509 Antioch -->
+    <div class="zip-block">
+      <div class="zip-header">
+        <div class="zip-left">
+          <span class="zip-code">94509</span>
+          <span class="zip-city">Antioch</span>
+        </div>
+        <div class="zip-stats">
+          <div class="zstat"><span class="zval neutral">$601K</span><span class="zlabel">中位成交价</span></div>
+          <div class="zstat"><span class="zval up">↑1.5%</span><span class="zlabel">同比涨幅</span></div>
+          <div class="zstat"><span class="zval down">21天</span><span class="zlabel">平均成交</span></div>
+          <div class="zstat"><span class="zval school">★★☆☆☆</span><span class="zlabel">学区评级</span></div>
+        </div>
+      </div>
+      <div class="zip-school-note">🏫 <strong>Antioch High School</strong> 3/10 · 距离湾区核心 60–80 分钟通勤 · WFH 减少后通勤成本重新成为障碍</div>
+      <div class="listing-row">
+        <div class="listing-card">
+          <div class="lc-price t4">$625,000</div>
+          <div class="lc-addr">Black Diamond 社区</div>
+          <div class="lc-spec">4卧 / 3浴 / 2,400 sqft</div>
+          <div class="lc-tags">
+            <span class="lc-tag w">学区 3/10</span>
+            <span class="lc-tag w">远郊</span>
+            <span class="lc-tag">面积大</span>
+          </div>
+          <div class="lc-note">面积看起来划算，但学区差、通勤远、持有成本随时间积累。2021 年这套可能要 $750K+，现在回落说明 WFH 红利消散了。</div>
+        </div>
+        <div class="listing-card">
+          <div class="lc-price t4">$585,000</div>
+          <div class="lc-addr">Prewett Farm 附近</div>
+          <div class="lc-spec">3卧 / 2浴 / 1,900 sqft</div>
+          <div class="lc-tags">
+            <span class="lc-tag w">21天仍未售</span>
+            <span class="lc-tag">近 BART 站</span>
+          </div>
+          <div class="lc-note">有 BART 接驳，但 BART → 湾区核心单程仍需 70–90 分钟。买家犹豫，挂牌期延长，市场话语权已向买家倾斜。</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 95376 Tracy -->
+    <div class="zip-block">
+      <div class="zip-header">
+        <div class="zip-left">
+          <span class="zip-code">95376</span>
+          <span class="zip-city">Tracy</span>
+        </div>
+        <div class="zip-stats">
+          <div class="zstat"><span class="zval neutral">$665K</span><span class="zlabel">中位成交价</span></div>
+          <div class="zstat"><span class="zval down">↓1.1%</span><span class="zlabel">同比涨幅</span></div>
+          <div class="zstat"><span class="zval down">37天</span><span class="zlabel">平均成交（慢）</span></div>
+          <div class="zstat"><span class="zval school">★★☆☆☆</span><span class="zlabel">学区评级</span></div>
+        </div>
+      </div>
+      <div class="zip-school-note">🏫 <strong>West High School</strong> 5/10 · 距离湾区 80–100 分钟 · 37天成交周期（对比核心区 9–11天）是流动性差的直接体现</div>
+      <div class="listing-row">
+        <div class="listing-card">
+          <div class="lc-price t4">$668,000</div>
+          <div class="lc-addr">Regency 社区</div>
+          <div class="lc-spec">4卧 / 3浴 / 2,600 sqft</div>
+          <div class="lc-tags">
+            <span class="lc-tag w">37天仍在挂</span>
+            <span class="lc-tag w">流动性差</span>
+            <span class="lc-tag">面积最大</span>
+          </div>
+          <div class="lc-note">37 天成交是 K 型下半边流动性的缩影。好市场时这里涨很快，但坏市场时卖出来很困难，是价格弹性最大的一层。</div>
+        </div>
+        <div class="listing-card">
+          <div class="lc-price t4">$598,000</div>
+          <div class="lc-addr">Ellis 社区</div>
+          <div class="lc-spec">3卧 / 2浴 / 1,850 sqft</div>
+          <div class="lc-tags">
+            <span class="lc-tag w">通勤 90分钟+</span>
+            <span class="lc-tag">新建小区</span>
+          </div>
+          <div class="lc-note">Tracy 新建社区，表面看起来性价比高，但考虑通勤时间成本和持有周期，实际总拥有成本并不低。</div>
+        </div>
+      </div>
+    </div>
+  </div><!-- /tier-block t4 -->
+
+  <!-- placeholder to match old closing tag -->
+  <div style="display:none">x
 
     <!-- FEATURED: Cherry Ave -->
     <div class="house-card featured">
@@ -1069,8 +1901,8 @@
         <p>买的是土地稀缺性。学区、地段、低密度、长期高收入买家池。是资产，不是消费。</p>
       </div>
       <div class="rule-card">
-        <strong>📊 买 ESS</strong>
-        <p>买的是高收入租客现金流 + 降息后 REIT 估值修复。参与湾区上半边逻辑的替代方式。</p>
+        <strong>🏢 高端租房逻辑</strong>
+        <p>买房门槛高 → 高收入人群主动选择租核心地段高质量公寓 → 高端租金持续强劲，和普通公寓是两个市场。</p>
       </div>
       <div class="rule-card">
         <strong>⚠️ 要小心的</strong>
