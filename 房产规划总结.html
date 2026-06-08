@@ -2941,7 +2941,12 @@
     <div id="bazi-body">
       <p style="font-size:0.82rem; color:var(--muted); margin-bottom:20px; line-height:1.7;">以 1996年6月20日 与 1998年9月20日 两组生辰推算四柱，结合五行喜忌判断方位吉凶，映射湾区各区域格局。日柱为估算值，时柱未知，仅供趣味参考。</p>
 
-      <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap:16px; margin-bottom:24px;">
+      <div style="display:flex; align-items:center; gap:8px; margin-bottom:10px; cursor:pointer; user-select:none;" onclick="var b=document.getElementById('bazi-pillars'); b.style.display=b.style.display==='none'?'grid':'none'; this.querySelector('.bp-arrow').textContent=b.style.display==='none'?'▶ 展开':'▼ 收起';">
+        <span style="font-size:0.82rem; color:var(--muted); font-weight:600;">四柱详情</span>
+        <span class="bp-arrow" style="font-size:0.75rem; color:var(--subtle);">▼ 收起</span>
+      </div>
+
+      <div id="bazi-pillars" style="display:grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap:16px; margin-bottom:24px;">
 
         <!-- Person 1 -->
         <div style="background:#fef9f2; border:1.5px solid #f0d8b8; border-radius:14px; padding:18px 20px;">
