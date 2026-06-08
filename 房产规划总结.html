@@ -558,6 +558,21 @@
   .mx-warn { background: #fdf5ef !important; } .mx-warn .mx-pay { color: var(--accent); }
   .mx-heavy { background: #fdeeed !important; } .mx-heavy .mx-pay { color: var(--down); }
   .mx-cash { background: #f8f5ff !important; } .mx-cash .mx-pay { color: #7c6b9e; font-size: 0.82rem; }
+  /* Property type comparison */
+  .prop-type-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; margin-bottom: 20px; }
+  .prop-card { border-radius: 14px; padding: 20px; border: 2px solid transparent; }
+  .prop-sfh { background: #f0faf4; border-color: #a8d8b8; }
+  .prop-th  { background: #f5f7fd; border-color: #b8c8e8; }
+  .prop-condo { background: #fdf5f0; border-color: #e8c8b8; }
+  .prop-type-label { font-size: 1.15rem; font-weight: 800; color: var(--text); }
+  .prop-type-sub { font-size: 0.78rem; color: #aaa; margin-bottom: 12px; }
+  .prop-list { margin: 0 0 14px 0; padding-left: 4px; list-style: none; font-size: 0.83rem; color: var(--muted); line-height: 1.9; }
+  .prop-list li { padding-left: 0; }
+  .prop-verdict { font-size: 0.82rem; font-weight: 600; padding: 8px 12px; border-radius: 8px; }
+  .prop-sfh .prop-verdict { background: #d4f0e0; color: #2a6a45; }
+  .prop-th  .prop-verdict { background: #dce6f8; color: #2a4a8a; }
+  .prop-condo .prop-verdict { background: #f8e0d0; color: #8a3a1a; }
+  .prop-hoa-note { background: #fef9f2; border: 1px solid #e8d4b0; border-radius: 12px; padding: 14px 18px; font-size: 0.85rem; color: var(--muted); }
 
   .conclusion {
     background: linear-gradient(135deg, #fef9f2, #fdf4eb);
@@ -2228,7 +2243,7 @@
         <tbody>
           <tr class="afford-row-t2">
             <td class="afford-price">$1.5M</td>
-            <td>Cupertino / San Mateo 2–3卧小房</td>
+            <td>East San Jose / Fremont / Milpitas 3卧老旧 SFH；核心学区地段几乎无 SFH 可选</td>
             <td>$300K</td>
             <td>$19K</td>
             <td class="afford-key">$319K</td>
@@ -2239,7 +2254,7 @@
           </tr>
           <tr class="afford-row-t2">
             <td class="afford-price">$2.5M</td>
-            <td>Los Gatos / Burlingame 3–4卧 SFH</td>
+            <td>Mountain View / Sunnyvale / San Mateo 3卧 SFH（小旧）；Cupertino / Los Gatos 入场价</td>
             <td>$500K</td>
             <td>$31K</td>
             <td class="afford-key">$531K</td>
@@ -2250,7 +2265,7 @@
           </tr>
           <tr class="afford-row-t1">
             <td class="afford-price">$3.5M</td>
-            <td>Saratoga / Menlo Park 4卧 SFH</td>
+            <td>Cupertino / Saratoga / Los Gatos / Burlingame 4卧 SFH（主力价位）</td>
             <td>$700K</td>
             <td>$44K</td>
             <td class="afford-key">$744K</td>
@@ -2261,7 +2276,7 @@
           </tr>
           <tr class="afford-row-t1">
             <td class="afford-price">$5M</td>
-            <td>Palo Alto / Atherton 顶级 SFH</td>
+            <td>Palo Alto / Los Altos / Atherton 入场 SFH；Saratoga / Menlo Park 西侧大房</td>
             <td>$1.0M</td>
             <td>$63K</td>
             <td class="afford-key">$1.06M</td>
@@ -2445,6 +2460,64 @@
         </div>
       </div>
       <p class="rate-footnote">⚠️ 利率预测仅供参考，实际走势受美联储政策、通胀数据及全球经济影响。"买房等降息"策略风险：降息时价格可能同步上升，月供降幅未必能抵消价格涨幅。核心地段供给刚性，等待窗口通常比预期短。</p>
+    </div>
+  </div>
+
+  <!-- PROPERTY TYPE COMPARISON -->
+  <div class="afford-section" style="margin-top:40px;">
+    <div class="afford-header">
+      <h2 style="margin:0 0 4px 0; font-size:1.3rem; color:var(--text)">SFH · Townhouse · Condo：三种房型的本质区别</h2>
+      <p style="margin:0; color:#888; font-size:0.85rem">同样的钱买不同房型，长期结果差异很大</p>
+    </div>
+    <div class="prop-type-grid">
+      <div class="prop-card prop-sfh">
+        <div class="prop-type-label">SFH 独栋</div>
+        <div class="prop-type-sub">Single Family Home</div>
+        <ul class="prop-list">
+          <li>✅ 拥有土地产权——这是核心稀缺性所在</li>
+          <li>✅ 无 HOA（或极低），没有每月额外费用</li>
+          <li>✅ 可自由改建：加 ADU、扩建、翻新无需经批准</li>
+          <li>✅ 买家池最广，流动性最强，溢价最稳</li>
+          <li>✅ 学区绑定最直接（以地址为准）</li>
+          <li>⚠️ 同面积价格最贵</li>
+          <li>⚠️ 维护全由自己负责（屋顶、管线、草坪）</li>
+        </ul>
+        <div class="prop-verdict">首选。湾区 K 型分化的上半边几乎都是 SFH 逻辑。</div>
+      </div>
+      <div class="prop-card prop-th">
+        <div class="prop-type-label">TH 联排</div>
+        <div class="prop-type-sub">Townhouse / Townhome</div>
+        <ul class="prop-list">
+          <li>✅ 有独立门牌、多层结构，生活感接近独栋</li>
+          <li>✅ 价格比 SFH 低 15–30%，面积更大</li>
+          <li>✅ 外墙/屋顶维护通常由 HOA 负责</li>
+          <li>⚠️ 共享墙体（至少一侧），隔音是关键变量</li>
+          <li>⚠️ HOA 费用 $300–$800/月，长期成本需计入</li>
+          <li>❌ 无独立土地——土地增值逻辑弱于 SFH</li>
+          <li>❌ 流动性和溢价空间弱于同区 SFH</li>
+          <li>❌ 出租限制：部分 HOA 规定禁止出租或 Airbnb</li>
+        </ul>
+        <div class="prop-verdict">过渡选项。预算不够买 SFH 时可考虑，但务必确认 HOA 规则和隔音质量。</div>
+      </div>
+      <div class="prop-card prop-condo">
+        <div class="prop-type-label">Condo 公寓</div>
+        <div class="prop-type-sub">Condominium</div>
+        <ul class="prop-list">
+          <li>✅ 同区最低价格入场</li>
+          <li>✅ 地段可以很好（市中心、步行便利）</li>
+          <li>✅ 维护成本低，物业全管</li>
+          <li>⚠️ HOA 费 $400–$1,200/月，大楼越老越高</li>
+          <li>⚠️ 特别评估（Special Assessment）风险：大修时全体业主摊费</li>
+          <li>❌ 无土地、无独栋稀缺性，长期增值弱</li>
+          <li>❌ 贷款限制多：部分 Condo 大楼不符合 Fannie Mae 标准，只能做非标贷款（利率更高）</li>
+          <li>❌ 买家池窄（投资客多、自住家庭少），流动性较差</li>
+          <li>❌ 学区对应弱：同栋不同层可能对应不同学区</li>
+        </ul>
+        <div class="prop-verdict">不推荐作为家庭主要资产。除非地段极佳且预算有限，否则优先考虑 SFH 或 TH。</div>
+      </div>
+    </div>
+    <div class="prop-hoa-note">
+      <strong>HOA 的隐形成本：</strong>以 $600/月 HOA 为例，30年累计支付 <strong>$216,000</strong>，相当于多付了一大笔首付。选 TH/Condo 时，HOA 费用必须加入月总支出一起和 SFH 比较。
     </div>
   </div>
 
