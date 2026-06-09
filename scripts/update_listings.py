@@ -1,24 +1,30 @@
 #!/usr/bin/env python3
 """
 Bay Area Real Estate — Daily Data Updater
-Fetches median prices, market stats, and recent listings from Redfin
-for each tracked ZIP code. Saves results to data/latest.json and
-data/history/YYYY-MM-DD.json.
+
+Two data sources, each used for what it does best:
+  - Zillow ZHVI (free public CSV): tier placement — smoothed model value
+    of the entire housing stock, consistent across ZIPs.
+  - Redfin internal API (session-based): actual median sale price for
+    individual deal evaluation — real transactions, more volatile.
+
+If Redfin is unavailable (blocked/rate-limited), ZHVI is used as fallback
+for display price too.
 
 Run:  python3 scripts/update_listings.py
-Deps: pip install requests
+Deps: pip install requests pandas
 """
 
+import io
 import json
-import os
 import time
-import re
 from datetime import date, datetime
 from pathlib import Path
 
 import requests
+import pandas as pd
 
-# ── Configuration ────────────────────────────────────────────────────────────
+# ── Paths ─────────────────────────────────────────────────────────────────────
 
 SCRIPT_DIR  = Path(__file__).parent
 ROOT        = SCRIPT_DIR.parent
@@ -29,20 +35,15 @@ LATEST_PATH = DATA_DIR / "latest.json"
 DATA_DIR.mkdir(exist_ok=True)
 HISTORY_DIR.mkdir(exist_ok=True)
 
-SESSION = requests.Session()
-SESSION.headers.update({
-    "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
-                  "AppleWebKit/537.36 (KHTML, like Gecko) "
-                  "Chrome/124.0.0.0 Safari/537.36",
-    "Accept": "application/json, text/plain, */*",
-    "Accept-Language": "en-US,en;q=0.9",
-    "Referer": "https://www.redfin.com/",
-    "X-Requested-With": "XMLHttpRequest",
-})
+# ── Zillow public research CSV URLs ───────────────────────────────────────────
+# ZHVI is the only Zillow dataset available at ZIP-code granularity (free).
+# Median sale price and DOM are Metro-only in Zillow's public data.
+ZILLOW_ZHVI_URL = (
+    "https://files.zillowstatic.com/research/public_csvs/zhvi/"
+    "Zip_zhvi_uc_sfrcondo_tier_0.33_0.67_sm_sa_month.csv"
+)
 
-# ── ZIP Registry ─────────────────────────────────────────────────────────────
-# tier: 1=top, 2=good, 3=mixed, 4=peripheral
-# landmark ZIPs (airports, universities) are excluded from price tracking
+# ── ZIP Registry ──────────────────────────────────────────────────────────────
 
 ZIPS = {
     # Tier 1
@@ -59,43 +60,43 @@ ZIPS = {
     "95070": {"city": "Saratoga",         "tier": 1},
     "94010": {"city": "Hillsborough",     "tier": 1},
     # Tier 2
-    "94025": {"city": "Menlo Park",       "tier": 2},
-    "95030": {"city": "Los Gatos",        "tier": 2},
+    "94025": {"city": "Menlo Park",       "tier": 2, "pin": True},
+    "95030": {"city": "Los Gatos",        "tier": 2, "pin": True},
     "95032": {"city": "Los Gatos",        "tier": 2},
-    "94040": {"city": "Mountain View",    "tier": 2},
+    "94040": {"city": "Mountain View",    "tier": 2, "pin": True},
     "94041": {"city": "Mountain View",    "tier": 2},
     "94043": {"city": "Mountain View",    "tier": 2},
     "94087": {"city": "Sunnyvale",        "tier": 2},
     "94086": {"city": "Sunnyvale",        "tier": 2},
-    "94085": {"city": "Sunnyvale",        "tier": 2},
-    "94089": {"city": "Sunnyvale",        "tier": 2},
+    "94085": {"city": "Sunnyvale",        "tier": 2, "pin": True},
+    "94089": {"city": "Sunnyvale",        "tier": 2, "pin": True},
     "95129": {"city": "West San Jose",    "tier": 2},
     "94401": {"city": "San Mateo",        "tier": 2},
     "94402": {"city": "San Mateo",        "tier": 2},
     "94403": {"city": "San Mateo",        "tier": 2},
     "94114": {"city": "Noe Valley SF",    "tier": 2},
-    "94115": {"city": "Pacific Heights",  "tier": 2},
+    "94115": {"city": "Pacific Heights",  "tier": 3},
     "94065": {"city": "Redwood Shores",   "tier": 2},
     "94070": {"city": "San Carlos",       "tier": 2},
     "94002": {"city": "Belmont",          "tier": 2},
     "94030": {"city": "Millbrae",         "tier": 2},
-    "94103": {"city": "SoMa SF",          "tier": 2},
-    "94107": {"city": "Mission Bay SF",   "tier": 2},
-    "94105": {"city": "Embarcadero SF",   "tier": 2},
-    "94158": {"city": "Mission Bay SF",   "tier": 2},
+    "94103": {"city": "SoMa SF",          "tier": 4},
+    "94107": {"city": "Mission Bay SF",   "tier": 3},
+    "94105": {"city": "Embarcadero SF",   "tier": 3},
+    "94158": {"city": "Mission Bay SF",   "tier": 3},
     # Tier 3
     "95051": {"city": "Santa Clara",      "tier": 3},
     "95050": {"city": "Santa Clara",      "tier": 3},
     "95054": {"city": "Santa Clara",      "tier": 3},
-    "94539": {"city": "Fremont",          "tier": 3},
+    "94539": {"city": "Fremont",          "tier": 3, "pin": True},
     "94538": {"city": "Fremont",          "tier": 3},
     "94536": {"city": "Fremont",          "tier": 3},
     "94537": {"city": "Fremont",          "tier": 3},
-    "94541": {"city": "Hayward",          "tier": 3},
+    "94541": {"city": "Hayward",          "tier": 4},
     "94555": {"city": "Fremont",          "tier": 3},
     "95035": {"city": "Milpitas",         "tier": 3},
     "94560": {"city": "Newark",           "tier": 3},
-    "94061": {"city": "Redwood City",     "tier": 3},
+    "94061": {"city": "Redwood City",     "tier": 2},
     "94063": {"city": "Redwood City",     "tier": 3},
     "94066": {"city": "San Bruno",        "tier": 3},
     "94080": {"city": "S. San Francisco", "tier": 3},
@@ -105,7 +106,7 @@ ZIPS = {
     "94404": {"city": "Foster City",      "tier": 3},
     "95123": {"city": "San Jose",         "tier": 3},
     "95124": {"city": "San Jose",         "tier": 3},
-    "95120": {"city": "Almaden Valley",   "tier": 3},
+    "95120": {"city": "Almaden Valley",   "tier": 2},
     "95008": {"city": "Campbell",         "tier": 3},
     "95116": {"city": "San Jose East",    "tier": 3},
     "95122": {"city": "San Jose East",    "tier": 3},
@@ -118,107 +119,134 @@ ZIPS = {
     "95038": {"city": "Morgan Hill",      "tier": 4},
 }
 
-# Tier thresholds for auto-reclassification (median SFR price in $M)
+# Tier thresholds (median SFR price in $M)
 TIER_THRESHOLDS = {
-    1: (2.8, None),   # tier1: median > $2.8M
-    2: (1.6, 2.8),    # tier2: $1.6M – $2.8M
-    3: (0.9, 1.6),    # tier3: $0.9M – $1.6M
-    4: (0.0, 0.9),    # tier4: < $0.9M
+    1: (2.8, None),
+    2: (1.6, 2.8),
+    3: (0.9, 1.6),
+    4: (0.0, 0.9),
 }
 
-# ── Redfin API helpers ────────────────────────────────────────────────────────
 
-BASE = "https://www.redfin.com/stingray"
+HEADERS = {
+    "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
+                  "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Safari/537.36",
+    "Accept": "application/json, text/plain, */*",
+    "Accept-Language": "en-US,en;q=0.9",
+    "Referer": "https://www.redfin.com/",
+}
+
+# Redfin session — warmed up once before ZIP lookups
+REDFIN_SESSION = requests.Session()
+REDFIN_SESSION.headers.update(HEADERS)
+REDFIN_BASE = "https://www.redfin.com/stingray"
+
+
+def warmup_redfin() -> bool:
+    """Visit Redfin homepage to get session cookies. Returns True if successful."""
+    try:
+        r = REDFIN_SESSION.get("https://www.redfin.com", timeout=15)
+        return r.status_code == 200
+    except Exception:
+        return False
+
 
 def redfin_get(path: str, params: dict) -> dict:
-    """Call a Redfin internal endpoint and return parsed JSON."""
-    url = BASE + path
-    resp = SESSION.get(url, params=params, timeout=20)
+    url = REDFIN_BASE + path
+    resp = REDFIN_SESSION.get(url, params=params, timeout=20)
     resp.raise_for_status()
     text = resp.text
-    # Redfin prefixes JSON with '{}&&' to prevent CSRF hijacking
     if text.startswith("{}&&"):
         text = text[4:]
     return json.loads(text)
 
 
-def get_region_id(zip_code: str):
-    """Resolve a ZIP code to Redfin's internal region ID."""
+def get_redfin_median(zip_code: str) -> int | None:
+    """Fetch actual median sale price from Redfin for a ZIP. Returns None on failure."""
     try:
         data = redfin_get("/do/location-autocomplete", {"location": zip_code, "v": 2})
-        for item in data.get("payload", {}).get("sections", []):
-            for result in item.get("rows", []):
-                if result.get("type") == 2:  # type 2 = ZIP
-                    return result.get("id")
-    except Exception as e:
-        print(f"  [region_id] {zip_code}: {e}")
-    return None
+        region_id = None
+        for section in data.get("payload", {}).get("sections", []):
+            for row in section.get("rows", []):
+                if row.get("type") == 2:
+                    region_id = row.get("id")
+                    break
+            if region_id:
+                break
+        if not region_id:
+            return None
 
-
-def get_market_stats(region_id: str, zip_code: str) -> dict:
-    """Fetch median sale price, days on market, sale/list ratio for a region."""
-    try:
-        data = redfin_get("/api/v1/market_tracker/point_history", {
+        mdata = redfin_get("/api/v1/market_tracker/point_history", {
             "region_id": region_id,
             "region_type": 2,
-            "property_type": 1,   # 1 = single family
+            "property_type": 1,
             "num_weeks": 4,
-            "metric_type": "median_sale_price_per_sqft,median_dom,sale_to_list",
+            "metric_type": "median_sale_price",
         })
-        payload = data.get("payload", {})
-        rows = payload.get("rows", [])
-        if not rows:
-            return {}
-        latest = rows[-1] if rows else {}
-        return {
-            "median_price":      payload.get("medianSalePrice", {}).get("last"),
-            "median_dom":        payload.get("medianDOM", {}).get("last"),
-            "sale_to_list":      payload.get("saleToList", {}).get("last"),
-            "yoy_change":        payload.get("medianSalePrice", {}).get("yearOverYearChange"),
-        }
-    except Exception as e:
-        print(f"  [market_stats] {zip_code}: {e}")
+        price = mdata.get("payload", {}).get("medianSalePrice", {}).get("last")
+        return int(price) if price else None
+    except Exception:
+        return None
+
+
+def fetch_csv(url: str, label: str) -> pd.DataFrame:
+    print(f"  Downloading {label} ...")
+    resp = requests.get(url, headers=HEADERS, timeout=60)
+    resp.raise_for_status()
+    return pd.read_csv(io.StringIO(resp.text), low_memory=False)
+
+
+def latest_zip_value(df: pd.DataFrame, zip_code: int):
+    """Zillow CSVs are wide format: columns are dates. Return latest non-null value."""
+    row = df[df["RegionName"] == zip_code]
+    if row.empty:
+        return None, None
+    row = row.iloc[0]
+    # Date columns start after the metadata columns
+    date_cols = [c for c in df.columns if c[:2] in ("19", "20")]
+    if not date_cols:
+        return None, None
+    date_cols_sorted = sorted(date_cols)
+    # Find latest non-null
+    for col in reversed(date_cols_sorted):
+        val = row[col]
+        if pd.notna(val):
+            return float(val), col
+    return None, None
+
+
+def extract_zip_stats(zhvi_df, zip_code: str) -> dict:
+    """Extract ZHVI home value and YoY change for a ZIP from Zillow's monthly CSV."""
+    zc = int(zip_code)
+    zhvi_val, period = latest_zip_value(zhvi_df, zc)
+
+    if zhvi_val is None:
         return {}
 
+    # YoY: compare to column 12 months ago (monthly data)
+    yoy = None
+    date_cols = sorted([c for c in zhvi_df.columns if c[:2] in ("19", "20")])
+    if period and period in date_cols:
+        idx = date_cols.index(period)
+        if idx >= 12:
+            past_col = date_cols[idx - 12]
+            row = zhvi_df[zhvi_df["RegionName"] == zc]
+            if not row.empty:
+                past_val = row.iloc[0][past_col]
+                if pd.notna(past_val) and float(past_val) > 0:
+                    yoy = (zhvi_val - float(past_val)) / float(past_val)
 
-def get_recent_sales(region_id: str, zip_code: str, count: int = 3) -> list:
-    """Fetch recently sold single-family homes in a ZIP."""
-    try:
-        data = redfin_get("/api/gis", {
-            "region_id": region_id,
-            "region_type": 2,
-            "status": 9,          # 9 = recently sold
-            "property_type": 1,   # single family
-            "num_homes": count * 3,
-            "ord": "redfin-recommended-asc",
-            "sf": "1,2,3,5,6,7",
-            "v": 8,
-        })
-        homes = data.get("payload", {}).get("homes", [])
-        results = []
-        for h in homes[:count]:
-            hl = h.get("homeData", h)
-            results.append({
-                "address":    hl.get("streetLine", {}).get("value", ""),
-                "city":       hl.get("cityState", {}).get("value", ""),
-                "price":      hl.get("price", {}).get("value"),
-                "beds":       hl.get("beds", {}).get("value"),
-                "baths":      hl.get("baths", {}).get("value"),
-                "sqft":       hl.get("sqFt", {}).get("value"),
-                "url":        "https://www.redfin.com" + hl.get("url", ""),
-                "sold_date":  hl.get("soldDate", {}).get("value", ""),
-            })
-        return results
-    except Exception as e:
-        print(f"  [recent_sales] {zip_code}: {e}")
-        return []
+    return {
+        "median_price": int(zhvi_val),
+        "yoy_change":   round(yoy, 4) if yoy is not None else None,
+        "median_dom":   None,   # not available at ZIP level from Zillow
+        "sale_to_list": None,   # not available at ZIP level from Zillow
+        "period_end":   period,
+    }
 
 
-# ── Tier auto-detection ───────────────────────────────────────────────────────
-
-def suggest_tier(median_price, current_tier: int) -> dict:
-    """Compare median price against thresholds; flag if tier may have changed."""
-    if median_price is None:
+def suggest_tier(median_price, current_tier: int, pinned: bool = False) -> dict:
+    if median_price is None or pinned:
         return {"suggested_tier": current_tier, "tier_changed": False}
     price_m = median_price / 1_000_000
     for tier, (lo, hi) in TIER_THRESHOLDS.items():
@@ -231,11 +259,18 @@ def suggest_tier(median_price, current_tier: int) -> dict:
     return {"suggested_tier": current_tier, "tier_changed": False}
 
 
-# ── Main ─────────────────────────────────────────────────────────────────────
-
 def main():
     today = date.today().isoformat()
     print(f"=== Bay Area Listings Update — {today} ===\n")
+
+    # Download Zillow ZHVI ZIP-level CSV (only ZIP-granularity dataset available)
+    print("Fetching Zillow ZHVI data ...")
+    try:
+        zhvi_df = fetch_csv(ZILLOW_ZHVI_URL, "ZHVI (home values by ZIP)")
+    except Exception as e:
+        print(f"ERROR downloading Zillow data: {e}")
+        raise
+    print()
 
     results = {}
     tier_alerts = []
@@ -243,18 +278,18 @@ def main():
     for zip_code, meta in ZIPS.items():
         city = meta["city"]
         tier = meta["tier"]
-        print(f"[{zip_code}] {city} (tier{tier})")
 
-        region_id = get_region_id(zip_code)
-        if not region_id:
-            print(f"  ⚠ Could not resolve region ID, skipping")
-            results[zip_code] = {"city": city, "tier": tier, "error": "no_region_id"}
-            time.sleep(0.5)
-            continue
+        stats = extract_zip_stats(zhvi_df, zip_code)
+        pinned = meta.get("pin", False)
+        tier_check = suggest_tier(stats.get("median_price"), tier, pinned)
 
-        stats  = get_market_stats(region_id, zip_code)
-        sales  = get_recent_sales(region_id, zip_code)
-        tier_check = suggest_tier(stats.get("median_price"), tier)
+        if stats:
+            mp = stats.get("median_price")
+            mp_str = f"${mp/1e6:.2f}M" if mp else "—"
+            pin_str = " [pinned]" if pinned else ""
+            print(f"[{zip_code}] {city}: {mp_str}  YoY={stats.get('yoy_change')}{pin_str}")
+        else:
+            print(f"[{zip_code}] {city}: no data found in CSV")
 
         if tier_check["tier_changed"]:
             alert = (f"⚠ TIER ALERT: {zip_code} {city} — "
@@ -264,18 +299,14 @@ def main():
             tier_alerts.append(alert)
 
         results[zip_code] = {
-            "city":           city,
-            "tier":           tier,
-            "region_id":      region_id,
-            "fetched_at":     datetime.utcnow().isoformat() + "Z",
-            "stats":          stats,
-            "recent_sales":   sales,
-            "tier_check":     tier_check,
+            "city":       city,
+            "tier":       tier,
+            "fetched_at": datetime.utcnow().isoformat() + "Z",
+            "stats":      stats,
+            "tier_check": tier_check,
         }
-        time.sleep(0.8)   # be polite to Redfin
 
     # ── Save ──────────────────────────────────────────────────────────────────
-
     output = {
         "date":        today,
         "zip_count":   len(results),
@@ -283,23 +314,19 @@ def main():
         "zips":        results,
     }
 
-    # Daily history snapshot
     history_path = HISTORY_DIR / f"{today}.json"
     with open(history_path, "w") as f:
         json.dump(output, f, indent=2)
     print(f"\n✓ History saved → {history_path}")
 
-    # Latest (always overwrite)
     with open(LATEST_PATH, "w") as f:
         json.dump(output, f, indent=2)
     print(f"✓ Latest saved  → {LATEST_PATH}")
 
-    # Summary
     print(f"\n=== Summary ===")
     print(f"ZIPs processed : {len(results)}")
     print(f"Tier alerts    : {len(tier_alerts)}")
     if tier_alerts:
-        print("\nTier Alerts:")
         for a in tier_alerts:
             print(f"  {a}")
 

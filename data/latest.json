@@ -1,0 +1,1160 @@
+{
+  "date": "2026-06-09",
+  "zip_count": 67,
+  "tier_alerts": [
+    "\u26a0 TIER ALERT: 94062 Woodside \u2014 current=tier1, suggested=tier2 (median $2.71M)",
+    "\u26a0 TIER ALERT: 94303 Palo Alto \u2014 current=tier1, suggested=tier2 (median $2.14M)",
+    "\u26a0 TIER ALERT: 94025 Menlo Park \u2014 current=tier2, suggested=tier1 (median $2.9M)",
+    "\u26a0 TIER ALERT: 95030 Los Gatos \u2014 current=tier2, suggested=tier1 (median $3.62M)",
+    "\u26a0 TIER ALERT: 94040 Mountain View \u2014 current=tier2, suggested=tier1 (median $2.91M)",
+    "\u26a0 TIER ALERT: 94043 Mountain View \u2014 current=tier2, suggested=tier3 (median $1.6M)",
+    "\u26a0 TIER ALERT: 94087 Sunnyvale \u2014 current=tier2, suggested=tier1 (median $2.9M)",
+    "\u26a0 TIER ALERT: 94085 Sunnyvale \u2014 current=tier2, suggested=tier3 (median $1.58M)",
+    "\u26a0 TIER ALERT: 94089 Sunnyvale \u2014 current=tier2, suggested=tier3 (median $1.49M)",
+    "\u26a0 TIER ALERT: 94401 San Mateo \u2014 current=tier2, suggested=tier3 (median $1.22M)",
+    "\u26a0 TIER ALERT: 94115 Pacific Heights \u2014 current=tier2, suggested=tier3 (median $1.46M)",
+    "\u26a0 TIER ALERT: 94103 SoMa SF \u2014 current=tier2, suggested=tier4 (median $0.8M)",
+    "\u26a0 TIER ALERT: 94107 Mission Bay SF \u2014 current=tier2, suggested=tier3 (median $1.0M)",
+    "\u26a0 TIER ALERT: 94105 Embarcadero SF \u2014 current=tier2, suggested=tier3 (median $1.08M)",
+    "\u26a0 TIER ALERT: 94158 Mission Bay SF \u2014 current=tier2, suggested=tier3 (median $1.3M)",
+    "\u26a0 TIER ALERT: 95051 Santa Clara \u2014 current=tier3, suggested=tier2 (median $1.93M)",
+    "\u26a0 TIER ALERT: 95050 Santa Clara \u2014 current=tier3, suggested=tier2 (median $1.66M)",
+    "\u26a0 TIER ALERT: 94539 Fremont \u2014 current=tier3, suggested=tier2 (median $2.26M)",
+    "\u26a0 TIER ALERT: 94541 Hayward \u2014 current=tier3, suggested=tier4 (median $0.79M)",
+    "\u26a0 TIER ALERT: 94061 Redwood City \u2014 current=tier3, suggested=tier2 (median $1.99M)",
+    "\u26a0 TIER ALERT: 95117 West San Jose \u2014 current=tier3, suggested=tier2 (median $1.82M)",
+    "\u26a0 TIER ALERT: 95130 West San Jose \u2014 current=tier3, suggested=tier2 (median $2.21M)",
+    "\u26a0 TIER ALERT: 94404 Foster City \u2014 current=tier3, suggested=tier2 (median $1.76M)",
+    "\u26a0 TIER ALERT: 95124 San Jose \u2014 current=tier3, suggested=tier2 (median $2.01M)",
+    "\u26a0 TIER ALERT: 95120 Almaden Valley \u2014 current=tier3, suggested=tier2 (median $2.31M)",
+    "\u26a0 TIER ALERT: 95008 Campbell \u2014 current=tier3, suggested=tier2 (median $1.95M)",
+    "\u26a0 TIER ALERT: 95037 Morgan Hill \u2014 current=tier4, suggested=tier3 (median $1.36M)"
+  ],
+  "zips": {
+    "94027": {
+      "city": "Atherton",
+      "tier": 1,
+      "fetched_at": "2026-06-09T22:09:48.072831Z",
+      "stats": {
+        "median_price": 8314785,
+        "yoy_change": 0.0936,
+        "median_dom": null,
+        "sale_to_list": null,
+        "period_end": "2026-04-30"
+      },
+      "tier_check": {
+        "suggested_tier": 1,
+        "tier_changed": false,
+        "price_m": 8.31
+      }
+    },
+    "94022": {
+      "city": "Los Altos",
+      "tier": 1,
+      "fetched_at": "2026-06-09T22:09:48.073511Z",
+      "stats": {
+        "median_price": 5154203,
+        "yoy_change": 0.0459,
+        "median_dom": null,
+        "sale_to_list": null,
+        "period_end": "2026-04-30"
+      },
+      "tier_check": {
+        "suggested_tier": 1,
+        "tier_changed": false,
+        "price_m": 5.15
+      }
+    },
+    "94024": {
+      "city": "Los Altos Hills",
+      "tier": 1,
+      "fetched_at": "2026-06-09T22:09:48.074053Z",
+      "stats": {
+        "median_price": 4704359,
+        "yoy_change": 0.0246,
+        "median_dom": null,
+        "sale_to_list": null,
+        "period_end": "2026-04-30"
+      },
+      "tier_check": {
+        "suggested_tier": 1,
+        "tier_changed": false,
+        "price_m": 4.7
+      }
+    },
+    "94028": {
+      "city": "Portola Valley",
+      "tier": 1,
+      "fetched_at": "2026-06-09T22:09:48.074596Z",
+      "stats": {
+        "median_price": 4338042,
+        "yoy_change": 0.0984,
+        "median_dom": null,
+        "sale_to_list": null,
+        "period_end": "2026-04-30"
+      },
+      "tier_check": {
+        "suggested_tier": 1,
+        "tier_changed": false,
+        "price_m": 4.34
+      }
+    },
+    "94062": {
+      "city": "Woodside",
+      "tier": 1,
+      "fetched_at": "2026-06-09T22:09:48.075159Z",
+      "stats": {
+        "median_price": 2713312,
+        "yoy_change": 0.0175,
+        "median_dom": null,
+        "sale_to_list": null,
+        "period_end": "2026-04-30"
+      },
+      "tier_check": {
+        "suggested_tier": 2,
+        "tier_changed": true,
+        "price_m": 2.71
+      }
+    },
+    "94301": {
+      "city": "Palo Alto",
+      "tier": 1,
+      "fetched_at": "2026-06-09T22:09:48.075678Z",
+      "stats": {
+        "median_price": 4362311,
+        "yoy_change": 0.042,
+        "median_dom": null,
+        "sale_to_list": null,
+        "period_end": "2026-04-30"
+      },
+      "tier_check": {
+        "suggested_tier": 1,
+        "tier_changed": false,
+        "price_m": 4.36
+      }
+    },
+    "94303": {
+      "city": "Palo Alto",
+      "tier": 1,
+      "fetched_at": "2026-06-09T22:09:48.076270Z",
+      "stats": {
+        "median_price": 2140422,
+        "yoy_change": 0.0025,
+        "median_dom": null,
+        "sale_to_list": null,
+        "period_end": "2026-04-30"
+      },
+      "tier_check": {
+        "suggested_tier": 2,
+        "tier_changed": true,
+        "price_m": 2.14
+      }
+    },
+    "94304": {
+      "city": "Palo Alto",
+      "tier": 1,
+      "fetched_at": "2026-06-09T22:09:48.076849Z",
+      "stats": {
+        "median_price": 3310285,
+        "yoy_change": 0.0272,
+        "median_dom": null,
+        "sale_to_list": null,
+        "period_end": "2026-04-30"
+      },
+      "tier_check": {
+        "suggested_tier": 1,
+        "tier_changed": false,
+        "price_m": 3.31
+      }
+    },
+    "94306": {
+      "city": "Palo Alto",
+      "tier": 1,
+      "fetched_at": "2026-06-09T22:09:48.077344Z",
+      "stats": {
+        "median_price": 3450948,
+        "yoy_change": 0.0234,
+        "median_dom": null,
+        "sale_to_list": null,
+        "period_end": "2026-04-30"
+      },
+      "tier_check": {
+        "suggested_tier": 1,
+        "tier_changed": false,
+        "price_m": 3.45
+      }
+    },
+    "95014": {
+      "city": "Cupertino",
+      "tier": 1,
+      "fetched_at": "2026-06-09T22:09:48.077877Z",
+      "stats": {
+        "median_price": 3182391,
+        "yoy_change": 0.0175,
+        "median_dom": null,
+        "sale_to_list": null,
+        "period_end": "2026-04-30"
+      },
+      "tier_check": {
+        "suggested_tier": 1,
+        "tier_changed": false,
+        "price_m": 3.18
+      }
+    },
+    "95070": {
+      "city": "Saratoga",
+      "tier": 1,
+      "fetched_at": "2026-06-09T22:09:48.078385Z",
+      "stats": {
+        "median_price": 4196446,
+        "yoy_change": 0.0181,
+        "median_dom": null,
+        "sale_to_list": null,
+        "period_end": "2026-04-30"
+      },
+      "tier_check": {
+        "suggested_tier": 1,
+        "tier_changed": false,
+        "price_m": 4.2
+      }
+    },
+    "94010": {
+      "city": "Hillsborough",
+      "tier": 1,
+      "fetched_at": "2026-06-09T22:09:48.078872Z",
+      "stats": {
+        "median_price": 3465868,
+        "yoy_change": 0.0591,
+        "median_dom": null,
+        "sale_to_list": null,
+        "period_end": "2026-04-30"
+      },
+      "tier_check": {
+        "suggested_tier": 1,
+        "tier_changed": false,
+        "price_m": 3.47
+      }
+    },
+    "94025": {
+      "city": "Menlo Park",
+      "tier": 2,
+      "fetched_at": "2026-06-09T22:09:48.079361Z",
+      "stats": {
+        "median_price": 2902646,
+        "yoy_change": 0.0522,
+        "median_dom": null,
+        "sale_to_list": null,
+        "period_end": "2026-04-30"
+      },
+      "tier_check": {
+        "suggested_tier": 1,
+        "tier_changed": true,
+        "price_m": 2.9
+      }
+    },
+    "95030": {
+      "city": "Los Gatos",
+      "tier": 2,
+      "fetched_at": "2026-06-09T22:09:48.079923Z",
+      "stats": {
+        "median_price": 3624771,
+        "yoy_change": 0.0291,
+        "median_dom": null,
+        "sale_to_list": null,
+        "period_end": "2026-04-30"
+      },
+      "tier_check": {
+        "suggested_tier": 1,
+        "tier_changed": true,
+        "price_m": 3.62
+      }
+    },
+    "95032": {
+      "city": "Los Gatos",
+      "tier": 2,
+      "fetched_at": "2026-06-09T22:09:48.080410Z",
+      "stats": {
+        "median_price": 2648628,
+        "yoy_change": 0.0127,
+        "median_dom": null,
+        "sale_to_list": null,
+        "period_end": "2026-04-30"
+      },
+      "tier_check": {
+        "suggested_tier": 2,
+        "tier_changed": false,
+        "price_m": 2.65
+      }
+    },
+    "94040": {
+      "city": "Mountain View",
+      "tier": 2,
+      "fetched_at": "2026-06-09T22:09:48.080905Z",
+      "stats": {
+        "median_price": 2914658,
+        "yoy_change": 0.03,
+        "median_dom": null,
+        "sale_to_list": null,
+        "period_end": "2026-04-30"
+      },
+      "tier_check": {
+        "suggested_tier": 1,
+        "tier_changed": true,
+        "price_m": 2.91
+      }
+    },
+    "94041": {
+      "city": "Mountain View",
+      "tier": 2,
+      "fetched_at": "2026-06-09T22:09:48.081418Z",
+      "stats": {
+        "median_price": 2278177,
+        "yoy_change": 0.0361,
+        "median_dom": null,
+        "sale_to_list": null,
+        "period_end": "2026-04-30"
+      },
+      "tier_check": {
+        "suggested_tier": 2,
+        "tier_changed": false,
+        "price_m": 2.28
+      }
+    },
+    "94043": {
+      "city": "Mountain View",
+      "tier": 2,
+      "fetched_at": "2026-06-09T22:09:48.081912Z",
+      "stats": {
+        "median_price": 1599616,
+        "yoy_change": -0.0289,
+        "median_dom": null,
+        "sale_to_list": null,
+        "period_end": "2026-04-30"
+      },
+      "tier_check": {
+        "suggested_tier": 3,
+        "tier_changed": true,
+        "price_m": 1.6
+      }
+    },
+    "94087": {
+      "city": "Sunnyvale",
+      "tier": 2,
+      "fetched_at": "2026-06-09T22:09:48.082414Z",
+      "stats": {
+        "median_price": 2898234,
+        "yoy_change": 0.0101,
+        "median_dom": null,
+        "sale_to_list": null,
+        "period_end": "2026-04-30"
+      },
+      "tier_check": {
+        "suggested_tier": 1,
+        "tier_changed": true,
+        "price_m": 2.9
+      }
+    },
+    "94086": {
+      "city": "Sunnyvale",
+      "tier": 2,
+      "fetched_at": "2026-06-09T22:09:48.082903Z",
+      "stats": {
+        "median_price": 1959743,
+        "yoy_change": -0.0094,
+        "median_dom": null,
+        "sale_to_list": null,
+        "period_end": "2026-04-30"
+      },
+      "tier_check": {
+        "suggested_tier": 2,
+        "tier_changed": false,
+        "price_m": 1.96
+      }
+    },
+    "94085": {
+      "city": "Sunnyvale",
+      "tier": 2,
+      "fetched_at": "2026-06-09T22:09:48.083394Z",
+      "stats": {
+        "median_price": 1583347,
+        "yoy_change": -0.0059,
+        "median_dom": null,
+        "sale_to_list": null,
+        "period_end": "2026-04-30"
+      },
+      "tier_check": {
+        "suggested_tier": 3,
+        "tier_changed": true,
+        "price_m": 1.58
+      }
+    },
+    "94089": {
+      "city": "Sunnyvale",
+      "tier": 2,
+      "fetched_at": "2026-06-09T22:09:48.083890Z",
+      "stats": {
+        "median_price": 1489946,
+        "yoy_change": -0.0216,
+        "median_dom": null,
+        "sale_to_list": null,
+        "period_end": "2026-04-30"
+      },
+      "tier_check": {
+        "suggested_tier": 3,
+        "tier_changed": true,
+        "price_m": 1.49
+      }
+    },
+    "95129": {
+      "city": "West San Jose",
+      "tier": 2,
+      "fetched_at": "2026-06-09T22:09:48.084381Z",
+      "stats": {
+        "median_price": 2721587,
+        "yoy_change": 0.0153,
+        "median_dom": null,
+        "sale_to_list": null,
+        "period_end": "2026-04-30"
+      },
+      "tier_check": {
+        "suggested_tier": 2,
+        "tier_changed": false,
+        "price_m": 2.72
+      }
+    },
+    "94401": {
+      "city": "San Mateo",
+      "tier": 2,
+      "fetched_at": "2026-06-09T22:09:48.084897Z",
+      "stats": {
+        "median_price": 1223225,
+        "yoy_change": 0.0057,
+        "median_dom": null,
+        "sale_to_list": null,
+        "period_end": "2026-04-30"
+      },
+      "tier_check": {
+        "suggested_tier": 3,
+        "tier_changed": true,
+        "price_m": 1.22
+      }
+    },
+    "94402": {
+      "city": "San Mateo",
+      "tier": 2,
+      "fetched_at": "2026-06-09T22:09:48.085382Z",
+      "stats": {
+        "median_price": 2478818,
+        "yoy_change": 0.0384,
+        "median_dom": null,
+        "sale_to_list": null,
+        "period_end": "2026-04-30"
+      },
+      "tier_check": {
+        "suggested_tier": 2,
+        "tier_changed": false,
+        "price_m": 2.48
+      }
+    },
+    "94403": {
+      "city": "San Mateo",
+      "tier": 2,
+      "fetched_at": "2026-06-09T22:09:48.085873Z",
+      "stats": {
+        "median_price": 1835098,
+        "yoy_change": 0.0155,
+        "median_dom": null,
+        "sale_to_list": null,
+        "period_end": "2026-04-30"
+      },
+      "tier_check": {
+        "suggested_tier": 2,
+        "tier_changed": false,
+        "price_m": 1.84
+      }
+    },
+    "94114": {
+      "city": "Noe Valley SF",
+      "tier": 2,
+      "fetched_at": "2026-06-09T22:09:48.086358Z",
+      "stats": {
+        "median_price": 1911560,
+        "yoy_change": 0.1093,
+        "median_dom": null,
+        "sale_to_list": null,
+        "period_end": "2026-04-30"
+      },
+      "tier_check": {
+        "suggested_tier": 2,
+        "tier_changed": false,
+        "price_m": 1.91
+      }
+    },
+    "94115": {
+      "city": "Pacific Heights",
+      "tier": 2,
+      "fetched_at": "2026-06-09T22:09:48.086831Z",
+      "stats": {
+        "median_price": 1460368,
+        "yoy_change": 0.079,
+        "median_dom": null,
+        "sale_to_list": null,
+        "period_end": "2026-04-30"
+      },
+      "tier_check": {
+        "suggested_tier": 3,
+        "tier_changed": true,
+        "price_m": 1.46
+      }
+    },
+    "94065": {
+      "city": "Redwood Shores",
+      "tier": 2,
+      "fetched_at": "2026-06-09T22:09:48.087333Z",
+      "stats": {
+        "median_price": 1852543,
+        "yoy_change": -0.0146,
+        "median_dom": null,
+        "sale_to_list": null,
+        "period_end": "2026-04-30"
+      },
+      "tier_check": {
+        "suggested_tier": 2,
+        "tier_changed": false,
+        "price_m": 1.85
+      }
+    },
+    "94070": {
+      "city": "San Carlos",
+      "tier": 2,
+      "fetched_at": "2026-06-09T22:09:48.087808Z",
+      "stats": {
+        "median_price": 2474297,
+        "yoy_change": 0.0308,
+        "median_dom": null,
+        "sale_to_list": null,
+        "period_end": "2026-04-30"
+      },
+      "tier_check": {
+        "suggested_tier": 2,
+        "tier_changed": false,
+        "price_m": 2.47
+      }
+    },
+    "94002": {
+      "city": "Belmont",
+      "tier": 2,
+      "fetched_at": "2026-06-09T22:09:48.088279Z",
+      "stats": {
+        "median_price": 2364910,
+        "yoy_change": 0.0234,
+        "median_dom": null,
+        "sale_to_list": null,
+        "period_end": "2026-04-30"
+      },
+      "tier_check": {
+        "suggested_tier": 2,
+        "tier_changed": false,
+        "price_m": 2.36
+      }
+    },
+    "94030": {
+      "city": "Millbrae",
+      "tier": 2,
+      "fetched_at": "2026-06-09T22:09:48.088750Z",
+      "stats": {
+        "median_price": 2067126,
+        "yoy_change": 0.0489,
+        "median_dom": null,
+        "sale_to_list": null,
+        "period_end": "2026-04-30"
+      },
+      "tier_check": {
+        "suggested_tier": 2,
+        "tier_changed": false,
+        "price_m": 2.07
+      }
+    },
+    "94103": {
+      "city": "SoMa SF",
+      "tier": 2,
+      "fetched_at": "2026-06-09T22:09:48.089224Z",
+      "stats": {
+        "median_price": 802666,
+        "yoy_change": -0.0018,
+        "median_dom": null,
+        "sale_to_list": null,
+        "period_end": "2026-04-30"
+      },
+      "tier_check": {
+        "suggested_tier": 4,
+        "tier_changed": true,
+        "price_m": 0.8
+      }
+    },
+    "94107": {
+      "city": "Mission Bay SF",
+      "tier": 2,
+      "fetched_at": "2026-06-09T22:09:48.089700Z",
+      "stats": {
+        "median_price": 1002906,
+        "yoy_change": 0.028,
+        "median_dom": null,
+        "sale_to_list": null,
+        "period_end": "2026-04-30"
+      },
+      "tier_check": {
+        "suggested_tier": 3,
+        "tier_changed": true,
+        "price_m": 1.0
+      }
+    },
+    "94105": {
+      "city": "Embarcadero SF",
+      "tier": 2,
+      "fetched_at": "2026-06-09T22:09:48.090182Z",
+      "stats": {
+        "median_price": 1079017,
+        "yoy_change": 0.0163,
+        "median_dom": null,
+        "sale_to_list": null,
+        "period_end": "2026-04-30"
+      },
+      "tier_check": {
+        "suggested_tier": 3,
+        "tier_changed": true,
+        "price_m": 1.08
+      }
+    },
+    "94158": {
+      "city": "Mission Bay SF",
+      "tier": 2,
+      "fetched_at": "2026-06-09T22:09:48.090680Z",
+      "stats": {
+        "median_price": 1298030,
+        "yoy_change": 0.054,
+        "median_dom": null,
+        "sale_to_list": null,
+        "period_end": "2026-04-30"
+      },
+      "tier_check": {
+        "suggested_tier": 3,
+        "tier_changed": true,
+        "price_m": 1.3
+      }
+    },
+    "95051": {
+      "city": "Santa Clara",
+      "tier": 3,
+      "fetched_at": "2026-06-09T22:09:48.091162Z",
+      "stats": {
+        "median_price": 1932904,
+        "yoy_change": -0.0105,
+        "median_dom": null,
+        "sale_to_list": null,
+        "period_end": "2026-04-30"
+      },
+      "tier_check": {
+        "suggested_tier": 2,
+        "tier_changed": true,
+        "price_m": 1.93
+      }
+    },
+    "95050": {
+      "city": "Santa Clara",
+      "tier": 3,
+      "fetched_at": "2026-06-09T22:09:48.091635Z",
+      "stats": {
+        "median_price": 1660321,
+        "yoy_change": -0.0029,
+        "median_dom": null,
+        "sale_to_list": null,
+        "period_end": "2026-04-30"
+      },
+      "tier_check": {
+        "suggested_tier": 2,
+        "tier_changed": true,
+        "price_m": 1.66
+      }
+    },
+    "95054": {
+      "city": "Santa Clara",
+      "tier": 3,
+      "fetched_at": "2026-06-09T22:09:48.092109Z",
+      "stats": {
+        "median_price": 1538748,
+        "yoy_change": -0.042,
+        "median_dom": null,
+        "sale_to_list": null,
+        "period_end": "2026-04-30"
+      },
+      "tier_check": {
+        "suggested_tier": 3,
+        "tier_changed": false,
+        "price_m": 1.54
+      }
+    },
+    "94539": {
+      "city": "Fremont",
+      "tier": 3,
+      "fetched_at": "2026-06-09T22:09:48.092585Z",
+      "stats": {
+        "median_price": 2257200,
+        "yoy_change": -0.0157,
+        "median_dom": null,
+        "sale_to_list": null,
+        "period_end": "2026-04-30"
+      },
+      "tier_check": {
+        "suggested_tier": 2,
+        "tier_changed": true,
+        "price_m": 2.26
+      }
+    },
+    "94538": {
+      "city": "Fremont",
+      "tier": 3,
+      "fetched_at": "2026-06-09T22:09:48.093068Z",
+      "stats": {
+        "median_price": 1342015,
+        "yoy_change": -0.0446,
+        "median_dom": null,
+        "sale_to_list": null,
+        "period_end": "2026-04-30"
+      },
+      "tier_check": {
+        "suggested_tier": 3,
+        "tier_changed": false,
+        "price_m": 1.34
+      }
+    },
+    "94536": {
+      "city": "Fremont",
+      "tier": 3,
+      "fetched_at": "2026-06-09T22:09:48.093539Z",
+      "stats": {
+        "median_price": 1463283,
+        "yoy_change": -0.0415,
+        "median_dom": null,
+        "sale_to_list": null,
+        "period_end": "2026-04-30"
+      },
+      "tier_check": {
+        "suggested_tier": 3,
+        "tier_changed": false,
+        "price_m": 1.46
+      }
+    },
+    "94537": {
+      "city": "Fremont",
+      "tier": 3,
+      "fetched_at": "2026-06-09T22:09:48.093642Z",
+      "stats": {},
+      "tier_check": {
+        "suggested_tier": 3,
+        "tier_changed": false
+      }
+    },
+    "94541": {
+      "city": "Hayward",
+      "tier": 3,
+      "fetched_at": "2026-06-09T22:09:48.094118Z",
+      "stats": {
+        "median_price": 785828,
+        "yoy_change": -0.049,
+        "median_dom": null,
+        "sale_to_list": null,
+        "period_end": "2026-04-30"
+      },
+      "tier_check": {
+        "suggested_tier": 4,
+        "tier_changed": true,
+        "price_m": 0.79
+      }
+    },
+    "94555": {
+      "city": "Fremont",
+      "tier": 3,
+      "fetched_at": "2026-06-09T22:09:48.094594Z",
+      "stats": {
+        "median_price": 1534962,
+        "yoy_change": -0.0375,
+        "median_dom": null,
+        "sale_to_list": null,
+        "period_end": "2026-04-30"
+      },
+      "tier_check": {
+        "suggested_tier": 3,
+        "tier_changed": false,
+        "price_m": 1.53
+      }
+    },
+    "95035": {
+      "city": "Milpitas",
+      "tier": 3,
+      "fetched_at": "2026-06-09T22:09:48.095072Z",
+      "stats": {
+        "median_price": 1487703,
+        "yoy_change": -0.0297,
+        "median_dom": null,
+        "sale_to_list": null,
+        "period_end": "2026-04-30"
+      },
+      "tier_check": {
+        "suggested_tier": 3,
+        "tier_changed": false,
+        "price_m": 1.49
+      }
+    },
+    "94560": {
+      "city": "Newark",
+      "tier": 3,
+      "fetched_at": "2026-06-09T22:09:48.095544Z",
+      "stats": {
+        "median_price": 1253153,
+        "yoy_change": -0.0552,
+        "median_dom": null,
+        "sale_to_list": null,
+        "period_end": "2026-04-30"
+      },
+      "tier_check": {
+        "suggested_tier": 3,
+        "tier_changed": false,
+        "price_m": 1.25
+      }
+    },
+    "94061": {
+      "city": "Redwood City",
+      "tier": 3,
+      "fetched_at": "2026-06-09T22:09:48.096018Z",
+      "stats": {
+        "median_price": 1991109,
+        "yoy_change": 0.0189,
+        "median_dom": null,
+        "sale_to_list": null,
+        "period_end": "2026-04-30"
+      },
+      "tier_check": {
+        "suggested_tier": 2,
+        "tier_changed": true,
+        "price_m": 1.99
+      }
+    },
+    "94063": {
+      "city": "Redwood City",
+      "tier": 3,
+      "fetched_at": "2026-06-09T22:09:48.096489Z",
+      "stats": {
+        "median_price": 1296910,
+        "yoy_change": -0.0103,
+        "median_dom": null,
+        "sale_to_list": null,
+        "period_end": "2026-04-30"
+      },
+      "tier_check": {
+        "suggested_tier": 3,
+        "tier_changed": false,
+        "price_m": 1.3
+      }
+    },
+    "94066": {
+      "city": "San Bruno",
+      "tier": 3,
+      "fetched_at": "2026-06-09T22:09:48.096965Z",
+      "stats": {
+        "median_price": 1310825,
+        "yoy_change": 0.0011,
+        "median_dom": null,
+        "sale_to_list": null,
+        "period_end": "2026-04-30"
+      },
+      "tier_check": {
+        "suggested_tier": 3,
+        "tier_changed": false,
+        "price_m": 1.31
+      }
+    },
+    "94080": {
+      "city": "S. San Francisco",
+      "tier": 3,
+      "fetched_at": "2026-06-09T22:09:48.097433Z",
+      "stats": {
+        "median_price": 1235840,
+        "yoy_change": 0.0112,
+        "median_dom": null,
+        "sale_to_list": null,
+        "period_end": "2026-04-30"
+      },
+      "tier_check": {
+        "suggested_tier": 3,
+        "tier_changed": false,
+        "price_m": 1.24
+      }
+    },
+    "95117": {
+      "city": "West San Jose",
+      "tier": 3,
+      "fetched_at": "2026-06-09T22:09:48.097911Z",
+      "stats": {
+        "median_price": 1822713,
+        "yoy_change": 0.0049,
+        "median_dom": null,
+        "sale_to_list": null,
+        "period_end": "2026-04-30"
+      },
+      "tier_check": {
+        "suggested_tier": 2,
+        "tier_changed": true,
+        "price_m": 1.82
+      }
+    },
+    "95128": {
+      "city": "West San Jose",
+      "tier": 3,
+      "fetched_at": "2026-06-09T22:09:48.098389Z",
+      "stats": {
+        "median_price": 1495786,
+        "yoy_change": -0.0035,
+        "median_dom": null,
+        "sale_to_list": null,
+        "period_end": "2026-04-30"
+      },
+      "tier_check": {
+        "suggested_tier": 3,
+        "tier_changed": false,
+        "price_m": 1.5
+      }
+    },
+    "95130": {
+      "city": "West San Jose",
+      "tier": 3,
+      "fetched_at": "2026-06-09T22:09:48.098874Z",
+      "stats": {
+        "median_price": 2207725,
+        "yoy_change": 0.0084,
+        "median_dom": null,
+        "sale_to_list": null,
+        "period_end": "2026-04-30"
+      },
+      "tier_check": {
+        "suggested_tier": 2,
+        "tier_changed": true,
+        "price_m": 2.21
+      }
+    },
+    "94404": {
+      "city": "Foster City",
+      "tier": 3,
+      "fetched_at": "2026-06-09T22:09:48.099348Z",
+      "stats": {
+        "median_price": 1763096,
+        "yoy_change": -0.0081,
+        "median_dom": null,
+        "sale_to_list": null,
+        "period_end": "2026-04-30"
+      },
+      "tier_check": {
+        "suggested_tier": 2,
+        "tier_changed": true,
+        "price_m": 1.76
+      }
+    },
+    "95123": {
+      "city": "San Jose",
+      "tier": 3,
+      "fetched_at": "2026-06-09T22:09:48.099822Z",
+      "stats": {
+        "median_price": 1396785,
+        "yoy_change": -0.0345,
+        "median_dom": null,
+        "sale_to_list": null,
+        "period_end": "2026-04-30"
+      },
+      "tier_check": {
+        "suggested_tier": 3,
+        "tier_changed": false,
+        "price_m": 1.4
+      }
+    },
+    "95124": {
+      "city": "San Jose",
+      "tier": 3,
+      "fetched_at": "2026-06-09T22:09:48.100293Z",
+      "stats": {
+        "median_price": 2005760,
+        "yoy_change": 0.0109,
+        "median_dom": null,
+        "sale_to_list": null,
+        "period_end": "2026-04-30"
+      },
+      "tier_check": {
+        "suggested_tier": 2,
+        "tier_changed": true,
+        "price_m": 2.01
+      }
+    },
+    "95120": {
+      "city": "Almaden Valley",
+      "tier": 3,
+      "fetched_at": "2026-06-09T22:09:48.100763Z",
+      "stats": {
+        "median_price": 2311979,
+        "yoy_change": 0.0219,
+        "median_dom": null,
+        "sale_to_list": null,
+        "period_end": "2026-04-30"
+      },
+      "tier_check": {
+        "suggested_tier": 2,
+        "tier_changed": true,
+        "price_m": 2.31
+      }
+    },
+    "95008": {
+      "city": "Campbell",
+      "tier": 3,
+      "fetched_at": "2026-06-09T22:09:48.101236Z",
+      "stats": {
+        "median_price": 1945256,
+        "yoy_change": 0.0151,
+        "median_dom": null,
+        "sale_to_list": null,
+        "period_end": "2026-04-30"
+      },
+      "tier_check": {
+        "suggested_tier": 2,
+        "tier_changed": true,
+        "price_m": 1.95
+      }
+    },
+    "95116": {
+      "city": "San Jose East",
+      "tier": 3,
+      "fetched_at": "2026-06-09T22:09:48.101712Z",
+      "stats": {
+        "median_price": 948443,
+        "yoy_change": -0.0354,
+        "median_dom": null,
+        "sale_to_list": null,
+        "period_end": "2026-04-30"
+      },
+      "tier_check": {
+        "suggested_tier": 3,
+        "tier_changed": false,
+        "price_m": 0.95
+      }
+    },
+    "95122": {
+      "city": "San Jose East",
+      "tier": 3,
+      "fetched_at": "2026-06-09T22:09:48.102185Z",
+      "stats": {
+        "median_price": 1001672,
+        "yoy_change": -0.0403,
+        "median_dom": null,
+        "sale_to_list": null,
+        "period_end": "2026-04-30"
+      },
+      "tier_check": {
+        "suggested_tier": 3,
+        "tier_changed": false,
+        "price_m": 1.0
+      }
+    },
+    "94509": {
+      "city": "Antioch",
+      "tier": 4,
+      "fetched_at": "2026-06-09T22:09:48.102661Z",
+      "stats": {
+        "median_price": 540119,
+        "yoy_change": -0.0425,
+        "median_dom": null,
+        "sale_to_list": null,
+        "period_end": "2026-04-30"
+      },
+      "tier_check": {
+        "suggested_tier": 4,
+        "tier_changed": false,
+        "price_m": 0.54
+      }
+    },
+    "94531": {
+      "city": "Antioch",
+      "tier": 4,
+      "fetched_at": "2026-06-09T22:09:48.103132Z",
+      "stats": {
+        "median_price": 668130,
+        "yoy_change": -0.0287,
+        "median_dom": null,
+        "sale_to_list": null,
+        "period_end": "2026-04-30"
+      },
+      "tier_check": {
+        "suggested_tier": 4,
+        "tier_changed": false,
+        "price_m": 0.67
+      }
+    },
+    "95376": {
+      "city": "Tracy",
+      "tier": 4,
+      "fetched_at": "2026-06-09T22:09:48.103603Z",
+      "stats": {
+        "median_price": 598407,
+        "yoy_change": -0.063,
+        "median_dom": null,
+        "sale_to_list": null,
+        "period_end": "2026-04-30"
+      },
+      "tier_check": {
+        "suggested_tier": 4,
+        "tier_changed": false,
+        "price_m": 0.6
+      }
+    },
+    "95377": {
+      "city": "Tracy",
+      "tier": 4,
+      "fetched_at": "2026-06-09T22:09:48.104083Z",
+      "stats": {
+        "median_price": 773240,
+        "yoy_change": -0.0573,
+        "median_dom": null,
+        "sale_to_list": null,
+        "period_end": "2026-04-30"
+      },
+      "tier_check": {
+        "suggested_tier": 4,
+        "tier_changed": false,
+        "price_m": 0.77
+      }
+    },
+    "95037": {
+      "city": "Morgan Hill",
+      "tier": 4,
+      "fetched_at": "2026-06-09T22:09:48.104573Z",
+      "stats": {
+        "median_price": 1358138,
+        "yoy_change": 0.0038,
+        "median_dom": null,
+        "sale_to_list": null,
+        "period_end": "2026-04-30"
+      },
+      "tier_check": {
+        "suggested_tier": 3,
+        "tier_changed": true,
+        "price_m": 1.36
+      }
+    },
+    "95038": {
+      "city": "Morgan Hill",
+      "tier": 4,
+      "fetched_at": "2026-06-09T22:09:48.104679Z",
+      "stats": {},
+      "tier_check": {
+        "suggested_tier": 4,
+        "tier_changed": false
+      }
+    }
+  }
+}
