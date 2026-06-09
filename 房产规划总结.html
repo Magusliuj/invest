@@ -1279,6 +1279,15 @@
       // ── 城市边界（Nominatim GeoJSON，分批加载） ──
       var withBoundary = cities.filter(function(c){ return c.q; });
 
+      // 未提及的周边城市，用灰色默认边框
+      var defaultCities = [
+        'Redwood City, CA','San Carlos, CA','Belmont, CA','Los Altos Hills, CA',
+        'Campbell, CA','Oakland, CA','Berkeley, CA','Hayward, CA',
+        'Union City, CA','Newark, CA','Pleasanton, CA','Dublin, CA',
+        'Livermore, CA','Walnut Creek, CA','Daly City, CA','San Bruno, CA',
+        'South San Francisco, CA','Pacifica, CA','San Leandro, CA','Alameda, CA'
+      ].map(function(q){ return { q:q, color:'#999', isDefault:true }; });
+
       function loadBoundary(c) {
         return fetch(
           'https://nominatim.openstreetmap.org/search?q=' + encodeURIComponent(c.q) +
@@ -1290,8 +1299,11 @@
           if (d.features && d.features.length) {
             L.geoJSON(d, {
               interactive: false,
-              style: {
-                color: c.color, weight: 2, opacity: 0.65,
+              style: c.isDefault ? {
+                color: '#aaa', weight: 1, opacity: 0.45,
+                fill: false       // 默认城市：只显示灰色边框，无填充
+              } : {
+                color: c.color, weight: 2, opacity: 0.7,
                 fillColor: c.color, fillOpacity: 0.07,
                 dashArray: '5,4'
               }
@@ -1301,9 +1313,10 @@
         .catch(function(){});
       }
 
-      // 每批3个，批间隔800ms，避免超过Nominatim速率限制
+      // 先加载分析城市，再加载默认城市，每批3个间隔800ms
+      var allBatched = withBoundary.concat(defaultCities);
       var batches = [];
-      for (var i = 0; i < withBoundary.length; i += 3) batches.push(withBoundary.slice(i, i+3));
+      for (var i = 0; i < allBatched.length; i += 3) batches.push(allBatched.slice(i, i+3));
       (function runBatch(idx) {
         if (idx >= batches.length) return;
         Promise.all(batches[idx].map(loadBoundary)).then(function(){
