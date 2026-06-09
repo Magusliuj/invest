@@ -1,0 +1,56 @@
+name: Daily Listings Update
+
+on:
+  schedule:
+    # Runs at 08:00 UTC = midnight Pacific (PST = UTC-8)
+    - cron: '0 8 * * *'
+  workflow_dispatch:   # allow manual trigger from GitHub UI
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install requests
+
+      - name: Fetch Redfin data
+        run: python scripts/update_listings.py
+        env:
+          PYTHONUNBUFFERED: "1"
+
+      - name: Patch HTML with new data
+        run: python scripts/patch_html.py
+        env:
+          PYTHONUNBUFFERED: "1"
+
+      - name: Sync index.html → 房产规划总结.html
+        run: cp index.html "房产规划总结.html"
+
+      - name: Commit and push changes
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          git add data/latest.json
+          git add "data/history/$(date +%Y-%m-%d).json" || true
+          git add index.html "房产规划总结.html"
+
+          # Only commit if there are changes
+          if git diff --cached --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "chore: daily data update $(date +%Y-%m-%d)"
+            git push
+          fi
