@@ -1180,6 +1180,154 @@
 
   </div>
 
+  <!-- SECTION 11: 湾区通勤分析 -->
+  <div class="section" style="margin-top:40px;">
+    <div class="section-header">
+      <div class="section-num">11</div>
+      <div class="section-header-text">
+        <h2>湾区通勤分析</h2>
+        <p>通勤是买房最容易被低估的隐性成本，也是最难反悔的决定</p>
+      </div>
+    </div>
+
+    <!-- 通勤矩阵 -->
+    <div style="overflow-x:auto; margin-bottom:24px;">
+      <table style="width:100%; border-collapse:collapse; font-size:0.82rem; background:var(--card); border-radius:12px; overflow:hidden; border:1px solid var(--border);">
+        <thead>
+          <tr style="background:#f0ece6;">
+            <th style="padding:11px 14px; text-align:left; color:var(--text); font-weight:700; border-bottom:1px solid var(--border); white-space:nowrap;">居住地</th>
+            <th style="padding:11px 10px; text-align:center; color:#3d6b9e; border-bottom:1px solid var(--border); white-space:nowrap;">🍎 Apple Park</th>
+            <th style="padding:11px 10px; text-align:center; color:#3a8c5c; border-bottom:1px solid var(--border); white-space:nowrap;">🔍 Google HQ</th>
+            <th style="padding:11px 10px; text-align:center; color:#3d6b9e; border-bottom:1px solid var(--border); white-space:nowrap;">👥 Meta HQ</th>
+            <th style="padding:11px 10px; text-align:center; color:#4a7c6f; border-bottom:1px solid var(--border); white-space:nowrap;">🟢 Nvidia</th>
+            <th style="padding:11px 10px; text-align:center; color:#7a5090; border-bottom:1px solid var(--border); white-space:nowrap;">🔗 LinkedIn</th>
+            <th style="padding:11px 10px; text-align:center; color:#8a5010; border-bottom:1px solid var(--border); white-space:nowrap;">年隐性时间成本</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Tier 1 -->
+          <tr style="background:#f6fdf8;">
+            <td style="padding:10px 14px; font-weight:700; color:var(--text); border-bottom:1px solid var(--border);">Cupertino / Los Altos</td>
+            <td style="padding:10px; text-align:center; border-bottom:1px solid var(--border);"><span style="color:var(--up); font-weight:700;">10min</span><br><span style="color:var(--muted); font-size:0.72rem;">高峰+5</span></td>
+            <td style="padding:10px; text-align:center; border-bottom:1px solid var(--border);"><span style="color:var(--up); font-weight:700;">15min</span><br><span style="color:var(--muted); font-size:0.72rem;">高峰+10</span></td>
+            <td style="padding:10px; text-align:center; border-bottom:1px solid var(--border);"><span style="color:var(--up); font-weight:700;">20min</span><br><span style="color:var(--muted); font-size:0.72rem;">高峰+15</span></td>
+            <td style="padding:10px; text-align:center; border-bottom:1px solid var(--border);"><span style="color:var(--up); font-weight:700;">15min</span><br><span style="color:var(--muted); font-size:0.72rem;">高峰+10</span></td>
+            <td style="padding:10px; text-align:center; border-bottom:1px solid var(--border);"><span style="color:var(--up); font-weight:700;">10min</span><br><span style="color:var(--muted); font-size:0.72rem;">高峰+5</span></td>
+            <td style="padding:10px; text-align:center; border-bottom:1px solid var(--border); font-weight:700; color:var(--up);">~50小时/年</td>
+          </tr>
+          <tr style="background:#f6fdf8;">
+            <td style="padding:10px 14px; font-weight:700; color:var(--text); border-bottom:1px solid var(--border);">Palo Alto / Los Altos Hills</td>
+            <td style="padding:10px; text-align:center; border-bottom:1px solid var(--border);"><span style="color:var(--up); font-weight:700;">15min</span><br><span style="color:var(--muted); font-size:0.72rem;">高峰+10</span></td>
+            <td style="padding:10px; text-align:center; border-bottom:1px solid var(--border);"><span style="color:var(--up); font-weight:700;">10min</span><br><span style="color:var(--muted); font-size:0.72rem;">高峰+5</span></td>
+            <td style="padding:10px; text-align:center; border-bottom:1px solid var(--border);"><span style="color:var(--up); font-weight:700;">15min</span><br><span style="color:var(--muted); font-size:0.72rem;">高峰+10</span></td>
+            <td style="padding:10px; text-align:center; border-bottom:1px solid var(--border);"><span style="color:#c9880a; font-weight:700;">25min</span><br><span style="color:var(--muted); font-size:0.72rem;">高峰+15</span></td>
+            <td style="padding:10px; text-align:center; border-bottom:1px solid var(--border);"><span style="color:var(--up); font-weight:700;">5min</span><br><span style="color:var(--muted); font-size:0.72rem;">Caltrain</span></td>
+            <td style="padding:10px; text-align:center; border-bottom:1px solid var(--border); font-weight:700; color:var(--up);">~50小时/年</td>
+          </tr>
+          <!-- Tier 2 -->
+          <tr style="background:#fffff8;">
+            <td style="padding:10px 14px; font-weight:700; color:var(--text); border-bottom:1px solid var(--border);">Mountain View / Sunnyvale</td>
+            <td style="padding:10px; text-align:center; border-bottom:1px solid var(--border);"><span style="color:var(--up); font-weight:700;">15min</span><br><span style="color:var(--muted); font-size:0.72rem;">高峰+15</span></td>
+            <td style="padding:10px; text-align:center; border-bottom:1px solid var(--border);"><span style="color:var(--up); font-weight:700;">5min</span><br><span style="color:var(--muted); font-size:0.72rem;">步行/骑车</span></td>
+            <td style="padding:10px; text-align:center; border-bottom:1px solid var(--border);"><span style="color:var(--up); font-weight:700;">20min</span><br><span style="color:var(--muted); font-size:0.72rem;">高峰+15</span></td>
+            <td style="padding:10px; text-align:center; border-bottom:1px solid var(--border);"><span style="color:var(--up); font-weight:700;">15min</span><br><span style="color:var(--muted); font-size:0.72rem;">高峰+10</span></td>
+            <td style="padding:10px; text-align:center; border-bottom:1px solid var(--border);"><span style="color:var(--up); font-weight:700;">10min</span><br><span style="color:var(--muted); font-size:0.72rem;">高峰+10</span></td>
+            <td style="padding:10px; text-align:center; border-bottom:1px solid var(--border); font-weight:700; color:var(--up);">~75小时/年</td>
+          </tr>
+          <tr style="background:#fffff8;">
+            <td style="padding:10px 14px; font-weight:700; color:var(--text); border-bottom:1px solid var(--border);">Burlingame / San Mateo</td>
+            <td style="padding:10px; text-align:center; border-bottom:1px solid var(--border);"><span style="color:#c9880a; font-weight:700;">35min</span><br><span style="color:var(--muted); font-size:0.72rem;">高峰+20</span></td>
+            <td style="padding:10px; text-align:center; border-bottom:1px solid var(--border);"><span style="color:#c9880a; font-weight:700;">30min</span><br><span style="color:var(--muted); font-size:0.72rem;">高峰+20</span></td>
+            <td style="padding:10px; text-align:center; border-bottom:1px solid var(--border);"><span style="color:var(--up); font-weight:700;">20min</span><br><span style="color:var(--muted); font-size:0.72rem;">高峰+15</span></td>
+            <td style="padding:10px; text-align:center; border-bottom:1px solid var(--border);"><span style="color:#c9880a; font-weight:700;">40min</span><br><span style="color:var(--muted); font-size:0.72rem;">高峰+20</span></td>
+            <td style="padding:10px; text-align:center; border-bottom:1px solid var(--border);"><span style="color:#c9880a; font-weight:700;">30min</span><br><span style="color:var(--muted); font-size:0.72rem;">高峰+20</span></td>
+            <td style="padding:10px; text-align:center; border-bottom:1px solid var(--border); font-weight:700; color:#c9880a;">~175小时/年</td>
+          </tr>
+          <!-- Tier 3 -->
+          <tr style="background:#fffaf5;">
+            <td style="padding:10px 14px; font-weight:700; color:var(--text); border-bottom:1px solid var(--border);">Santa Clara / Milpitas</td>
+            <td style="padding:10px; text-align:center; border-bottom:1px solid var(--border);"><span style="color:var(--up); font-weight:700;">15min</span><br><span style="color:var(--muted); font-size:0.72rem;">高峰+15</span></td>
+            <td style="padding:10px; text-align:center; border-bottom:1px solid var(--border);"><span style="color:var(--up); font-weight:700;">20min</span><br><span style="color:var(--muted); font-size:0.72rem;">高峰+15</span></td>
+            <td style="padding:10px; text-align:center; border-bottom:1px solid var(--border);"><span style="color:#c9880a; font-weight:700;">35min</span><br><span style="color:var(--muted); font-size:0.72rem;">高峰+20</span></td>
+            <td style="padding:10px; text-align:center; border-bottom:1px solid var(--border);"><span style="color:var(--up); font-weight:700;">10min</span><br><span style="color:var(--muted); font-size:0.72rem;">高峰+10</span></td>
+            <td style="padding:10px; text-align:center; border-bottom:1px solid var(--border);"><span style="color:var(--up); font-weight:700;">20min</span><br><span style="color:var(--muted); font-size:0.72rem;">高峰+15</span></td>
+            <td style="padding:10px; text-align:center; border-bottom:1px solid var(--border); font-weight:700; color:#c9880a;">~125小时/年</td>
+          </tr>
+          <tr style="background:#fffaf5;">
+            <td style="padding:10px 14px; font-weight:700; color:var(--text); border-bottom:1px solid var(--border);">Fremont MSJ</td>
+            <td style="padding:10px; text-align:center; border-bottom:1px solid var(--border);"><span style="color:#c9880a; font-weight:700;">35min</span><br><span style="color:var(--muted); font-size:0.72rem;">高峰+30</span></td>
+            <td style="padding:10px; text-align:center; border-bottom:1px solid var(--border);"><span style="color:var(--down); font-weight:700;">45min</span><br><span style="color:var(--muted); font-size:0.72rem;">高峰+40</span></td>
+            <td style="padding:10px; text-align:center; border-bottom:1px solid var(--border);"><span style="color:var(--down); font-weight:700;">50min</span><br><span style="color:var(--muted); font-size:0.72rem;">高峰+40</span></td>
+            <td style="padding:10px; text-align:center; border-bottom:1px solid var(--border);"><span style="color:#c9880a; font-weight:700;">30min</span><br><span style="color:var(--muted); font-size:0.72rem;">高峰+25</span></td>
+            <td style="padding:10px; text-align:center; border-bottom:1px solid var(--border);"><span style="color:var(--down); font-weight:700;">50min</span><br><span style="color:var(--muted); font-size:0.72rem;">高峰+40</span></td>
+            <td style="padding:10px; text-align:center; border-bottom:1px solid var(--border); font-weight:700; color:var(--down);">~300小时/年</td>
+          </tr>
+          <!-- Tier 4 -->
+          <tr style="background:#fff5f5;">
+            <td style="padding:10px 14px; font-weight:700; color:var(--text); border-bottom:1px solid var(--border);">Antioch</td>
+            <td style="padding:10px; text-align:center; border-bottom:1px solid var(--border);"><span style="color:var(--down); font-weight:700;">70min</span><br><span style="color:var(--muted); font-size:0.72rem;">高峰+30</span></td>
+            <td style="padding:10px; text-align:center; border-bottom:1px solid var(--border);"><span style="color:var(--down); font-weight:700;">65min</span><br><span style="color:var(--muted); font-size:0.72rem;">高峰+30</span></td>
+            <td style="padding:10px; text-align:center; border-bottom:1px solid var(--border);"><span style="color:var(--down); font-weight:700;">75min</span><br><span style="color:var(--muted); font-size:0.72rem;">高峰+35</span></td>
+            <td style="padding:10px; text-align:center; border-bottom:1px solid var(--border);"><span style="color:var(--down); font-weight:700;">65min</span><br><span style="color:var(--muted); font-size:0.72rem;">高峰+30</span></td>
+            <td style="padding:10px; text-align:center; border-bottom:1px solid var(--border);"><span style="color:var(--down); font-weight:700;">70min</span><br><span style="color:var(--muted); font-size:0.72rem;">高峰+30</span></td>
+            <td style="padding:10px; text-align:center; border-bottom:1px solid var(--border); font-weight:700; color:var(--down);">~560小时/年</td>
+          </tr>
+          <tr style="background:#fff5f5;">
+            <td style="padding:10px 14px; font-weight:700; color:var(--text);">Tracy</td>
+            <td style="padding:10px; text-align:center;"><span style="color:var(--down); font-weight:700;">90min</span><br><span style="color:var(--muted); font-size:0.72rem;">高峰+40</span></td>
+            <td style="padding:10px; text-align:center;"><span style="color:var(--down); font-weight:700;">85min</span><br><span style="color:var(--muted); font-size:0.72rem;">高峰+40</span></td>
+            <td style="padding:10px; text-align:center;"><span style="color:var(--down); font-weight:700;">90min</span><br><span style="color:var(--muted); font-size:0.72rem;">高峰+45</span></td>
+            <td style="padding:10px; text-align:center;"><span style="color:var(--down); font-weight:700;">90min</span><br><span style="color:var(--muted); font-size:0.72rem;">高峰+40</span></td>
+            <td style="padding:10px; text-align:center;"><span style="color:var(--down); font-weight:700;">90min</span><br><span style="color:var(--muted); font-size:0.72rem;">高峰+45</span></td>
+            <td style="padding:10px; text-align:center; font-weight:700; color:var(--down);">~750小时/年</td>
+          </tr>
+        </tbody>
+      </table>
+      <div style="font-size:0.75rem; color:var(--muted); margin-top:6px;">非高峰单程时间 · 往返×250个工作日 · 高峰时间仅供参考，实际随 RTO 政策和季节波动</div>
+    </div>
+
+    <!-- 三个核心洞察 -->
+    <div style="display:flex; flex-wrap:wrap; gap:14px; margin-bottom:20px;">
+
+      <div style="flex:1; min-width:220px; background:var(--card); border:1px solid var(--border); border-radius:12px; padding:16px 18px;">
+        <div style="font-weight:700; color:var(--accent); margin-bottom:8px; font-size:0.9rem;">💸 通勤的真实年成本</div>
+        <div style="font-size:0.83rem; color:var(--text); line-height:1.8;">
+          按工程师机会成本 <strong>$200/小时</strong> 计算：<br>
+          <span style="color:var(--up);">● 核心区（50小时/年）= $10K/年</span><br>
+          <span style="color:#c9880a;">● 中圈（175小时/年）= $35K/年</span><br>
+          <span style="color:var(--down);">● Fremont（300小时/年）= $60K/年</span><br>
+          <span style="color:var(--down);">● Tracy（750小时/年）= $150K/年</span><br><br>
+          Tracy 比 Cupertino 省下的房贷差价，<strong>通勤时间成本 5–7 年内就吃回来了</strong>。
+        </div>
+      </div>
+
+      <div style="flex:1; min-width:220px; background:var(--card); border:1px solid var(--border); border-radius:12px; padding:16px 18px;">
+        <div style="font-weight:700; color:var(--accent2); margin-bottom:8px; font-size:0.9rem;">🔄 RTO 趋势的影响</div>
+        <div style="font-size:0.83rem; color:var(--text); line-height:1.8;">
+          2022–2024 年 WFH 红利已基本退潮。Apple、Google、Meta 均要求 <strong>每周 3 天</strong>到岗，部分组要求 4–5 天。<br><br>
+          用 WFH 来合理化远郊通勤是高风险决策——公司政策可以在季度内变化，但你的房子锁定 30 年。<br><br>
+          <strong>买房要按 5 天到岗来算通勤承受度</strong>，WFH 天数当作意外惊喜。
+        </div>
+      </div>
+
+      <div style="flex:1; min-width:220px; background:var(--card); border:1px solid var(--border); border-radius:12px; padding:16px 18px;">
+        <div style="font-weight:700; color:var(--blue); margin-bottom:8px; font-size:0.9rem;">🚆 公共交通的真实价值</div>
+        <div style="font-size:0.83rem; color:var(--text); line-height:1.8;">
+          Caltrain 直达的地段（Palo Alto、Mountain View、Sunnyvale、Burlingame）有一个隐性优势：通勤时间可以<strong>用于工作或休息</strong>，不是纯损耗。<br><br>
+          开车通勤 45 分钟 vs Caltrain 50 分钟，实际体感完全不同。<br><br>
+          BART 次之：换乘多、延误率高，但东湾/远郊唯一可接受的公交选项。
+        </div>
+      </div>
+
+    </div>
+
+    <!-- 双人家庭通勤特别说明 -->
+    <div style="background:#f0f5ff; border-left:3px solid var(--blue); border-radius:8px; padding:16px 18px; font-size:0.85rem; color:var(--text); line-height:1.8;">
+      👫 <strong>双职工家庭的通勤选址逻辑：</strong>两个人上班地点不同时，最优居住地是<strong>两者通勤时间之和最小的交叉点</strong>，不是其中一个人的最优解。Apple Park + Meta HQ 的组合，选 Sunnyvale / Cupertino 边界（94087 / 95014）通常是全局最优——两人单程均在 15–20 分钟以内，早高峰合计损耗最低。Mountain View 是 Google + LinkedIn 组合的最优解。如果一方在 SF，另一方在南湾，Caltrain 沿线的 Burlingame / San Mateo 是折中点。
+    </div>
+
+  </div>
+
   <!-- HOUSING EXAMPLES -->
   <div class="section-divider">
     <h2>各区域房产实例</h2>
