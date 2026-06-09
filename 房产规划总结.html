@@ -1318,7 +1318,7 @@
         }).addTo(map);
       }
 
-      var CACHE_KEY = 'bayarea_zip_geo_v11';
+      var CACHE_KEY = 'bayarea_zip_geo_v12';
       var cached = localStorage.getItem(CACHE_KEY);
       if (cached) {
         try { renderZipLayer(JSON.parse(cached)); } catch(e) { localStorage.removeItem(CACHE_KEY); }
@@ -2297,58 +2297,6 @@
       </div>
     </div>
 
-    <!-- 95129/95117/95128/95130 West San Jose -->
-    <div class="zip-block">
-      <div class="zip-header">
-        <div class="zip-left">
-          <span class="zip-code">95129</span>
-          <span class="zip-city">West San Jose</span>
-        </div>
-        <div class="zip-stats">
-          <div class="zstat"><span class="zval up">$2.45M</span><span class="zlabel">中位成交价</span></div>
-          <div class="zstat"><span class="zval up">↑5.8%</span><span class="zlabel">同比涨幅</span></div>
-          <div class="zstat"><span class="zval neutral">10天</span><span class="zlabel">平均成交</span></div>
-          <div class="zstat"><span class="zval school">★★★★☆</span><span class="zlabel">学区评级</span></div>
-          <div class="zstat"><span class="zval up">103%</span><span class="zlabel">成交/要价比</span></div>
-        </div>
-      </div>
-      <div class="zip-school-note">🏫 <strong>Lynbrook High School</strong> 9/10 · <strong>Moreland Middle</strong> 8/10 · <strong>Easterbrook Discovery</strong> 8/10 — 与 Cupertino 95014 共享 Lynbrook HS 学区，但地址是 San Jose，造成系统性低估</div>
-      <div class="zip-commute">🚗 <strong>通勤：</strong>近 <span class="ctag">CA-85</span><span class="ctag">I-280</span><span class="ctag">Lawrence Expwy</span> · Apple Park <strong>10分钟</strong> · Google HQ <strong>15分钟</strong> · Cupertino <strong>5分钟</strong> · Meta HQ <strong>25分钟</strong>（早高峰 +15分钟）</div>
-      <div class="zip-profile">👥 <strong>典型住户：</strong><span class="ptag">华裔科技双职工</span><span class="ptag">Cupertino学区需求但预算有限</span><span class="ptag">Apple/Google员工</span> · 高度学区驱动，买家结构与 Cupertino 几乎相同，但价格低 10–15%</div>
-      <div class="zip-multi">🗺 <strong>West San Jose 各 ZIP 差异：</strong>
-        <span class="ztag-good">95129 ★★★★☆</span> Lynbrook HS学区，最强，$2.4–2.8M，第二层
-        <span class="ztag-mid">95130 ★★★☆☆</span> Campbell边界，Cambrian溢出，$1.9M，第三层
-        <span class="ztag-mid">95117 ★★★☆☆</span> 近Santa Clara，老区，$1.6M，第三层
-        <span class="ztag-bad">95128 ★★☆☆☆</span> 近Downtown SJ，密度高，$1.4M，第三层
-      </div>
-      <div class="zip-multi" style="background:#f0f7f4; border:1px solid #c8e0d4; border-radius:10px; padding:12px 16px; margin:10px 0; font-size:0.84rem; color:#2a4a3a;">
-        💡 <strong>95129 的价值洼地逻辑：</strong>Lynbrook High 在 Cupertino 和 San Jose 之间划定学区时，将 95129 大部分区域划入，导致这里的学区品质等同于 Cupertino 95014，但因地址是「San Jose」而非「Cupertino」，售价通常低 10–15%。对于以学区为核心诉求、不在意地址标签的家庭，是第二层里性价比最高的选项之一。
-      </div>
-      <div class="listing-row">
-        <div class="listing-card">
-          <div class="lc-price t2">$2,580,000</div>
-          <div class="lc-addr">Lynbrook 学区核心</div>
-          <div class="lc-spec">4卧 / 3浴 / 2,000 sqft · 6,500 sqft 地块</div>
-          <div class="lc-tags">
-            <span class="lc-tag g">Lynbrook HS 9/10</span>
-            <span class="lc-tag g">近Apple Park</span>
-            <span class="lc-tag">San Jose地址</span>
-          </div>
-          <div class="lc-note">同等学区下比 Cupertino 95014 便宜约 $300–500K。地块标准，步行距 Moreland 中学。适合以 Lynbrook HS 为目标、预算略低于 Cupertino 满配的家庭。</div>
-        </div>
-        <div class="listing-card">
-          <div class="lc-price t3">$1,920,000</div>
-          <div class="lc-addr">95130 Campbell 边界</div>
-          <div class="lc-spec">3卧 / 2浴 / 1,500 sqft · 近 Cambrian</div>
-          <div class="lc-tags">
-            <span class="lc-tag g">近85/17交汇</span>
-            <span class="lc-tag">学区中等</span>
-          </div>
-          <div class="lc-note">95130 入门价，Cambrian 区域延伸段，通勤方便。学区不及 95129，但比东圣何塞强，适合通勤优先、学区次之的买家。</div>
-        </div>
-      </div>
-    </div>
-
     <!-- 94010 Burlingame -->
     <div class="zip-block">
       <div class="zip-header">
@@ -2732,6 +2680,58 @@
       <span class="tier-block-badge">第三层</span>
       <span class="tier-block-title">各有明显短板</span>
       <span class="tier-block-desc">学区强则通勤差 · 通勤近则学区弱 · 买家纯算账 · 利率敏感 · 代表：Santa Clara / Fremont / Milpitas / Foster City / San Jose 主城区</span>
+    </div>
+
+    <!-- 95129/95117/95128/95130 West San Jose -->
+    <div class="zip-block">
+      <div class="zip-header">
+        <div class="zip-left">
+          <span class="zip-code">95129</span>
+          <span class="zip-city">West San Jose</span>
+        </div>
+        <div class="zip-stats">
+          <div class="zstat"><span class="zval up">$2.45M</span><span class="zlabel">中位成交价</span></div>
+          <div class="zstat"><span class="zval up">↑5.8%</span><span class="zlabel">同比涨幅</span></div>
+          <div class="zstat"><span class="zval neutral">10天</span><span class="zlabel">平均成交</span></div>
+          <div class="zstat"><span class="zval school">★★★★☆</span><span class="zlabel">学区评级</span></div>
+          <div class="zstat"><span class="zval up">103%</span><span class="zlabel">成交/要价比</span></div>
+        </div>
+      </div>
+      <div class="zip-school-note">🏫 <strong>Lynbrook High School</strong> 9/10 · <strong>Moreland Middle</strong> 8/10 · <strong>Easterbrook Discovery</strong> 8/10 — 与 Cupertino 95014 共享 Lynbrook HS 学区，但地址是 San Jose，造成系统性低估</div>
+      <div class="zip-commute">🚗 <strong>通勤：</strong>近 <span class="ctag">CA-85</span><span class="ctag">I-280</span><span class="ctag">Lawrence Expwy</span> · Apple Park <strong>10分钟</strong> · Google HQ <strong>15分钟</strong> · Cupertino <strong>5分钟</strong> · Meta HQ <strong>25分钟</strong>（早高峰 +15分钟）</div>
+      <div class="zip-profile">👥 <strong>典型住户：</strong><span class="ptag">华裔科技双职工</span><span class="ptag">Cupertino学区需求但预算有限</span><span class="ptag">Apple/Google员工</span> · 高度学区驱动，买家结构与 Cupertino 几乎相同，但价格低 10–15%</div>
+      <div class="zip-multi">🗺 <strong>West San Jose 各 ZIP 差异：</strong>
+        <span class="ztag-good">95129 ★★★★☆</span> Lynbrook HS学区，最强，$2.4–2.8M，第三层上段
+        <span class="ztag-mid">95130 ★★★☆☆</span> Campbell边界，Cambrian溢出，$1.9M
+        <span class="ztag-mid">95117 ★★★☆☆</span> 近Santa Clara，老区，$1.6M
+        <span class="ztag-bad">95128 ★★☆☆☆</span> 近Downtown SJ，密度高，$1.4M
+      </div>
+      <div class="zip-multi" style="background:#f0f7f4; border:1px solid #c8e0d4; border-radius:10px; padding:12px 16px; margin:10px 0; font-size:0.84rem; color:#2a4a3a;">
+        💡 <strong>95129 的价值洼地逻辑：</strong>Lynbrook High 在 Cupertino 和 San Jose 之间划定学区时，将 95129 大部分区域划入，导致这里的学区品质等同于 Cupertino 95014，但因地址是「San Jose」而非「Cupertino」，售价通常低 10–15%。对于以学区为核心诉求、不在意地址标签的家庭，是第三层里性价比最高的选项之一。
+      </div>
+      <div class="listing-row">
+        <div class="listing-card">
+          <div class="lc-price t2">$2,580,000</div>
+          <div class="lc-addr">Lynbrook 学区核心</div>
+          <div class="lc-spec">4卧 / 3浴 / 2,000 sqft · 6,500 sqft 地块</div>
+          <div class="lc-tags">
+            <span class="lc-tag g">Lynbrook HS 9/10</span>
+            <span class="lc-tag g">近Apple Park</span>
+            <span class="lc-tag">San Jose地址</span>
+          </div>
+          <div class="lc-note">同等学区下比 Cupertino 95014 便宜约 $300–500K。地块标准，步行距 Moreland 中学。适合以 Lynbrook HS 为目标、预算略低于 Cupertino 满配的家庭。</div>
+        </div>
+        <div class="listing-card">
+          <div class="lc-price t3">$1,920,000</div>
+          <div class="lc-addr">95130 Campbell 边界</div>
+          <div class="lc-spec">3卧 / 2浴 / 1,500 sqft · 近 Cambrian</div>
+          <div class="lc-tags">
+            <span class="lc-tag g">近85/17交汇</span>
+            <span class="lc-tag">学区中等</span>
+          </div>
+          <div class="lc-note">95130 入门价，Cambrian 区域延伸段，通勤方便。学区不及 95129，但比东圣何塞强，适合通勤优先、学区次之的买家。</div>
+        </div>
+      </div>
     </div>
 
     <!-- 95051 Santa Clara -->
