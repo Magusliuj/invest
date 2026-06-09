@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>房产规划总结</title>
+<title>湾区 K 型分化 · 买房深度解读</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 <style>
   :root {
@@ -648,10 +648,10 @@
 
 <!-- HERO -->
 <div class="hero">
-  <div class="hero-eyebrow">深度解读</div>
-  <h1>湾区正在发生<br>一场 <em>K 型分化</em></h1>
+  <div class="hero-eyebrow">2026 · 湾区置业研究报告</div>
+  <h1>买房<em>深度解读</em></h1>
   <div class="hero-lead">
-    同一个经济体里，上面那一撇继续往上，下面那一撇往下走，中间被挤压。好房越来越贵，普通房越来越难涨——这不是你的错觉，数据在支持这个判断。
+    好区持续升值，普通区越来越难涨——这是结构性分化，不是短期波动。本报告梳理各地段的学区质量、通勤成本与价格走势，建立一套可执行的置业判断框架。
   </div>
   <div class="hero-pills">
     <span class="pill up">顶级区域 +13.4%</span>
@@ -1276,53 +1276,67 @@
         circle.bindTooltip(c.name, { permanent: true, direction: 'right', offset: [8,0], className: 'map-label' });
       });
 
-      // ── 城市边界（Nominatim GeoJSON，分批加载） ──
-      var withBoundary = cities.filter(function(c){ return c.q; });
+      // ── 城市区域圈（直接用 L.circle，不依赖外部 API）──
+      // radius 单位：米，根据各城市实际面积估算
+      var zones = [
+        // 第一层 — 绿
+        { lat:37.4634, lng:-122.1977, r:1400,  color:tier1 }, // Atherton
+        { lat:37.4419, lng:-122.1430, r:3200,  color:tier1 }, // Palo Alto
+        { lat:37.3852, lng:-122.1141, r:1900,  color:tier1 }, // Los Altos
+        { lat:37.3230, lng:-122.0322, r:1900,  color:tier1 }, // Cupertino
+        { lat:37.2638, lng:-122.0230, r:2100,  color:tier1 }, // Saratoga
+        { lat:37.5485, lng:-122.3647, r:1400,  color:tier1 }, // Hillsborough
+        // 第二层 — 琥珀
+        { lat:37.2358, lng:-121.9624, r:2000,  color:tier2 }, // Los Gatos
+        { lat:37.4530, lng:-122.1817, r:2300,  color:tier2 }, // Menlo Park
+        { lat:37.5841, lng:-122.3661, r:1400,  color:tier2 }, // Burlingame
+        { lat:37.3861, lng:-122.0839, r:2000,  color:tier2 }, // Mountain View
+        { lat:37.3688, lng:-122.0363, r:2700,  color:tier2 }, // Sunnyvale
+        { lat:37.5630, lng:-122.3255, r:2000,  color:tier2 }, // San Mateo
+        { lat:37.7502, lng:-122.4337, r:800,   color:tier2 }, // Noe Valley SF
+        // 第三层 — 橙红
+        { lat:37.3541, lng:-121.9552, r:2500,  color:tier3 }, // Santa Clara
+        { lat:37.4323, lng:-121.8996, r:2200,  color:tier3 }, // Milpitas
+        { lat:37.5485, lng:-121.9886, r:4500,  color:tier3 }, // Fremont
+        { lat:37.5585, lng:-122.2711, r:1100,  color:tier3 }, // Foster City
+        { lat:37.2969, lng:-121.9020, r:5500,  color:tier3 }, // San Jose
+        // 第四层 — 深红
+        { lat:37.9963, lng:-121.8058, r:3200,  color:tier4 }, // Antioch
+        { lat:37.7397, lng:-121.4252, r:3000,  color:tier4 }, // Tracy
+        // 周边未分析城市 — 灰色
+        { lat:37.4849, lng:-122.2364, r:2200,  color:'#bbb' }, // Redwood City
+        { lat:37.5074, lng:-122.2603, r:1100,  color:'#bbb' }, // San Carlos
+        { lat:37.5210, lng:-122.2758, r:1000,  color:'#bbb' }, // Belmont
+        { lat:37.3748, lng:-122.1174, r:1200,  color:'#bbb' }, // Los Altos Hills
+        { lat:37.2872, lng:-121.9500, r:1800,  color:'#bbb' }, // Campbell
+        { lat:37.8044, lng:-122.2712, r:5500,  color:'#bbb' }, // Oakland
+        { lat:37.8716, lng:-122.2727, r:2800,  color:'#bbb' }, // Berkeley
+        { lat:37.6688, lng:-122.0808, r:3500,  color:'#bbb' }, // Hayward
+        { lat:37.5941, lng:-122.0652, r:2200,  color:'#bbb' }, // Union City
+        { lat:37.5294, lng:-121.9961, r:1800,  color:'#bbb' }, // Newark
+        { lat:37.6624, lng:-121.8777, r:2500,  color:'#bbb' }, // Pleasanton
+        { lat:37.7021, lng:-121.9358, r:2500,  color:'#bbb' }, // Dublin
+        { lat:37.6879, lng:-121.7721, r:3000,  color:'#bbb' }, // Livermore
+        { lat:37.9101, lng:-122.0652, r:2800,  color:'#bbb' }, // Walnut Creek
+        { lat:37.6879, lng:-122.4702, r:2000,  color:'#bbb' }, // Daly City
+        { lat:37.6305, lng:-122.4111, r:1500,  color:'#bbb' }, // San Bruno
+        { lat:37.6547, lng:-122.4077, r:1500,  color:'#bbb' }, // South SF
+        { lat:37.7249, lng:-122.1561, r:2500,  color:'#bbb' }, // San Leandro
+      ];
 
-      // 未提及的周边城市，用灰色默认边框
-      var defaultCities = [
-        'Redwood City, CA','San Carlos, CA','Belmont, CA','Los Altos Hills, CA',
-        'Campbell, CA','Oakland, CA','Berkeley, CA','Hayward, CA',
-        'Union City, CA','Newark, CA','Pleasanton, CA','Dublin, CA',
-        'Livermore, CA','Walnut Creek, CA','Daly City, CA','San Bruno, CA',
-        'South San Francisco, CA','Pacifica, CA','San Leandro, CA','Alameda, CA'
-      ].map(function(q){ return { q:q, color:'#999', isDefault:true }; });
-
-      function loadBoundary(c) {
-        return fetch(
-          'https://nominatim.openstreetmap.org/search?q=' + encodeURIComponent(c.q) +
-          '&format=geojson&polygon_geojson=1&limit=1',
-          { headers: { 'Accept-Language': 'en-US' } }
-        )
-        .then(function(r){ return r.json(); })
-        .then(function(d){
-          if (d.features && d.features.length) {
-            L.geoJSON(d, {
-              interactive: false,
-              style: c.isDefault ? {
-                color: '#aaa', weight: 1, opacity: 0.45,
-                fill: false       // 默认城市：只显示灰色边框，无填充
-              } : {
-                color: c.color, weight: 2, opacity: 0.7,
-                fillColor: c.color, fillOpacity: 0.07,
-                dashArray: '5,4'
-              }
-            }).addTo(map);
-          }
-        })
-        .catch(function(){});
-      }
-
-      // 先加载分析城市，再加载默认城市，每批3个间隔800ms
-      var allBatched = withBoundary.concat(defaultCities);
-      var batches = [];
-      for (var i = 0; i < allBatched.length; i += 3) batches.push(allBatched.slice(i, i+3));
-      (function runBatch(idx) {
-        if (idx >= batches.length) return;
-        Promise.all(batches[idx].map(loadBoundary)).then(function(){
-          setTimeout(function(){ runBatch(idx+1); }, 800);
-        });
-      })(0);
+      zones.forEach(function(z) {
+        var isDefault = z.color === '#bbb';
+        L.circle([z.lat, z.lng], {
+          radius: z.r,
+          color: z.color,
+          weight: isDefault ? 1.2 : 1.8,
+          opacity: isDefault ? 0.4 : 0.65,
+          dashArray: isDefault ? null : '6,4',
+          fillColor: z.color,
+          fillOpacity: isDefault ? 0.04 : 0.13,
+          interactive: false
+        }).addTo(map);
+      });
 
       // 样式
       var s = document.createElement('style');
