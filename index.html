@@ -1218,7 +1218,7 @@
         maxZoom: 14
       }).addTo(map);
 
-      var tier1 = '#3a8c5c', tier2 = '#c9880a', tier3 = '#c0623a', tier4 = '#b04a38', tech = '#3d6b9e';
+      var tier1 = '#3a8c5c', tier2 = '#c9880a', tier3 = '#c0623a', tier4 = '#b04a38', tech = '#3d6b9e', landmark = '#7b5ea7';
 
       var cities = [
         // Tier 1 — 稀缺资产（10/10学区 + 极强稀缺性）
@@ -1230,6 +1230,8 @@
         { name:'Hillsborough',q:'Hillsborough, CA',lat:37.5485, lng:-122.3647, color:tier1, tier:'第一层', note:'全市纯住宅，无商业区，半岛老钱聚居' },
         { name:'Woodside',    q:'Woodside, CA',    lat:37.4296, lng:-122.2541, color:tier1, tier:'第一层', note:'硅谷亿万富翁聚集，最小地块5英亩，极度私密，均价$5M–$15M+' },
         { name:'Portola Valley',q:'Portola Valley, CA',lat:37.3766,lng:-122.2108,color:tier1,tier:'第一层',note:'I-280西侧山边，马场地产，均价$4M–$8M，比 Los Altos Hills 流动性略低' },
+        { name:'Stanford',q:'Stanford, CA',lat:37.4275,lng:-122.1697,color:landmark,tier:'地标',note:'Stanford大学（94305）—极少数住宅为大学教职员工配套，非公开市场' },
+        { name:'Moffett Field',q:'Moffett Field, CA',lat:37.4089,lng:-122.0492,color:landmark,tier:'地标',note:'NASA Ames + 联邦军事设施（94035），无住宅市场' },
 
         // Tier 2 — Los Gatos 9/10学区，精致但非顶级压舱石
         { name:'Los Gatos',   q:'Los Gatos, CA',   lat:37.2358, lng:-121.9624, color:tier2, tier:'第二层（上段）', note:'Los Gatos HS 9/10（非10/10），精致小镇，均价比Saratoga低10–15%，I-280沿线' },
@@ -1281,15 +1283,18 @@
       // ── ZIP Code 真实边界（Esri USA_ZIP_Codes_2016, field ZIP_CODE）──
       var zipColors = {
         '94027':tier1,'94022':tier1,'94024':tier1,'94028':tier1,'94062':tier1,
-        '94301':tier1,'94303':tier1,'94304':tier1,'94306':tier1,'95014':tier1,'95070':tier1,
+        '94301':tier1,'94303':tier1,'94304':tier1,'94305':landmark,'94306':tier1,'95014':tier1,'95070':tier1,
+        '94035':landmark,
         // 94010 = Hillsborough（tier1），Burlingame 与 Hillsborough 共用此 ZIP，标为 tier1
         '94010':tier1,
         '94025':tier2,'95030':tier2,'95032':tier2,'94040':tier2,'94041':tier2,
         '94043':tier2,'94087':tier2,'94086':tier2,'94085':tier2,'94089':tier2,
         // Burlingame 无独立 ZCTA，94011 是 PO Box；用 San Mateo ZIPs 代表该段
         '94401':tier2,'94402':tier2,'94403':tier2,'94114':tier2,'94115':tier2,
+        '94065':tier2,
         '95051':tier3,'95050':tier3,'95054':tier3,'94539':tier3,'94538':tier3,
         '94536':tier3,'94537':tier3,'94541':tier3,'94555':tier3,'95035':tier3,
+        '94061':tier3,'94063':tier3,
         '94404':tier3,'95123':tier3,'95124':tier3,'95120':tier3,'95008':tier3,'95116':tier3,'95122':tier3,
         '94509':tier4,'94531':tier4,'95376':tier4,'95377':tier4,
       };
@@ -1310,7 +1315,7 @@
         }).addTo(map);
       }
 
-      var CACHE_KEY = 'bayarea_zip_geo_v8';
+      var CACHE_KEY = 'bayarea_zip_geo_v11';
       var cached = localStorage.getItem(CACHE_KEY);
       if (cached) {
         try { renderZipLayer(JSON.parse(cached)); } catch(e) { localStorage.removeItem(CACHE_KEY); }
@@ -2540,6 +2545,55 @@
             <span class="lc-tag">学区中等</span>
           </div>
           <div class="lc-note">San Mateo 相对低价入口，通勤极方便，适合单高收入家庭，但要注意高中学区评分一般。</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 94065/94061/94063 Redwood City -->
+    <div class="zip-block">
+      <div class="zip-header">
+        <div class="zip-left">
+          <span class="zip-code">94065</span>
+          <span class="zip-city">Redwood City</span>
+        </div>
+        <div class="zip-stats">
+          <div class="zstat"><span class="zval up">$2.05M</span><span class="zlabel">中位成交价</span></div>
+          <div class="zstat"><span class="zval up">↑4.2%</span><span class="zlabel">同比涨幅</span></div>
+          <div class="zstat"><span class="zval neutral">14天</span><span class="zlabel">平均成交</span></div>
+          <div class="zstat"><span class="zval school">★★★☆☆</span><span class="zlabel">学区评级</span></div>
+          <div class="zstat"><span class="zval neutral">100%</span><span class="zlabel">成交/要价比</span></div>
+        </div>
+      </div>
+      <div class="zip-school-note">🏫 <strong>Sequoia High School</strong> 6/10 · <strong>John F. Kennedy Middle</strong> 5/10 · <strong>Redwood Shores Elementary</strong> 8/10（仅限94065）— 学区是 RC 最大短板，Redwood Shores 例外略好</div>
+      <div class="zip-commute">🚗 <strong>通勤：</strong>近 <span class="ctag">US-101</span><span class="ctag">CA-84</span><span class="ctag">Caltrain</span> · SF市中心 <strong>40分钟</strong>（Caltrain） · Meta HQ <strong>20分钟</strong> · Oracle HQ（就在94065内）<strong>5分钟</strong> · Apple Park <strong>30分钟</strong>（早高峰 +15–25分钟）</div>
+      <div class="zip-profile">👥 <strong>典型住户：</strong><span class="ptag">Oracle/Box员工</span><span class="ptag">半岛刚需上车族</span><span class="ptag">投资型买家</span> · 族裔多元，生活配套日趋完善，Downtown RC 近年改造提升明显</div>
+      <div class="zip-multi">🗺 <strong>Redwood City 各 ZIP 差异：</strong>
+        <span class="ztag-good">94065 ★★★★☆</span> Redwood Shores，临水新区，Oracle HQ，$2.2M+，第二层
+        <span class="ztag-mid">94061 ★★★☆☆</span> 中西部，Downtown RC，$1.8M 附近，第三层
+        <span class="ztag-bad">94063 ★★☆☆☆</span> 东部/North Fair Oaks，价格低但学区弱，$1.5M 附近，第三层
+      </div>
+      <div class="listing-row">
+        <div class="listing-card">
+          <div class="lc-price t2">$2,280,000</div>
+          <div class="lc-addr">Redwood Shores 水景社区</div>
+          <div class="lc-spec">4卧 / 3浴 / 2,100 sqft · 2010年建</div>
+          <div class="lc-tags">
+            <span class="lc-tag g">Oracle HQ步行圈</span>
+            <span class="lc-tag g">水景</span>
+            <span class="lc-tag">学区一般</span>
+          </div>
+          <div class="lc-note">Redwood Shores 最好的地段，现代建筑，临水环境优美。Oracle、Box员工首选，通勤极方便。学区是短板，适合无学区需求或子女已上私校的家庭。</div>
+        </div>
+        <div class="listing-card">
+          <div class="lc-price t3">$1,750,000</div>
+          <div class="lc-addr">Downtown Redwood City 附近</div>
+          <div class="lc-spec">3卧 / 2浴 / 1,600 sqft · 1970年代建</div>
+          <div class="lc-tags">
+            <span class="lc-tag g">近Caltrain</span>
+            <span class="lc-tag g">Downtown改造区</span>
+            <span class="lc-tag">学区弱</span>
+          </div>
+          <div class="lc-note">RC 中部入门价位，步行可达 Downtown RC 餐饮娱乐圈和 Caltrain 站。近年 Downtown 改造带动区域活力，适合双职工无子女或子女已大的家庭。</div>
         </div>
       </div>
     </div>
