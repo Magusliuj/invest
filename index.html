@@ -1228,6 +1228,8 @@
         { name:'Cupertino',   q:'Cupertino, CA',   lat:37.3230, lng:-122.0322, color:tier1, tier:'第一层', note:'Monta Vista HS 10/10，华裔科技家庭首选，Apple步行圈' },
         { name:'Saratoga',    q:'Saratoga, CA',    lat:37.2638, lng:-122.0230, color:tier1, tier:'第一层', note:'Saratoga HS 10/10，低密度豪宅，静谧' },
         { name:'Hillsborough',q:'Hillsborough, CA',lat:37.5485, lng:-122.3647, color:tier1, tier:'第一层', note:'全市纯住宅，无商业区，半岛老钱聚居' },
+        { name:'Woodside',    q:'Woodside, CA',    lat:37.4296, lng:-122.2541, color:tier1, tier:'第一层', note:'硅谷亿万富翁聚集，最小地块5英亩，极度私密，均价$5M–$15M+' },
+        { name:'Portola Valley',q:'Portola Valley, CA',lat:37.3766,lng:-122.2108,color:tier1,tier:'第一层',note:'I-280西侧山边，马场地产，均价$4M–$8M，比 Los Altos Hills 流动性略低' },
 
         // Tier 2 — Los Gatos 9/10学区，精致但非顶级压舱石
         { name:'Los Gatos',   q:'Los Gatos, CA',   lat:37.2358, lng:-121.9624, color:tier2, tier:'第二层（上段）', note:'Los Gatos HS 9/10（非10/10），精致小镇，均价比Saratoga低10–15%，I-280沿线' },
@@ -1276,10 +1278,10 @@
         circle.bindTooltip(c.name, { permanent: true, direction: 'right', offset: [8,0], className: 'map-label' });
       });
 
-      // ── ZIP Code 真实边界（Census TIGERweb Layer 1, field ZCTA5CE20）──
+      // ── ZIP Code 真实边界（Esri USA_ZIP_Codes_2016, field ZIP_CODE）──
       var zipColors = {
-        '94027':tier1,'94022':tier1,'94024':tier1,'94301':tier1,'94303':tier1,'94304':tier1,
-        '94306':tier1,'95014':tier1,'95070':tier1,
+        '94027':tier1,'94022':tier1,'94024':tier1,'94028':tier1,'94062':tier1,
+        '94301':tier1,'94303':tier1,'94304':tier1,'94306':tier1,'95014':tier1,'95070':tier1,
         // 94010 = Hillsborough（tier1），Burlingame 与 Hillsborough 共用此 ZIP，标为 tier1
         '94010':tier1,
         '94025':tier2,'95030':tier2,'95032':tier2,'94040':tier2,'94041':tier2,
@@ -1297,54 +1299,44 @@
         L.geoJSON(data, {
           interactive: false,
           style: function(f) {
-            var zip = f.properties.GEOID || f.properties.ZCTA5 || '';
+            var zip = (f.properties.ZIP_CODE || f.properties.GEOID || '').toString().trim();
             var color = zipColors[zip] || null;
             if (!color) return { opacity:0, fillOpacity:0 };
             return {
-              color: color, weight: 2, opacity: 0.75,
-              fillColor: color, fillOpacity: 0.15
+              color: color, weight: 2, opacity: 0.8,
+              fillColor: color, fillOpacity: 0.25
             };
           }
         }).addTo(map);
       }
 
-      var CACHE_KEY = 'bayarea_zip_geo_v6';
+      var CACHE_KEY = 'bayarea_zip_geo_v8';
       var cached = localStorage.getItem(CACHE_KEY);
       if (cached) {
-        renderZipLayer(JSON.parse(cached));
+        try { renderZipLayer(JSON.parse(cached)); } catch(e) { localStorage.removeItem(CACHE_KEY); }
       } else {
         var zips = Object.keys(zipColors);
-        var whereClause = "GEOID IN (" + zips.map(function(z){ return "'" + z + "'"; }).join(',') + ")";
-        var censusUrl = 'https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/PUMA_TAD_TAZ_UGA_ZCTA/MapServer/1/query'
-          + '?where=' + encodeURIComponent(whereClause)
-          + '&outFields=GEOID&returnGeometry=true&outSR=4326&f=geojson';
+        // Esri public service — supports CORS natively, no proxy needed
+        var esriBase = 'https://services.arcgis.com/P3ePLMYs2RVChkJx/arcgis/rest/services/USA_ZIP_Codes_2016/FeatureServer/0/query';
+        var zipList = zips.map(function(z){ return "'" + z + "'"; }).join(',');
+        var esriUrl = esriBase + '?where=ZIP_CODE+IN+(' + zipList + ')&outFields=ZIP_CODE&returnGeometry=true&outSR=4326&f=geojson';
 
-        // Try direct → corsproxy.io → allorigins.win
-        var attempts = [
-          censusUrl,
-          'https://corsproxy.io/?' + encodeURIComponent(censusUrl),
-          'https://api.allorigins.win/raw?url=' + encodeURIComponent(censusUrl)
-        ];
-
-        function tryNext(i) {
-          if (i >= attempts.length) {
-            console.warn('All ZIP boundary fetch attempts failed');
-            return;
-          }
-          fetch(attempts[i])
-            .then(function(r){ return r.json(); })
-            .then(function(data){
-              if (data.features && data.features.length) {
-                try { localStorage.setItem(CACHE_KEY, JSON.stringify(data)); } catch(e){}
-                renderZipLayer(data);
-              } else {
-                console.warn('Attempt', i, 'returned 0 features, trying next...');
-                tryNext(i + 1);
-              }
-            })
-            .catch(function(){ tryNext(i + 1); });
-        }
-        tryNext(0);
+        fetch(esriUrl)
+          .then(function(r) {
+            if (!r.ok) throw new Error('HTTP ' + r.status);
+            return r.json();
+          })
+          .then(function(data) {
+            if (data.features && data.features.length) {
+              try { localStorage.setItem(CACHE_KEY, JSON.stringify(data)); } catch(e){}
+              renderZipLayer(data);
+            } else {
+              console.warn('ZIP boundary: 0 features returned', JSON.stringify(data).substring(0,200));
+            }
+          })
+          .catch(function(err) {
+            console.warn('ZIP boundary fetch failed:', err);
+          });
       }
 
       // 样式
@@ -1740,6 +1732,99 @@
             <span class="lc-tag g">买了即住</span>
           </div>
           <div class="lc-note">LAH 极稀少的新建项目：当代风格，全开放式设计，Fleetwood 推拉门直通泳池甲板，主卧观景台可见旧金山湾。此类新建在 LAH 每年不超过 5 套，供应近乎稀缺。</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 94062 Woodside -->
+    <div class="zip-block">
+      <div class="zip-header">
+        <div class="zip-left">
+          <span class="zip-code">94062</span>
+          <span class="zip-city">Woodside</span>
+        </div>
+        <div class="zip-stats">
+          <div class="zstat"><span class="zval up">$6.5M</span><span class="zlabel">中位成交价</span></div>
+          <div class="zstat"><span class="zval neutral">~30天</span><span class="zlabel">平均成交</span></div>
+          <div class="zstat"><span class="zval school">★★★★★</span><span class="zlabel">学区评级</span></div>
+          <div class="zstat"><span class="zval up">100%</span><span class="zlabel">成交/要价比</span></div>
+        </div>
+      </div>
+      <div class="zip-school-note">🏫 <strong>Woodside High School</strong> 8/10 · <strong>Woodside Elementary</strong> 9/10 — 学区略低于 Los Altos/Palo Alto，买家优先级是地块和私密性而非学区排名</div>
+      <div class="zip-commute">🚗 <strong>通勤：</strong>近 <span class="ctag">I-280</span> · Meta HQ <strong>15分钟</strong> · Palo Alto <strong>15分钟</strong> · Apple Park <strong>25分钟</strong> · SF <strong>35分钟</strong>（早高峰 +15分钟）· 纯山区，无 Caltrain，必须开车</div>
+      <div class="zip-profile">👥 <strong>典型住户：</strong><span class="ptag">硅谷创始人/CEO</span><span class="ptag">对冲基金 / PE 合伙人</span><span class="ptag">老钱家族</span> · 年收入 $2M+，追求极度隐私与土地所有权，马场、葡萄园、网球场标配</div>
+      <div class="zip-multi" style="background:#f0f7f4; border:1px solid #c8e0d4; border-radius:10px; padding:12px 16px; margin:10px 0; font-size:0.84rem; color:#2a4a3a;">
+        💡 <strong>Woodside 特殊性：</strong>历史上 Larry Ellison、Steve Jobs（家在 Palo Alto 但在此有地产）、马克·扎克伯格（购入周边地块）都是此区地主。全市约 5,500 人口，供应极度稀缺，一年成交量不足 50 套。流动性低但增值逻辑极强——真正的稀缺不可复制。
+      </div>
+      <div class="listing-row">
+        <div class="listing-card">
+          <div class="lc-price">$5,500,000</div>
+          <div class="lc-addr">Whiskey Hill Rd 区域</div>
+          <div class="lc-spec">4卧 / 3浴 / 3,000 sqft · 2 英亩 · 建于1960年代</div>
+          <div class="lc-tags">
+            <span class="lc-tag g">大地块</span>
+            <span class="lc-tag g">I-280 近</span>
+            <span class="lc-tag w">需翻新</span>
+          </div>
+          <div class="lc-note">Woodside 入门段，地块超 2 英亩，房子需要更新但地价本身支撑估值。距 Menlo Park 和 Palo Alto 各 10 分钟，适合重视私密性的 Meta/Salesforce 高管家庭。</div>
+        </div>
+        <div class="listing-card">
+          <div class="lc-price">$9,800,000</div>
+          <div class="lc-addr">Mountain Home Rd 山顶</div>
+          <div class="lc-spec">5卧 / 5.5浴 / 5,200 sqft · 5 英亩 · 含马厩 + 泳池</div>
+          <div class="lc-tags">
+            <span class="lc-tag g">全景湾景</span>
+            <span class="lc-tag g">马厩 / 马道</span>
+            <span class="lc-tag g">半翻新</span>
+          </div>
+          <div class="lc-note">山顶全景地产，晴天可见旧金山湾和金门大桥。5 英亩含专属马道接入 Woodside 马道网络。此类地产全球都找不到复制品，定价逻辑近似艺术品。</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 94028 Portola Valley -->
+    <div class="zip-block">
+      <div class="zip-header">
+        <div class="zip-left">
+          <span class="zip-code">94028</span>
+          <span class="zip-city">Portola Valley</span>
+        </div>
+        <div class="zip-stats">
+          <div class="zstat"><span class="zval up">$5.2M</span><span class="zlabel">中位成交价</span></div>
+          <div class="zstat"><span class="zval neutral">~25天</span><span class="zlabel">平均成交</span></div>
+          <div class="zstat"><span class="zval school">★★★★☆</span><span class="zlabel">学区评级</span></div>
+          <div class="zstat"><span class="zval up">101%</span><span class="zlabel">成交/要价比</span></div>
+        </div>
+      </div>
+      <div class="zip-school-note">🏫 <strong>Woodside High School</strong> 8/10（与 Woodside 共用）· <strong>Ormondale Elementary</strong> 9/10 · <strong>Corte Madera School</strong> 9/10 — 学区为同区域次佳，购房动力主要来自生活方式而非学区</div>
+      <div class="zip-commute">🚗 <strong>通勤：</strong>近 <span class="ctag">I-280</span> · Meta HQ <strong>18分钟</strong> · Palo Alto <strong>12分钟</strong> · Apple Park <strong>20分钟</strong> · SF <strong>40分钟</strong>（早高峰 +15分钟）</div>
+      <div class="zip-profile">👥 <strong>典型住户：</strong><span class="ptag">科技公司 VP/Director</span><span class="ptag">Stanford 教授 / 医生</span><span class="ptag">自然生活爱好者</span> · 年收入 $800K–$2M，兼顾通勤和空间，地震带注意（San Andreas 断层穿过此区）</div>
+      <div class="zip-multi" style="background:#fff8e8; border:1px solid #e8d8a0; border-radius:10px; padding:12px 16px; margin:10px 0; font-size:0.84rem; color:#5a4a10;">
+        ⚠️ <strong>地震风险提示：</strong>San Andreas 断层从 Portola Valley 中部穿过，部分地块在断层线附近，购房前需查阅 Alquist-Priolo Earthquake Fault Zone 地图，断层线50英尺内不允许新建住宅。务必做专业地质勘查。
+      </div>
+      <div class="listing-row">
+        <div class="listing-card">
+          <div class="lc-price">$4,200,000</div>
+          <div class="lc-addr">Alpine Rd 区域</div>
+          <div class="lc-spec">4卧 / 3浴 / 2,800 sqft · 1.5 英亩 · 建于1970年</div>
+          <div class="lc-tags">
+            <span class="lc-tag g">大地块</span>
+            <span class="lc-tag g">山景</span>
+            <span class="lc-tag w">断层区需核查</span>
+          </div>
+          <div class="lc-note">Portola Valley 入门价位，1.5 英亩地块，山景开阔。距 Palo Alto 仅 12 分钟。购前务必确认是否在 Alquist-Priolo 断层禁建区内。</div>
+        </div>
+        <div class="listing-card" style="background:#f6fdf8; border-left:3px solid #4a7c6f;">
+          <div class="lc-price">$6,500,000</div>
+          <div class="lc-addr">✨ Portola Valley Ranch 精装</div>
+          <div class="lc-spec">5卧 / 4.5浴 / 4,000 sqft · 1 英亩 · 2023年全面翻新</div>
+          <div class="lc-tags">
+            <span class="lc-tag g">全新厨卫</span>
+            <span class="lc-tag g">太阳能</span>
+            <span class="lc-tag g">断层安全区</span>
+            <span class="lc-tag g">买了即住</span>
+          </div>
+          <div class="lc-note">位于 Portola Valley Ranch 社区（已核实为断层安全区），2023 年底精装翻新，厨卫全新，太阳能 + 储能系统。社区有网球场和泳池，是此区少见的"新状态 + 安全区 + 即住"三合一。</div>
         </div>
       </div>
     </div>
