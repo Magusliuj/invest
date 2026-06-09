@@ -1187,10 +1187,111 @@
     <span class="divider-sub">Redfin 2026年数据 · 按 ZIP Code 分层对比</span>
   </div>
 
-  <!-- BAY AREA MAP -->
+  <!-- BAY AREA MAP (Leaflet) -->
   <div style="margin:0 0 28px; background:var(--card); border:1px solid var(--border); border-radius:14px; overflow:hidden;">
-    <div style="padding:14px 18px 6px; font-weight:700; font-size:0.95rem; color:var(--text);">🗺 湾区各区域地理分布（K型分化四层）</div>
-    <svg viewBox="0 0 700 500" xmlns="http://www.w3.org/2000/svg" style="width:100%; height:auto; display:block;">
+    <div style="padding:14px 18px 8px; font-weight:700; font-size:0.95rem; color:var(--text);">🗺 湾区各区域地理分布（K型分化四层）</div>
+
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css"/>
+
+    <div id="bayarea-map" style="height:460px; width:100%;"></div>
+
+    <!-- Legend -->
+    <div style="display:flex; flex-wrap:wrap; gap:12px; padding:10px 18px 14px; font-size:0.8rem; color:var(--text); border-top:1px solid var(--border); background:#faf8f5;">
+      <span><span style="display:inline-block;width:11px;height:11px;border-radius:50%;background:#3a8c5c;margin-right:4px;vertical-align:middle;"></span>第一层 稀缺资产</span>
+      <span><span style="display:inline-block;width:11px;height:11px;border-radius:50%;background:#c9880a;margin-right:4px;vertical-align:middle;"></span>第二层 优质实用</span>
+      <span><span style="display:inline-block;width:11px;height:11px;border-radius:50%;background:#c0623a;margin-right:4px;vertical-align:middle;"></span>第三层 明显短板房</span>
+      <span><span style="display:inline-block;width:11px;height:11px;border-radius:50%;background:#b04a38;margin-right:4px;vertical-align:middle;"></span>第四层 远郊消费品</span>
+      <span><span style="display:inline-block;width:11px;height:11px;border-radius:50%;background:#3d6b9e;margin-right:4px;vertical-align:middle;"></span>科技园区</span>
+    </div>
+
+    <!-- Leaflet JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+    <script>
+    (function() {
+      var map = L.map('bayarea-map', { zoomControl: true, scrollWheelZoom: false })
+                 .setView([37.42, -122.05], 10);
+
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '© OpenStreetMap contributors',
+        maxZoom: 14
+      }).addTo(map);
+
+      var tier1 = '#3a8c5c', tier2 = '#c9880a', tier3 = '#c0623a', tier4 = '#b04a38', tech = '#3d6b9e';
+
+      var cities = [
+        // Tier 1
+        { name:'Atherton', lat:37.4634, lng:-122.1977, color:tier1, tier:'第一层', note:'顶级学区 + VC圈层，成交/要价比 105%' },
+        { name:'Palo Alto', lat:37.4419, lng:-122.1430, color:tier1, tier:'第一层', note:'Stanford效应，AI财富聚集，学区顶尖' },
+        { name:'Los Altos', lat:37.3852, lng:-122.1141, color:tier1, tier:'第一层', note:'Loyola/Covington 10/10，家庭终极居住区' },
+        { name:'Cupertino', lat:37.3230, lng:-122.0322, color:tier1, tier:'第一层', note:'Monta Vista HS，华裔科技家庭首选，Apple步行圈' },
+        { name:'Saratoga', lat:37.2638, lng:-122.0230, color:tier1, tier:'第一层', note:'Saratoga HS 10/10，低密度豪宅，静谧' },
+        { name:'Los Gatos', lat:37.2358, lng:-121.9624, color:tier1, tier:'第一层', note:'精致小镇，Los Gatos HS 9/10，I-280 红利' },
+        { name:'Hillsborough', lat:37.5485, lng:-122.3647, color:tier1, tier:'第一层', note:'全市纯住宅，无商业区，半岛老钱聚居' },
+
+        // Tier 2
+        { name:'Menlo Park', lat:37.4530, lng:-122.1817, color:tier2, tier:'第二层', note:'Meta HQ 步行圈，VC集中，西侧 Allied Arts 溢价高' },
+        { name:'Burlingame', lat:37.5841, lng:-122.3661, color:tier2, tier:'第二层', note:'半岛精致生活，Caltrain直达，成交/要价比 102%' },
+        { name:'Mountain View', lat:37.3861, lng:-122.0839, color:tier2, tier:'第二层（下段）', note:'Google HQ步行，Caltrain，2026年交易量收缩' },
+        { name:'Sunnyvale', lat:37.3688, lng:-122.0363, color:tier2, tier:'第二层（下段）', note:'Apple通勤优，2026年5月成交已砍价出售' },
+        { name:'San Mateo', lat:37.5630, lng:-122.3255, color:tier2, tier:'第二层（下段）', note:'Hillsdale HS 9/10，Caltrain沿线，半岛中段' },
+        { name:'Noe Valley (SF)', lat:37.7502, lng:-122.4337, color:tier2, tier:'第二层（下段）', note:'AI人才圈，步行生活，OpenAI/Anthropic 15分钟' },
+
+        // Tier 3
+        { name:'Santa Clara', lat:37.3541, lng:-121.9552, color:tier3, tier:'第三层', note:'Nvidia/Intel步行，无学区溢价，功能性地段' },
+        { name:'Milpitas', lat:37.4323, lng:-121.8996, color:tier3, tier:'第三层', note:'气味问题，BART可达，成交/要价比 97%' },
+        { name:'Fremont MSJ', lat:37.5485, lng:-121.9886, color:tier3, tier:'第三层', note:'Mission San Jose HS 10/10，但通勤早高峰 90min' },
+        { name:'Foster City', lat:37.5585, lng:-122.2711, color:tier3, tier:'第三层', note:'填海造地，海平面风险，成交/要价比 98%' },
+        { name:'San Jose', lat:37.2969, lng:-121.9020, color:tier3, tier:'第三层', note:'Blossom Valley代表，无稀缺性，高利率敏感' },
+
+        // Tier 4
+        { name:'Antioch', lat:37.9963, lng:-121.8058, color:tier4, tier:'第四层', note:'通勤 90min，WFH退潮后需求萎缩，学区差' },
+        { name:'Tracy', lat:37.7397, lng:-121.4252, color:tier4, tier:'第四层', note:'通勤 110min，37天成交，流动性极差' },
+
+        // Tech campuses
+        { name:'🍎 Apple Park', lat:37.3349, lng:-122.0090, color:tech, tier:'科技园区', note:'Apple HQ，约12–15万员工，Cupertino/Sunnyvale核心' },
+        { name:'🔍 Google HQ', lat:37.4220, lng:-122.0841, color:tech, tier:'科技园区', note:'Googleplex，Mountain View，湾区约7–8万员工' },
+        { name:'👥 Meta HQ', lat:37.4848, lng:-122.1484, color:tech, tier:'科技园区', note:'Meta Menlo Park，约6–7万员工，Reality Labs在Burlingame' },
+        { name:'🟢 Nvidia HQ', lat:37.3688, lng:-121.9905, color:tech, tier:'科技园区', note:'Santa Clara，约2万+员工，AI芯片龙头，增速最快' },
+        { name:'🤖 OpenAI', lat:37.7864, lng:-122.3892, color:'#6a3090', tier:'AI公司', note:'SF Mission District，约3000–5000人，薪资密度极高' },
+      ];
+
+      cities.forEach(function(c) {
+        var radius = (c.tier === '第一层') ? 10 :
+                     (c.tier.startsWith('第二层')) ? 9 :
+                     (c.tier.startsWith('第三层')) ? 8 :
+                     (c.tier === '第四层') ? 9 : 7;
+        var circle = L.circleMarker([c.lat, c.lng], {
+          radius: radius,
+          fillColor: c.color,
+          color: 'white',
+          weight: 1.8,
+          opacity: 1,
+          fillOpacity: 0.88
+        }).addTo(map);
+
+        circle.bindPopup(
+          '<strong style="font-size:13px;">' + c.name + '</strong><br>' +
+          '<span style="color:#888;font-size:11px;">' + c.tier + '</span><br>' +
+          '<span style="font-size:12px;">' + c.note + '</span>',
+          { maxWidth: 220 }
+        );
+
+        circle.bindTooltip(c.name, { permanent: true, direction: 'right', offset: [8, 0],
+          className: 'map-label' });
+      });
+
+      // Custom tooltip style
+      var style = document.createElement('style');
+      style.textContent = '.map-label { background:none; border:none; box-shadow:none; font-size:10px; font-weight:700; color:#2a2018; text-shadow:0 0 3px #fff, 0 0 3px #fff; white-space:nowrap; } .map-label::before { display:none; }';
+      document.head.appendChild(style);
+    })();
+    </script>
+    <div style="font-size:0.72rem; color:var(--muted); padding:0 18px 10px; text-align:center;">点击城市标记查看详情 · 滚轮缩放已关闭，可双指/双击缩放</div>
+
+    <!-- placeholder closing div below -->
+    <div style="display:none;">SVG REMOVED</div>
+
 
       <!-- Background land -->
       <rect width="700" height="500" fill="#ede8df"/>
