@@ -1194,7 +1194,7 @@
     <!-- Leaflet CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css"/>
 
-    <div id="bayarea-map" style="height:460px; width:100%;"></div>
+    <div id="bayarea-map" style="height:560px; width:100%;"></div>
 
     <!-- Legend -->
     <div style="display:flex; flex-wrap:wrap; gap:12px; padding:10px 18px 14px; font-size:0.8rem; color:var(--text); border-top:1px solid var(--border); background:#faf8f5;">
@@ -1210,7 +1210,7 @@
     <script>
     (function() {
       var map = L.map('bayarea-map', { zoomControl: true, scrollWheelZoom: false })
-                 .setView([37.42, -122.05], 10);
+                 .setView([37.55, -122.10], 10);
 
       // CartoDB Positron — cleaner basemap, city boundaries more legible
       L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
@@ -1232,7 +1232,21 @@
         { name:'Portola Valley',q:'Portola Valley, CA',lat:37.3766,lng:-122.2108,color:tier1,tier:'第一层',note:'I-280西侧山边，马场地产，均价$4M–$8M，比 Los Altos Hills 流动性略低' },
         { name:'Stanford',q:'Stanford, CA',lat:37.4275,lng:-122.1697,color:landmark,tier:'地标',note:'Stanford大学（94305）—极少数住宅为大学教职员工配套，非公开市场' },
         { name:'Moffett Field',q:'Moffett Field, CA',lat:37.4089,lng:-122.0492,color:landmark,tier:'地标',note:'NASA Ames + 联邦军事设施（94035），无住宅市场' },
+        { name:'San Carlos', q:'San Carlos, CA', lat:37.5070, lng:-122.2605, color:tier2, tier:'第二层', note:'94070，Carlmont HS 8/10，半岛中段精致小城，均价$2.3M' },
+        { name:'Belmont',    q:'Belmont, CA',    lat:37.5202, lng:-122.2758, color:tier2, tier:'第二层', note:'94002，同属 Carlmont 学区，均价$2.1M，性价比略优于San Carlos' },
         { name:'W. San Jose',q:'West San Jose, CA',lat:37.3065,lng:-121.9986,color:tier2,tier:'第二层',note:'95129（Lynbrook HS 9/10，Cupertino同学区）均价$2.5M，常被低估的宝藏地段' },
+        { name:'Morgan Hill', q:'Morgan Hill, CA', lat:37.1305,lng:-121.6544,color:tier4,tier:'第四层',note:'95037/95038，Los Gatos以南15英里，均价$1.2M，通勤45–60分钟，完全不同的市场逻辑' },
+        { name:'圣克鲁兹山脉', q:'Santa Cruz Mountains, CA', lat:37.19,lng:-122.04,color:'#888888',tier:'地理边界',note:'硅谷居民区的南端终点——Hwy 17穿越山脉至Scotts Valley，山区（Lexington Hills 95033）有少量住宅但属野火高风险区，非通勤市场' },
+
+        // ── VC & AI 地标 ──
+        { name:'Sand Hill Rd', q:'Sand Hill Road, Menlo Park, CA', lat:37.4196,lng:-122.2025,color:'#1a6fa8',tier:'VC 走廊',note:'全球VC密度最高的3英里——Sequoia、a16z、Kleiner Perkins、Benchmark、NEA 均在此，紧邻 Menlo Park 94025' },
+        { name:'OpenAI · xAI', q:'SoMa San Francisco, CA', lat:37.7749,lng:-122.4094,color:'#1a6fa8',tier:'AI 总部',note:'SoMa/Mission Bay（94103/94107/94158）——OpenAI、Anthropic、xAI、Scale AI 等 AI 巨头聚集，带动 SF 租房需求逆势走强' },
+
+        // ── 半导体 HQ ──
+        { name:'NVIDIA HQ', q:'NVIDIA Santa Clara CA', lat:37.3707,lng:-121.9626,color:'#76b041',tier:'半导体',note:'NVIDIA总部（95051）——过去2年股价10倍，带来大量高薪员工涌入Santa Clara，是该区需求最强劲的单一驱动力' },
+        { name:'AMD HQ',    q:'AMD Santa Clara CA',    lat:37.3713,lng:-121.9841,color:'#76b041',tier:'半导体',note:'AMD总部（95054）——与NVIDIA同在Santa Clara，AI芯片竞争格局拉动员工薪资和购房力' },
+        { name:'Broadcom',  q:'Broadcom San Jose CA',  lat:37.4024,lng:-121.9673,color:'#76b041',tier:'半导体',note:'Broadcom总部（San Jose 95131）——年薪包普遍 $400K+，对 San Jose 北部住宅需求有较大拉动' },
+        { name:'Newark',    q:'Newark, CA',             lat:37.5296,lng:-122.0402,color:tier3,tier:'第三层',note:'94560，Dumbarton Bridge直连Meta HQ仅15分钟，East Bay少见的半岛通勤捷径；Meta"Willow Village"开发计划若落地将重塑区域价值' },
 
         // Tier 2 — Los Gatos 9/10学区，精致但非顶级压舱石
         { name:'Los Gatos',   q:'Los Gatos, CA',   lat:37.2358, lng:-121.9624, color:tier2, tier:'第二层（上段）', note:'Los Gatos HS 9/10（非10/10），精致小镇，均价比Saratoga低10–15%，I-280沿线' },
@@ -1285,7 +1299,7 @@
       var zipColors = {
         '94027':tier1,'94022':tier1,'94024':tier1,'94028':tier1,'94062':tier1,
         '94301':tier1,'94303':tier1,'94304':tier1,'94305':landmark,'94306':tier1,'95014':tier1,'95070':tier1,
-        '94035':landmark,
+        '94035':landmark,'95033':landmark,
         // 94010 = Hillsborough（tier1），Burlingame 与 Hillsborough 共用此 ZIP，标为 tier1
         '94010':tier1,
         '94025':tier2,'95030':tier2,'95032':tier2,'94040':tier2,'94041':tier2,
@@ -1293,13 +1307,15 @@
         '95129':tier2,
         // Burlingame 无独立 ZCTA，94011 是 PO Box；用 San Mateo ZIPs 代表该段
         '94401':tier2,'94402':tier2,'94403':tier2,'94114':tier2,'94115':tier2,
-        '94065':tier2,
+        '94065':tier2,'94070':tier2,'94002':tier2,
+        // SF AI district — SoMa / Mission Bay
+        '94103':tier2,'94107':tier2,'94158':tier2,'94105':tier2,
         '95051':tier3,'95050':tier3,'95054':tier3,'94539':tier3,'94538':tier3,
-        '94536':tier3,'94537':tier3,'94541':tier3,'94555':tier3,'95035':tier3,
+        '94536':tier3,'94537':tier3,'94541':tier3,'94555':tier3,'95035':tier3,'94560':tier3,
         '94061':tier3,'94063':tier3,
         '95117':tier3,'95128':tier3,'95130':tier3,
         '94404':tier3,'95123':tier3,'95124':tier3,'95120':tier3,'95008':tier3,'95116':tier3,'95122':tier3,
-        '94509':tier4,'94531':tier4,'95376':tier4,'95377':tier4,
+        '94509':tier4,'94531':tier4,'95376':tier4,'95377':tier4,'95037':tier4,'95038':tier4,
       };
 
       function renderZipLayer(data) {
@@ -1318,7 +1334,7 @@
         }).addTo(map);
       }
 
-      var CACHE_KEY = 'bayarea_zip_geo_v12';
+      var CACHE_KEY = 'bayarea_zip_geo_v17';
       var cached = localStorage.getItem(CACHE_KEY);
       if (cached) {
         try { renderZipLayer(JSON.parse(cached)); } catch(e) { localStorage.removeItem(CACHE_KEY); }
@@ -2194,6 +2210,9 @@
       <div class="zip-school-note">🏫 <strong>Los Gatos High School</strong> 9/10 · <strong>Fisher Middle</strong> 8/10 · <strong>Lexington Elementary</strong> 9/10 · 南湾精致小镇，生活品质高，但 Apple/Google 通勤 20–30 分钟，今年跌幅在第二层中偏大</div>
       <div class="zip-commute">🚗 <strong>通勤：</strong>近 <span class="ctag">CA-85</span><span class="ctag">CA-17</span><span class="ctag">Los Gatos Blvd</span> · Apple Park <strong>20分钟</strong> · Google MTV <strong>30分钟</strong> · Netflix(Los Gatos) <strong>5分钟</strong>（早高峰 +20–30分钟）· 无公共交通，纯开车，85号公路早高峰北向严重拥堵</div>
       <div class="zip-profile">👥 <strong>典型住户：</strong><span class="ptag">Netflix/Apple高管</span><span class="ptag">本地长期居民</span><span class="ptag">注重生活质量的科技人</span> · 不愿住在 Cupertino/Sunnyvale 高密度社区，愿意以通勤时间换取小镇氛围</div>
+      <div class="zip-multi" style="background:#f4f0f8; border:1px solid #d0c0e0; border-radius:10px; padding:12px 16px; margin:10px 0; font-size:0.84rem; color:#3a2a50;">
+        🏔 <strong>地理边界：</strong>Los Gatos 以南是圣克鲁兹山脉——Highway 17 穿越其中直达 Scotts Valley 和圣克鲁兹海岸，但山区几乎没有住宅开发。Lexington Hills（95033）有少量山区独立屋（$800K–$1.2M），但属野火高风险区、无市政服务、通勤依赖盘山公路，是完全不同的生活方式。Los Gatos 的南边界基本就是硅谷居民区的终点线。
+      </div>
       <div class="listing-row">
         <div class="listing-card">
           <div class="lc-price t2">$3,499,000</div>
@@ -2601,6 +2620,55 @@
       </div>
     </div>
 
+    <!-- 94070/94002 San Carlos & Belmont -->
+    <div class="zip-block">
+      <div class="zip-header">
+        <div class="zip-left">
+          <span class="zip-code">94070 / 94002</span>
+          <span class="zip-city">San Carlos · Belmont</span>
+        </div>
+        <div class="zip-stats">
+          <div class="zstat"><span class="zval up">$2.25M</span><span class="zlabel">中位成交价</span></div>
+          <div class="zstat"><span class="zval up">↑4.8%</span><span class="zlabel">同比涨幅</span></div>
+          <div class="zstat"><span class="zval neutral">12天</span><span class="zlabel">平均成交</span></div>
+          <div class="zstat"><span class="zval school">★★★★☆</span><span class="zlabel">学区评级</span></div>
+          <div class="zstat"><span class="zval neutral">101%</span><span class="zlabel">成交/要价比</span></div>
+        </div>
+      </div>
+      <div class="zip-school-note">🏫 <strong>Carlmont High School</strong> 8/10 · <strong>Central Middle</strong> 7/10 · <strong>Brittan Acres Elementary</strong> 9/10（San Carlos）— 两城共用 Sequoia Union 学区，学区质量接近 San Mateo 但价格略低</div>
+      <div class="zip-commute">🚗 <strong>通勤：</strong>近 <span class="ctag">US-101</span><span class="ctag">CA-92</span><span class="ctag">Caltrain</span> · SF市中心 <strong>35分钟</strong>（Caltrain） · Meta HQ <strong>18分钟</strong> · Apple Park <strong>30分钟</strong> · Redwood City <strong>10分钟</strong>（早高峰 +10–20分钟）</div>
+      <div class="zip-profile">👥 <strong>典型住户：</strong><span class="ptag">半岛双职工家庭</span><span class="ptag">Meta/Oracle员工</span><span class="ptag">从SF外迁的年轻家庭</span> · 生活氛围精致，Downtown San Carlos 近年活力提升，社区感强</div>
+      <div class="zip-multi">🗺 <strong>San Carlos vs Belmont：</strong>
+        <span class="ztag-good">94070 San Carlos ★★★★☆</span> 社区感更强，Downtown更热闹，$2.3M+，略贵
+        <span class="ztag-mid">94002 Belmont ★★★★☆</span> 更安静，地块略大，$2.1M，性价比稍好
+        <span class="ztag-mid">Emerald Hills</span> 94062（Woodside ZIP），Redwood City与Woodside之间丘陵区，大地块，均价$3M+，买的是空间和私密性
+      </div>
+      <div class="listing-row">
+        <div class="listing-card">
+          <div class="lc-price t2">$2,380,000</div>
+          <div class="lc-addr">San Carlos 核心住宅区</div>
+          <div class="lc-spec">4卧 / 3浴 / 2,000 sqft · 近Downtown</div>
+          <div class="lc-tags">
+            <span class="lc-tag g">Carlmont HS 8/10</span>
+            <span class="lc-tag g">步行Downtown</span>
+            <span class="lc-tag g">Caltrain</span>
+          </div>
+          <div class="lc-note">San Carlos 中心地带，步行可达 Laurel St 餐饮街和 Caltrain。半岛通勤族最爱，生活便利性强，比 San Mateo 同档房型便宜约 $200–300K。</div>
+        </div>
+        <div class="listing-card">
+          <div class="lc-price t2">$2,080,000</div>
+          <div class="lc-addr">Belmont Hills 区域</div>
+          <div class="lc-spec">3卧 / 2浴 / 1,700 sqft · 山景地块</div>
+          <div class="lc-tags">
+            <span class="lc-tag g">同属Carlmont学区</span>
+            <span class="lc-tag g">安静</span>
+            <span class="lc-tag">远离商业区</span>
+          </div>
+          <div class="lc-note">Belmont 入门段，相比 San Carlos 同档物业便宜约 $200K，学区相同。山坡地形，视野好，适合不需要步行商业区、通勤开车为主的家庭。</div>
+        </div>
+      </div>
+    </div>
+
     <!-- 94114 Noe Valley SF -->
     <div class="zip-block">
       <div class="zip-header">
@@ -2668,6 +2736,53 @@
           </div>
           <div class="lc-note">24th St 是 Noe Valley 的"村中心"，遍布精品杂货、有机餐厅、独立咖啡馆。2,157 sqft 独栋 $2.855M，相比 Sanchez St 价位更亲民，适合看重生活便利性但又想享受 Noe Valley 社区氛围的买家。11 天均速成交，需求稳健。</div>
           <a class="lc-link" href="https://www.redfin.com/CA/San-Francisco/4403-24th-St-94114/home/2034876" target="_blank">在 Redfin 查看 →</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- 94115 Pacific Heights SF -->
+    <div class="zip-block">
+      <div class="zip-header">
+        <div class="zip-left">
+          <span class="zip-code">94115</span>
+          <span class="zip-city">Pacific Heights, San Francisco</span>
+        </div>
+        <div class="zip-stats">
+          <div class="zstat"><span class="zval up">$4.2M</span><span class="zlabel">中位成交价</span></div>
+          <div class="zstat"><span class="zval neutral">↑1.8%</span><span class="zlabel">同比涨幅</span></div>
+          <div class="zstat"><span class="zval neutral">18天</span><span class="zlabel">平均成交</span></div>
+          <div class="zstat"><span class="zval school">★★☆☆☆</span><span class="zlabel">公立学区</span></div>
+          <div class="zstat"><span class="zval neutral">100%</span><span class="zlabel">成交/要价比</span></div>
+        </div>
+      </div>
+      <div class="zip-school-note">🏫 公立学区一般（SF Unified 整体偏弱）· 买家普遍送私立：<strong>Town School for Boys</strong>、<strong>Hamlin School</strong>、<strong>SF University High</strong> — 私校费用 $40K–$60K/年是这个圈子的标配，学区不是购房驱动力</div>
+      <div class="zip-commute">🚗 <strong>通勤：</strong>近 <span class="ctag">Muni</span><span class="ctag">US-101</span> · SF市内步行/Uber为主 · Caltrain至南湾 <strong>60–75分钟</strong> · OpenAI/Anthropic <strong>20分钟</strong>（Uber）· 不适合需每日通勤至半岛或南湾的家庭</div>
+      <div class="zip-profile">👥 <strong>典型住户：</strong><span class="ptag">金融/律所合伙人</span><span class="ptag">科技公司创始人</span><span class="ptag">湾区老钱家族</span> · 与硅谷科技通勤族高度不重叠，是 SF 本地精英圈的自留地</div>
+      <div class="zip-multi" style="background:#fff8e8; border:1px solid #e8d8a0; border-radius:10px; padding:12px 16px; margin:10px 0; font-size:0.84rem; color:#5a4a10;">
+        💡 <strong>价格第一层，逻辑第二层：</strong>Pacific Heights 中位价 $4M+ 与 Atherton/Palo Alto 比肩，但驱动逻辑完全不同——没有学区、没有科技通勤加持，靠的是历史建筑稀缺性、湾景、SF 社交圈层。对本报告的目标读者（科技家庭 · 学区导向 · 南湾通勤）而言，这里是生活方式资产而非 K 型分化的核心标的。
+      </div>
+      <div class="listing-row">
+        <div class="listing-card">
+          <div class="lc-price t1">$5,200,000</div>
+          <div class="lc-addr">Pacific Heights 山顶景观独栋</div>
+          <div class="lc-spec">4卧 / 4浴 / 3,200 sqft · 湾景 + 金门大桥景</div>
+          <div class="lc-tags">
+            <span class="lc-tag g">金门大桥景</span>
+            <span class="lc-tag g">历史建筑</span>
+            <span class="lc-tag w">私校圈配套</span>
+          </div>
+          <div class="lc-note">Pacific Heights 顶段，可见金门大桥和旧金山湾全景。买家几乎都是 SF 本地精英或国际高净值人群，与南湾科技通勤族不同逻辑。流动性相对较低，持有成本高（SF 房产税 + 私校）。</div>
+        </div>
+        <div class="listing-card">
+          <div class="lc-price t2">$3,100,000</div>
+          <div class="lc-addr">Pacific Heights 联排入门段</div>
+          <div class="lc-spec">3卧 / 2.5浴 / 2,000 sqft · Victorian 建筑</div>
+          <div class="lc-tags">
+            <span class="lc-tag g">Fillmore St步行圈</span>
+            <span class="lc-tag g">历史维多利亚建筑</span>
+            <span class="lc-tag w">无停车位</span>
+          </div>
+          <div class="lc-note">PacHeights 入门价位，步行至 Fillmore St 精品餐饮街。维多利亚建筑维护成本高，购前需做详细 inspection。无车位是 SF 联排的常见痛点，需额外租赁停车位。</div>
         </div>
       </div>
     </div>
@@ -2794,6 +2909,53 @@
         </div>
       </div>
     </div>
+    <!-- 94560 Newark -->
+    <div class="zip-block">
+      <div class="zip-header">
+        <div class="zip-left">
+          <span class="zip-code">94560</span>
+          <span class="zip-city">Newark</span>
+        </div>
+        <div class="zip-stats">
+          <div class="zstat"><span class="zval neutral">$1.02M</span><span class="zlabel">中位成交价</span></div>
+          <div class="zstat"><span class="zval neutral">↑2.4%</span><span class="zlabel">同比涨幅</span></div>
+          <div class="zstat"><span class="zval neutral">18天</span><span class="zlabel">平均成交</span></div>
+          <div class="zstat"><span class="zval school">★★★☆☆</span><span class="zlabel">学区评级</span></div>
+          <div class="zstat"><span class="zval neutral">100%</span><span class="zlabel">成交/要价比</span></div>
+        </div>
+      </div>
+      <div class="zip-school-note">🏫 <strong>Newark Memorial High School</strong> 6/10 · <strong>Graham Elementary</strong> 6/10 — Newark Unified 整体偏弱，学区是最大短板，买家需接受私校或提前规划</div>
+      <div class="zip-commute">🚗 <strong>通勤：</strong>近 <span class="ctag">I-880</span><span class="ctag">CA-84（Dumbarton Bridge）</span> · Meta HQ（Menlo Park）<strong>15–20分钟</strong>（过桥）· Apple Park <strong>35分钟</strong> · SF <strong>45分钟</strong>（880北上）· 这是 East Bay 少有的半岛通勤捷径，Meta员工专属优势</div>
+      <div class="zip-profile">👥 <strong>典型住户：</strong><span class="ptag">Meta员工</span><span class="ptag">预算受限的半岛通勤族</span><span class="ptag">东湾本地家庭</span> · 族裔多元，生活配套一般，吸引力几乎完全来自 Dumbarton Bridge 通勤优势</div>
+      <div class="zip-multi" style="background:#f0f4ff; border:1px solid #c0ccee; border-radius:10px; padding:12px 16px; margin:10px 0; font-size:0.84rem; color:#2a3a6a;">
+        🔮 <strong>Meta Willow Village 变量：</strong>Meta 计划在 Newark 旧工业地块建设大型混合用途社区（住宅 + 商业 + 办公），若落地将引入大量配套和人口。目前仍在规划审批阶段，存在不确定性——对风险承受力强的买家，这是潜在上行空间；对稳健型买家，建议等项目落地后再入场。
+      </div>
+      <div class="listing-row">
+        <div class="listing-card">
+          <div class="lc-price t3">$1,080,000</div>
+          <div class="lc-addr">Newark 近 Dumbarton Bridge</div>
+          <div class="lc-spec">4卧 / 2浴 / 1,800 sqft · 独立屋</div>
+          <div class="lc-tags">
+            <span class="lc-tag g">Meta HQ 15分钟</span>
+            <span class="lc-tag g">East Bay入门价</span>
+            <span class="lc-tag w">学区弱</span>
+          </div>
+          <div class="lc-note">同等通勤距离下，Newark 比 Menlo Park 便宜约 $1.5–2M。纯粹为 Meta 通勤而买，子女教育需走私校路线。适合 Meta 高薪单职工、另一半远程办公的家庭。</div>
+        </div>
+        <div class="listing-card">
+          <div class="lc-price t3">$880,000</div>
+          <div class="lc-addr">Newark 联排 / 镇屋</div>
+          <div class="lc-spec">3卧 / 2.5浴 / 1,500 sqft · 近 I-880</div>
+          <div class="lc-tags">
+            <span class="lc-tag g">百万内独立产权</span>
+            <span class="lc-tag g">近880/84交汇</span>
+            <span class="lc-tag w">工业区周边</span>
+          </div>
+          <div class="lc-note">Newark 入门价，联排形式，百万以下少见选项。周边有工业园区，生活环境不如 Fremont，但若 Willow Village 落地，这类房产的区位逻辑会大幅改善。</div>
+        </div>
+      </div>
+    </div>
+
     <!-- 94539 Fremont Mission San Jose -->
     <div class="zip-block">
       <div class="zip-header">
@@ -3002,6 +3164,53 @@
       <span class="tier-block-badge">第四层</span>
       <span class="tier-block-title">远郊通勤房 — 弹性最大，风险最高</span>
       <span class="tier-block-desc">WFH 退潮后需求弱 · 先跌后涨 · 持有逻辑最薄</span>
+    </div>
+
+    <!-- 95037/95038 Morgan Hill -->
+    <div class="zip-block">
+      <div class="zip-header">
+        <div class="zip-left">
+          <span class="zip-code">95037 / 95038</span>
+          <span class="zip-city">Morgan Hill</span>
+        </div>
+        <div class="zip-stats">
+          <div class="zstat"><span class="zval neutral">$1.18M</span><span class="zlabel">中位成交价</span></div>
+          <div class="zstat"><span class="zval neutral">↑2.1%</span><span class="zlabel">同比涨幅</span></div>
+          <div class="zstat"><span class="zval neutral">22天</span><span class="zlabel">平均成交</span></div>
+          <div class="zstat"><span class="zval school">★★★☆☆</span><span class="zlabel">学区评级</span></div>
+          <div class="zstat"><span class="zval neutral">99%</span><span class="zlabel">成交/要价比</span></div>
+        </div>
+      </div>
+      <div class="zip-school-note">🏫 <strong>Live Oak High School</strong> 6/10 · <strong>Martin Murphy Middle</strong> 6/10 · <strong>Los Paseos Elementary</strong> 7/10 — 学区中等，无顶尖高中，是第四层的核心短板</div>
+      <div class="zip-commute">🚗 <strong>通勤：</strong>近 <span class="ctag">US-101</span> · Apple Park <strong>45分钟</strong>（早高峰 +20–30分钟）· Google HQ <strong>50分钟</strong> · 无 Caltrain，纯开车通勤，101高峰期拥堵严重</div>
+      <div class="zip-profile">👥 <strong>典型住户：</strong><span class="ptag">完全预算受限家庭</span><span class="ptag">远程/混合办公族</span><span class="ptag">农庄/大地块偏好者</span> · 与硅谷核心买家群体几乎不重叠，是另一套市场逻辑</div>
+      <div class="zip-multi" style="background:#fff0ee; border:1px solid #e8c0b8; border-radius:10px; padding:12px 16px; margin:10px 0; font-size:0.84rem; color:#5a2a20;">
+        ⚠️ <strong>通勤是核心风险：</strong>Los Gatos 以南 15 英里，US-101 早高峰单程可达 60–75 分钟。每周 5 天通勤意味着每年 200+ 小时在路上。适合每周只进办公室 1–2 天的远程/混合工作模式，不适合需要每日通勤到 Apple/Google/Meta 的家庭。
+      </div>
+      <div class="listing-row">
+        <div class="listing-card">
+          <div class="lc-price t4">$1,250,000</div>
+          <div class="lc-addr">Morgan Hill 新开发区</div>
+          <div class="lc-spec">4卧 / 3浴 / 2,400 sqft · 6,500 sqft 地块</div>
+          <div class="lc-tags">
+            <span class="lc-tag g">新建房</span>
+            <span class="lc-tag g">大空间</span>
+            <span class="lc-tag w">通勤45–60分钟</span>
+          </div>
+          <div class="lc-note">同样价格在东湾（Antioch/Tracy）只能买旧房，Morgan Hill 可以买到新建大房，生活环境也更好。代价是通勤距离。适合已转为混合或远程办公的科技从业者。</div>
+        </div>
+        <div class="listing-card">
+          <div class="lc-price t4">$980,000</div>
+          <div class="lc-addr">Morgan Hill 联排/镇屋</div>
+          <div class="lc-spec">3卧 / 2.5浴 / 1,800 sqft · 新建联排</div>
+          <div class="lc-tags">
+            <span class="lc-tag g">百万内独立单元</span>
+            <span class="lc-tag">学区弱</span>
+            <span class="lc-tag w">纯开车通勤</span>
+          </div>
+          <div class="lc-note">湾区少数仍能在百万以下买到新建联排的地点之一。空间大、停车方便，但完全依赖开车，生活配套远不如半岛。</div>
+        </div>
+      </div>
     </div>
 
     <!-- 94509 Antioch -->
