@@ -51,9 +51,9 @@ ZIPS = {
     "94022": {"city": "Los Altos",        "tier": 1},
     "94024": {"city": "Los Altos Hills",  "tier": 1},
     "94028": {"city": "Portola Valley",   "tier": 1},
-    "94062": {"city": "Woodside",         "tier": 1},
+    "94062": {"city": "Woodside",         "tier": 1, "pin": True},
     "94301": {"city": "Palo Alto",        "tier": 1},
-    "94303": {"city": "Palo Alto",        "tier": 1},
+    "94303": {"city": "Palo Alto",        "tier": 1, "pin": True},
     "94304": {"city": "Palo Alto",        "tier": 1},
     "94306": {"city": "Palo Alto",        "tier": 1},
     "95014": {"city": "Cupertino",        "tier": 1},
@@ -65,13 +65,13 @@ ZIPS = {
     "95032": {"city": "Los Gatos",        "tier": 2},
     "94040": {"city": "Mountain View",    "tier": 2, "pin": True},
     "94041": {"city": "Mountain View",    "tier": 2},
-    "94043": {"city": "Mountain View",    "tier": 2},
-    "94087": {"city": "Sunnyvale",        "tier": 2},
+    "94043": {"city": "Mountain View",    "tier": 2, "pin": True},
+    "94087": {"city": "Sunnyvale",        "tier": 2, "pin": True},
     "94086": {"city": "Sunnyvale",        "tier": 2},
     "94085": {"city": "Sunnyvale",        "tier": 2, "pin": True},
     "94089": {"city": "Sunnyvale",        "tier": 2, "pin": True},
     "95129": {"city": "West San Jose",    "tier": 2},
-    "94401": {"city": "San Mateo",        "tier": 2},
+    "94401": {"city": "San Mateo",        "tier": 2, "pin": True},
     "94402": {"city": "San Mateo",        "tier": 2},
     "94403": {"city": "San Mateo",        "tier": 2},
     "94114": {"city": "Noe Valley SF",    "tier": 2},
@@ -85,8 +85,8 @@ ZIPS = {
     "94105": {"city": "Embarcadero SF",   "tier": 3},
     "94158": {"city": "Mission Bay SF",   "tier": 3},
     # Tier 3
-    "95051": {"city": "Santa Clara",      "tier": 3},
-    "95050": {"city": "Santa Clara",      "tier": 3},
+    "95051": {"city": "Santa Clara",      "tier": 3, "pin": True},
+    "95050": {"city": "Santa Clara",      "tier": 3, "pin": True},
     "95054": {"city": "Santa Clara",      "tier": 3},
     "94539": {"city": "Fremont",          "tier": 3, "pin": True},
     "94538": {"city": "Fremont",          "tier": 3},
@@ -100,14 +100,14 @@ ZIPS = {
     "94063": {"city": "Redwood City",     "tier": 3},
     "94066": {"city": "San Bruno",        "tier": 3},
     "94080": {"city": "S. San Francisco", "tier": 3},
-    "95117": {"city": "West San Jose",    "tier": 3},
+    "95117": {"city": "West San Jose",    "tier": 3, "pin": True},
     "95128": {"city": "West San Jose",    "tier": 3},
-    "95130": {"city": "West San Jose",    "tier": 3},
-    "94404": {"city": "Foster City",      "tier": 3},
+    "95130": {"city": "West San Jose",    "tier": 3, "pin": True},
+    "94404": {"city": "Foster City",      "tier": 3, "pin": True},
     "95123": {"city": "San Jose",         "tier": 3},
-    "95124": {"city": "San Jose",         "tier": 3},
+    "95124": {"city": "San Jose",         "tier": 3, "pin": True},
     "95120": {"city": "Almaden Valley",   "tier": 2},
-    "95008": {"city": "Campbell",         "tier": 3},
+    "95008": {"city": "Campbell",         "tier": 3, "pin": True},
     "95116": {"city": "San Jose East",    "tier": 3},
     "95122": {"city": "San Jose East",    "tier": 3},
     # Tier 4
@@ -115,7 +115,7 @@ ZIPS = {
     "94531": {"city": "Antioch",          "tier": 4},
     "95376": {"city": "Tracy",            "tier": 4},
     "95377": {"city": "Tracy",            "tier": 4},
-    "95037": {"city": "Morgan Hill",      "tier": 4},
+    "95037": {"city": "Morgan Hill",      "tier": 4, "pin": True},
     "95038": {"city": "Morgan Hill",      "tier": 4},
 }
 
@@ -161,7 +161,7 @@ def redfin_get(path: str, params: dict) -> dict:
     return json.loads(text)
 
 
-def get_redfin_median(zip_code: str) -> int | None:
+def get_redfin_median(zip_code: str):
     """Fetch actual median sale price from Redfin for a ZIP. Returns None on failure."""
     try:
         data = redfin_get("/do/location-autocomplete", {"location": zip_code, "v": 2})
@@ -263,13 +263,18 @@ def main():
     today = date.today().isoformat()
     print(f"=== Bay Area Listings Update — {today} ===\n")
 
-    # Download Zillow ZHVI ZIP-level CSV (only ZIP-granularity dataset available)
-    print("Fetching Zillow ZHVI data ...")
+    # ── Zillow ZHVI: tier placement ───────────────────────────────────────────
+    print("Fetching Zillow ZHVI (tier placement) ...")
     try:
-        zhvi_df = fetch_csv(ZILLOW_ZHVI_URL, "ZHVI (home values by ZIP)")
+        zhvi_df = fetch_csv(ZILLOW_ZHVI_URL, "ZHVI by ZIP")
     except Exception as e:
         print(f"ERROR downloading Zillow data: {e}")
         raise
+
+    # ── Redfin: actual sale price ─────────────────────────────────────────────
+    print("\nWarming up Redfin session ...")
+    redfin_ok = warmup_redfin()
+    print(f"  Redfin session: {'✓ ready' if redfin_ok else '✗ unavailable — will use ZHVI as display price'}")
     print()
 
     results = {}
@@ -279,17 +284,27 @@ def main():
         city = meta["city"]
         tier = meta["tier"]
 
+        # ZHVI → tier decision
         stats = extract_zip_stats(zhvi_df, zip_code)
         pinned = meta.get("pin", False)
         tier_check = suggest_tier(stats.get("median_price"), tier, pinned)
 
-        if stats:
-            mp = stats.get("median_price")
-            mp_str = f"${mp/1e6:.2f}M" if mp else "—"
-            pin_str = " [pinned]" if pinned else ""
-            print(f"[{zip_code}] {city}: {mp_str}  YoY={stats.get('yoy_change')}{pin_str}")
+        # Redfin → display price (actual transactions)
+        redfin_price = None
+        if redfin_ok:
+            redfin_price = get_redfin_median(zip_code)
+            time.sleep(0.8)
+
+        display_price = redfin_price or stats.get("median_price")
+        price_source  = "redfin" if redfin_price else "zhvi"
+
+        if stats or redfin_price:
+            mp_str   = f"${display_price/1e6:.2f}M" if display_price else "—"
+            src_str  = f"[{price_source}]"
+            pin_str  = " [pinned]" if pinned else ""
+            print(f"[{zip_code}] {city}: {mp_str} {src_str}  YoY={stats.get('yoy_change')}{pin_str}")
         else:
-            print(f"[{zip_code}] {city}: no data found in CSV")
+            print(f"[{zip_code}] {city}: no data found")
 
         if tier_check["tier_changed"]:
             alert = (f"⚠ TIER ALERT: {zip_code} {city} — "
@@ -299,9 +314,12 @@ def main():
             tier_alerts.append(alert)
 
         results[zip_code] = {
-            "city":       city,
-            "tier":       tier,
-            "fetched_at": datetime.utcnow().isoformat() + "Z",
+            "city":         city,
+            "tier":         tier,
+            "fetched_at":   datetime.utcnow().isoformat() + "Z",
+            "display_price":  display_price,
+            "price_source":   price_source,
+            "redfin_price":   redfin_price,
             "stats":      stats,
             "tier_check": tier_check,
         }

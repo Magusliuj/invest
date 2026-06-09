@@ -4,29 +4,15 @@
   "tier_alerts": [
     "\u26a0 TIER ALERT: 94062 Woodside \u2014 current=tier1, suggested=tier2 (median $2.71M)",
     "\u26a0 TIER ALERT: 94303 Palo Alto \u2014 current=tier1, suggested=tier2 (median $2.14M)",
-    "\u26a0 TIER ALERT: 94025 Menlo Park \u2014 current=tier2, suggested=tier1 (median $2.9M)",
-    "\u26a0 TIER ALERT: 95030 Los Gatos \u2014 current=tier2, suggested=tier1 (median $3.62M)",
-    "\u26a0 TIER ALERT: 94040 Mountain View \u2014 current=tier2, suggested=tier1 (median $2.91M)",
     "\u26a0 TIER ALERT: 94043 Mountain View \u2014 current=tier2, suggested=tier3 (median $1.6M)",
     "\u26a0 TIER ALERT: 94087 Sunnyvale \u2014 current=tier2, suggested=tier1 (median $2.9M)",
-    "\u26a0 TIER ALERT: 94085 Sunnyvale \u2014 current=tier2, suggested=tier3 (median $1.58M)",
-    "\u26a0 TIER ALERT: 94089 Sunnyvale \u2014 current=tier2, suggested=tier3 (median $1.49M)",
     "\u26a0 TIER ALERT: 94401 San Mateo \u2014 current=tier2, suggested=tier3 (median $1.22M)",
-    "\u26a0 TIER ALERT: 94115 Pacific Heights \u2014 current=tier2, suggested=tier3 (median $1.46M)",
-    "\u26a0 TIER ALERT: 94103 SoMa SF \u2014 current=tier2, suggested=tier4 (median $0.8M)",
-    "\u26a0 TIER ALERT: 94107 Mission Bay SF \u2014 current=tier2, suggested=tier3 (median $1.0M)",
-    "\u26a0 TIER ALERT: 94105 Embarcadero SF \u2014 current=tier2, suggested=tier3 (median $1.08M)",
-    "\u26a0 TIER ALERT: 94158 Mission Bay SF \u2014 current=tier2, suggested=tier3 (median $1.3M)",
     "\u26a0 TIER ALERT: 95051 Santa Clara \u2014 current=tier3, suggested=tier2 (median $1.93M)",
     "\u26a0 TIER ALERT: 95050 Santa Clara \u2014 current=tier3, suggested=tier2 (median $1.66M)",
-    "\u26a0 TIER ALERT: 94539 Fremont \u2014 current=tier3, suggested=tier2 (median $2.26M)",
-    "\u26a0 TIER ALERT: 94541 Hayward \u2014 current=tier3, suggested=tier4 (median $0.79M)",
-    "\u26a0 TIER ALERT: 94061 Redwood City \u2014 current=tier3, suggested=tier2 (median $1.99M)",
     "\u26a0 TIER ALERT: 95117 West San Jose \u2014 current=tier3, suggested=tier2 (median $1.82M)",
     "\u26a0 TIER ALERT: 95130 West San Jose \u2014 current=tier3, suggested=tier2 (median $2.21M)",
     "\u26a0 TIER ALERT: 94404 Foster City \u2014 current=tier3, suggested=tier2 (median $1.76M)",
     "\u26a0 TIER ALERT: 95124 San Jose \u2014 current=tier3, suggested=tier2 (median $2.01M)",
-    "\u26a0 TIER ALERT: 95120 Almaden Valley \u2014 current=tier3, suggested=tier2 (median $2.31M)",
     "\u26a0 TIER ALERT: 95008 Campbell \u2014 current=tier3, suggested=tier2 (median $1.95M)",
     "\u26a0 TIER ALERT: 95037 Morgan Hill \u2014 current=tier4, suggested=tier3 (median $1.36M)"
   ],
@@ -34,7 +20,10 @@
     "94027": {
       "city": "Atherton",
       "tier": 1,
-      "fetched_at": "2026-06-09T22:09:48.072831Z",
+      "fetched_at": "2026-06-09T22:25:50.266353Z",
+      "display_price": 8314785,
+      "price_source": "zhvi",
+      "redfin_price": null,
       "stats": {
         "median_price": 8314785,
         "yoy_change": 0.0936,
@@ -51,7 +40,10 @@
     "94022": {
       "city": "Los Altos",
       "tier": 1,
-      "fetched_at": "2026-06-09T22:09:48.073511Z",
+      "fetched_at": "2026-06-09T22:25:51.103659Z",
+      "display_price": 5154203,
+      "price_source": "zhvi",
+      "redfin_price": null,
       "stats": {
         "median_price": 5154203,
         "yoy_change": 0.0459,
@@ -68,7 +60,10 @@
     "94024": {
       "city": "Los Altos Hills",
       "tier": 1,
-      "fetched_at": "2026-06-09T22:09:48.074053Z",
+      "fetched_at": "2026-06-09T22:25:51.943157Z",
+      "display_price": 4704359,
+      "price_source": "zhvi",
+      "redfin_price": null,
       "stats": {
         "median_price": 4704359,
         "yoy_change": 0.0246,
@@ -85,7 +80,10 @@
     "94028": {
       "city": "Portola Valley",
       "tier": 1,
-      "fetched_at": "2026-06-09T22:09:48.074596Z",
+      "fetched_at": "2026-06-09T22:25:52.778416Z",
+      "display_price": 4338042,
+      "price_source": "zhvi",
+      "redfin_price": null,
       "stats": {
         "median_price": 4338042,
         "yoy_change": 0.0984,
@@ -102,7 +100,10 @@
     "94062": {
       "city": "Woodside",
       "tier": 1,
-      "fetched_at": "2026-06-09T22:09:48.075159Z",
+      "fetched_at": "2026-06-09T22:25:53.636974Z",
+      "display_price": 2713312,
+      "price_source": "zhvi",
+      "redfin_price": null,
       "stats": {
         "median_price": 2713312,
         "yoy_change": 0.0175,
@@ -119,7 +120,10 @@
     "94301": {
       "city": "Palo Alto",
       "tier": 1,
-      "fetched_at": "2026-06-09T22:09:48.075678Z",
+      "fetched_at": "2026-06-09T22:25:54.474070Z",
+      "display_price": 4362311,
+      "price_source": "zhvi",
+      "redfin_price": null,
       "stats": {
         "median_price": 4362311,
         "yoy_change": 0.042,
@@ -136,7 +140,10 @@
     "94303": {
       "city": "Palo Alto",
       "tier": 1,
-      "fetched_at": "2026-06-09T22:09:48.076270Z",
+      "fetched_at": "2026-06-09T22:25:55.315648Z",
+      "display_price": 2140422,
+      "price_source": "zhvi",
+      "redfin_price": null,
       "stats": {
         "median_price": 2140422,
         "yoy_change": 0.0025,
@@ -153,7 +160,10 @@
     "94304": {
       "city": "Palo Alto",
       "tier": 1,
-      "fetched_at": "2026-06-09T22:09:48.076849Z",
+      "fetched_at": "2026-06-09T22:25:56.149055Z",
+      "display_price": 3310285,
+      "price_source": "zhvi",
+      "redfin_price": null,
       "stats": {
         "median_price": 3310285,
         "yoy_change": 0.0272,
@@ -170,7 +180,10 @@
     "94306": {
       "city": "Palo Alto",
       "tier": 1,
-      "fetched_at": "2026-06-09T22:09:48.077344Z",
+      "fetched_at": "2026-06-09T22:25:56.982646Z",
+      "display_price": 3450948,
+      "price_source": "zhvi",
+      "redfin_price": null,
       "stats": {
         "median_price": 3450948,
         "yoy_change": 0.0234,
@@ -187,7 +200,10 @@
     "95014": {
       "city": "Cupertino",
       "tier": 1,
-      "fetched_at": "2026-06-09T22:09:48.077877Z",
+      "fetched_at": "2026-06-09T22:25:57.829569Z",
+      "display_price": 3182391,
+      "price_source": "zhvi",
+      "redfin_price": null,
       "stats": {
         "median_price": 3182391,
         "yoy_change": 0.0175,
@@ -204,7 +220,10 @@
     "95070": {
       "city": "Saratoga",
       "tier": 1,
-      "fetched_at": "2026-06-09T22:09:48.078385Z",
+      "fetched_at": "2026-06-09T22:25:58.666412Z",
+      "display_price": 4196446,
+      "price_source": "zhvi",
+      "redfin_price": null,
       "stats": {
         "median_price": 4196446,
         "yoy_change": 0.0181,
@@ -221,7 +240,10 @@
     "94010": {
       "city": "Hillsborough",
       "tier": 1,
-      "fetched_at": "2026-06-09T22:09:48.078872Z",
+      "fetched_at": "2026-06-09T22:25:59.498991Z",
+      "display_price": 3465868,
+      "price_source": "zhvi",
+      "redfin_price": null,
       "stats": {
         "median_price": 3465868,
         "yoy_change": 0.0591,
@@ -238,7 +260,10 @@
     "94025": {
       "city": "Menlo Park",
       "tier": 2,
-      "fetched_at": "2026-06-09T22:09:48.079361Z",
+      "fetched_at": "2026-06-09T22:26:00.335865Z",
+      "display_price": 2902646,
+      "price_source": "zhvi",
+      "redfin_price": null,
       "stats": {
         "median_price": 2902646,
         "yoy_change": 0.0522,
@@ -247,15 +272,17 @@
         "period_end": "2026-04-30"
       },
       "tier_check": {
-        "suggested_tier": 1,
-        "tier_changed": true,
-        "price_m": 2.9
+        "suggested_tier": 2,
+        "tier_changed": false
       }
     },
     "95030": {
       "city": "Los Gatos",
       "tier": 2,
-      "fetched_at": "2026-06-09T22:09:48.079923Z",
+      "fetched_at": "2026-06-09T22:26:01.169793Z",
+      "display_price": 3624771,
+      "price_source": "zhvi",
+      "redfin_price": null,
       "stats": {
         "median_price": 3624771,
         "yoy_change": 0.0291,
@@ -264,15 +291,17 @@
         "period_end": "2026-04-30"
       },
       "tier_check": {
-        "suggested_tier": 1,
-        "tier_changed": true,
-        "price_m": 3.62
+        "suggested_tier": 2,
+        "tier_changed": false
       }
     },
     "95032": {
       "city": "Los Gatos",
       "tier": 2,
-      "fetched_at": "2026-06-09T22:09:48.080410Z",
+      "fetched_at": "2026-06-09T22:26:02.029144Z",
+      "display_price": 2648628,
+      "price_source": "zhvi",
+      "redfin_price": null,
       "stats": {
         "median_price": 2648628,
         "yoy_change": 0.0127,
@@ -289,7 +318,10 @@
     "94040": {
       "city": "Mountain View",
       "tier": 2,
-      "fetched_at": "2026-06-09T22:09:48.080905Z",
+      "fetched_at": "2026-06-09T22:26:02.866671Z",
+      "display_price": 2914658,
+      "price_source": "zhvi",
+      "redfin_price": null,
       "stats": {
         "median_price": 2914658,
         "yoy_change": 0.03,
@@ -298,15 +330,17 @@
         "period_end": "2026-04-30"
       },
       "tier_check": {
-        "suggested_tier": 1,
-        "tier_changed": true,
-        "price_m": 2.91
+        "suggested_tier": 2,
+        "tier_changed": false
       }
     },
     "94041": {
       "city": "Mountain View",
       "tier": 2,
-      "fetched_at": "2026-06-09T22:09:48.081418Z",
+      "fetched_at": "2026-06-09T22:26:03.703464Z",
+      "display_price": 2278177,
+      "price_source": "zhvi",
+      "redfin_price": null,
       "stats": {
         "median_price": 2278177,
         "yoy_change": 0.0361,
@@ -323,7 +357,10 @@
     "94043": {
       "city": "Mountain View",
       "tier": 2,
-      "fetched_at": "2026-06-09T22:09:48.081912Z",
+      "fetched_at": "2026-06-09T22:26:04.536812Z",
+      "display_price": 1599616,
+      "price_source": "zhvi",
+      "redfin_price": null,
       "stats": {
         "median_price": 1599616,
         "yoy_change": -0.0289,
@@ -340,7 +377,10 @@
     "94087": {
       "city": "Sunnyvale",
       "tier": 2,
-      "fetched_at": "2026-06-09T22:09:48.082414Z",
+      "fetched_at": "2026-06-09T22:26:05.370256Z",
+      "display_price": 2898234,
+      "price_source": "zhvi",
+      "redfin_price": null,
       "stats": {
         "median_price": 2898234,
         "yoy_change": 0.0101,
@@ -357,7 +397,10 @@
     "94086": {
       "city": "Sunnyvale",
       "tier": 2,
-      "fetched_at": "2026-06-09T22:09:48.082903Z",
+      "fetched_at": "2026-06-09T22:26:06.218784Z",
+      "display_price": 1959743,
+      "price_source": "zhvi",
+      "redfin_price": null,
       "stats": {
         "median_price": 1959743,
         "yoy_change": -0.0094,
@@ -374,7 +417,10 @@
     "94085": {
       "city": "Sunnyvale",
       "tier": 2,
-      "fetched_at": "2026-06-09T22:09:48.083394Z",
+      "fetched_at": "2026-06-09T22:26:07.053130Z",
+      "display_price": 1583347,
+      "price_source": "zhvi",
+      "redfin_price": null,
       "stats": {
         "median_price": 1583347,
         "yoy_change": -0.0059,
@@ -383,15 +429,17 @@
         "period_end": "2026-04-30"
       },
       "tier_check": {
-        "suggested_tier": 3,
-        "tier_changed": true,
-        "price_m": 1.58
+        "suggested_tier": 2,
+        "tier_changed": false
       }
     },
     "94089": {
       "city": "Sunnyvale",
       "tier": 2,
-      "fetched_at": "2026-06-09T22:09:48.083890Z",
+      "fetched_at": "2026-06-09T22:26:07.886314Z",
+      "display_price": 1489946,
+      "price_source": "zhvi",
+      "redfin_price": null,
       "stats": {
         "median_price": 1489946,
         "yoy_change": -0.0216,
@@ -400,15 +448,17 @@
         "period_end": "2026-04-30"
       },
       "tier_check": {
-        "suggested_tier": 3,
-        "tier_changed": true,
-        "price_m": 1.49
+        "suggested_tier": 2,
+        "tier_changed": false
       }
     },
     "95129": {
       "city": "West San Jose",
       "tier": 2,
-      "fetched_at": "2026-06-09T22:09:48.084381Z",
+      "fetched_at": "2026-06-09T22:26:08.721208Z",
+      "display_price": 2721587,
+      "price_source": "zhvi",
+      "redfin_price": null,
       "stats": {
         "median_price": 2721587,
         "yoy_change": 0.0153,
@@ -425,7 +475,10 @@
     "94401": {
       "city": "San Mateo",
       "tier": 2,
-      "fetched_at": "2026-06-09T22:09:48.084897Z",
+      "fetched_at": "2026-06-09T22:26:09.553358Z",
+      "display_price": 1223225,
+      "price_source": "zhvi",
+      "redfin_price": null,
       "stats": {
         "median_price": 1223225,
         "yoy_change": 0.0057,
@@ -442,7 +495,10 @@
     "94402": {
       "city": "San Mateo",
       "tier": 2,
-      "fetched_at": "2026-06-09T22:09:48.085382Z",
+      "fetched_at": "2026-06-09T22:26:10.417129Z",
+      "display_price": 2478818,
+      "price_source": "zhvi",
+      "redfin_price": null,
       "stats": {
         "median_price": 2478818,
         "yoy_change": 0.0384,
@@ -459,7 +515,10 @@
     "94403": {
       "city": "San Mateo",
       "tier": 2,
-      "fetched_at": "2026-06-09T22:09:48.085873Z",
+      "fetched_at": "2026-06-09T22:26:11.248913Z",
+      "display_price": 1835098,
+      "price_source": "zhvi",
+      "redfin_price": null,
       "stats": {
         "median_price": 1835098,
         "yoy_change": 0.0155,
@@ -476,7 +535,10 @@
     "94114": {
       "city": "Noe Valley SF",
       "tier": 2,
-      "fetched_at": "2026-06-09T22:09:48.086358Z",
+      "fetched_at": "2026-06-09T22:26:12.086479Z",
+      "display_price": 1911560,
+      "price_source": "zhvi",
+      "redfin_price": null,
       "stats": {
         "median_price": 1911560,
         "yoy_change": 0.1093,
@@ -492,8 +554,11 @@
     },
     "94115": {
       "city": "Pacific Heights",
-      "tier": 2,
-      "fetched_at": "2026-06-09T22:09:48.086831Z",
+      "tier": 3,
+      "fetched_at": "2026-06-09T22:26:12.920999Z",
+      "display_price": 1460368,
+      "price_source": "zhvi",
+      "redfin_price": null,
       "stats": {
         "median_price": 1460368,
         "yoy_change": 0.079,
@@ -503,14 +568,17 @@
       },
       "tier_check": {
         "suggested_tier": 3,
-        "tier_changed": true,
+        "tier_changed": false,
         "price_m": 1.46
       }
     },
     "94065": {
       "city": "Redwood Shores",
       "tier": 2,
-      "fetched_at": "2026-06-09T22:09:48.087333Z",
+      "fetched_at": "2026-06-09T22:26:13.762159Z",
+      "display_price": 1852543,
+      "price_source": "zhvi",
+      "redfin_price": null,
       "stats": {
         "median_price": 1852543,
         "yoy_change": -0.0146,
@@ -527,7 +595,10 @@
     "94070": {
       "city": "San Carlos",
       "tier": 2,
-      "fetched_at": "2026-06-09T22:09:48.087808Z",
+      "fetched_at": "2026-06-09T22:26:14.607725Z",
+      "display_price": 2474297,
+      "price_source": "zhvi",
+      "redfin_price": null,
       "stats": {
         "median_price": 2474297,
         "yoy_change": 0.0308,
@@ -544,7 +615,10 @@
     "94002": {
       "city": "Belmont",
       "tier": 2,
-      "fetched_at": "2026-06-09T22:09:48.088279Z",
+      "fetched_at": "2026-06-09T22:26:15.442113Z",
+      "display_price": 2364910,
+      "price_source": "zhvi",
+      "redfin_price": null,
       "stats": {
         "median_price": 2364910,
         "yoy_change": 0.0234,
@@ -561,7 +635,10 @@
     "94030": {
       "city": "Millbrae",
       "tier": 2,
-      "fetched_at": "2026-06-09T22:09:48.088750Z",
+      "fetched_at": "2026-06-09T22:26:16.278085Z",
+      "display_price": 2067126,
+      "price_source": "zhvi",
+      "redfin_price": null,
       "stats": {
         "median_price": 2067126,
         "yoy_change": 0.0489,
@@ -577,8 +654,11 @@
     },
     "94103": {
       "city": "SoMa SF",
-      "tier": 2,
-      "fetched_at": "2026-06-09T22:09:48.089224Z",
+      "tier": 4,
+      "fetched_at": "2026-06-09T22:26:17.115651Z",
+      "display_price": 802666,
+      "price_source": "zhvi",
+      "redfin_price": null,
       "stats": {
         "median_price": 802666,
         "yoy_change": -0.0018,
@@ -588,14 +668,17 @@
       },
       "tier_check": {
         "suggested_tier": 4,
-        "tier_changed": true,
+        "tier_changed": false,
         "price_m": 0.8
       }
     },
     "94107": {
       "city": "Mission Bay SF",
-      "tier": 2,
-      "fetched_at": "2026-06-09T22:09:48.089700Z",
+      "tier": 3,
+      "fetched_at": "2026-06-09T22:26:17.956417Z",
+      "display_price": 1002906,
+      "price_source": "zhvi",
+      "redfin_price": null,
       "stats": {
         "median_price": 1002906,
         "yoy_change": 0.028,
@@ -605,14 +688,17 @@
       },
       "tier_check": {
         "suggested_tier": 3,
-        "tier_changed": true,
+        "tier_changed": false,
         "price_m": 1.0
       }
     },
     "94105": {
       "city": "Embarcadero SF",
-      "tier": 2,
-      "fetched_at": "2026-06-09T22:09:48.090182Z",
+      "tier": 3,
+      "fetched_at": "2026-06-09T22:26:18.802897Z",
+      "display_price": 1079017,
+      "price_source": "zhvi",
+      "redfin_price": null,
       "stats": {
         "median_price": 1079017,
         "yoy_change": 0.0163,
@@ -622,14 +708,17 @@
       },
       "tier_check": {
         "suggested_tier": 3,
-        "tier_changed": true,
+        "tier_changed": false,
         "price_m": 1.08
       }
     },
     "94158": {
       "city": "Mission Bay SF",
-      "tier": 2,
-      "fetched_at": "2026-06-09T22:09:48.090680Z",
+      "tier": 3,
+      "fetched_at": "2026-06-09T22:26:19.640605Z",
+      "display_price": 1298030,
+      "price_source": "zhvi",
+      "redfin_price": null,
       "stats": {
         "median_price": 1298030,
         "yoy_change": 0.054,
@@ -639,14 +728,17 @@
       },
       "tier_check": {
         "suggested_tier": 3,
-        "tier_changed": true,
+        "tier_changed": false,
         "price_m": 1.3
       }
     },
     "95051": {
       "city": "Santa Clara",
       "tier": 3,
-      "fetched_at": "2026-06-09T22:09:48.091162Z",
+      "fetched_at": "2026-06-09T22:26:20.478132Z",
+      "display_price": 1932904,
+      "price_source": "zhvi",
+      "redfin_price": null,
       "stats": {
         "median_price": 1932904,
         "yoy_change": -0.0105,
@@ -663,7 +755,10 @@
     "95050": {
       "city": "Santa Clara",
       "tier": 3,
-      "fetched_at": "2026-06-09T22:09:48.091635Z",
+      "fetched_at": "2026-06-09T22:26:21.311932Z",
+      "display_price": 1660321,
+      "price_source": "zhvi",
+      "redfin_price": null,
       "stats": {
         "median_price": 1660321,
         "yoy_change": -0.0029,
@@ -680,7 +775,10 @@
     "95054": {
       "city": "Santa Clara",
       "tier": 3,
-      "fetched_at": "2026-06-09T22:09:48.092109Z",
+      "fetched_at": "2026-06-09T22:26:22.145009Z",
+      "display_price": 1538748,
+      "price_source": "zhvi",
+      "redfin_price": null,
       "stats": {
         "median_price": 1538748,
         "yoy_change": -0.042,
@@ -697,7 +795,10 @@
     "94539": {
       "city": "Fremont",
       "tier": 3,
-      "fetched_at": "2026-06-09T22:09:48.092585Z",
+      "fetched_at": "2026-06-09T22:26:22.999571Z",
+      "display_price": 2257200,
+      "price_source": "zhvi",
+      "redfin_price": null,
       "stats": {
         "median_price": 2257200,
         "yoy_change": -0.0157,
@@ -706,15 +807,17 @@
         "period_end": "2026-04-30"
       },
       "tier_check": {
-        "suggested_tier": 2,
-        "tier_changed": true,
-        "price_m": 2.26
+        "suggested_tier": 3,
+        "tier_changed": false
       }
     },
     "94538": {
       "city": "Fremont",
       "tier": 3,
-      "fetched_at": "2026-06-09T22:09:48.093068Z",
+      "fetched_at": "2026-06-09T22:26:23.832685Z",
+      "display_price": 1342015,
+      "price_source": "zhvi",
+      "redfin_price": null,
       "stats": {
         "median_price": 1342015,
         "yoy_change": -0.0446,
@@ -731,7 +834,10 @@
     "94536": {
       "city": "Fremont",
       "tier": 3,
-      "fetched_at": "2026-06-09T22:09:48.093539Z",
+      "fetched_at": "2026-06-09T22:26:24.669756Z",
+      "display_price": 1463283,
+      "price_source": "zhvi",
+      "redfin_price": null,
       "stats": {
         "median_price": 1463283,
         "yoy_change": -0.0415,
@@ -748,7 +854,10 @@
     "94537": {
       "city": "Fremont",
       "tier": 3,
-      "fetched_at": "2026-06-09T22:09:48.093642Z",
+      "fetched_at": "2026-06-09T22:26:25.503176Z",
+      "display_price": null,
+      "price_source": "zhvi",
+      "redfin_price": null,
       "stats": {},
       "tier_check": {
         "suggested_tier": 3,
@@ -757,8 +866,11 @@
     },
     "94541": {
       "city": "Hayward",
-      "tier": 3,
-      "fetched_at": "2026-06-09T22:09:48.094118Z",
+      "tier": 4,
+      "fetched_at": "2026-06-09T22:26:26.338951Z",
+      "display_price": 785828,
+      "price_source": "zhvi",
+      "redfin_price": null,
       "stats": {
         "median_price": 785828,
         "yoy_change": -0.049,
@@ -768,14 +880,17 @@
       },
       "tier_check": {
         "suggested_tier": 4,
-        "tier_changed": true,
+        "tier_changed": false,
         "price_m": 0.79
       }
     },
     "94555": {
       "city": "Fremont",
       "tier": 3,
-      "fetched_at": "2026-06-09T22:09:48.094594Z",
+      "fetched_at": "2026-06-09T22:26:27.189864Z",
+      "display_price": 1534962,
+      "price_source": "zhvi",
+      "redfin_price": null,
       "stats": {
         "median_price": 1534962,
         "yoy_change": -0.0375,
@@ -792,7 +907,10 @@
     "95035": {
       "city": "Milpitas",
       "tier": 3,
-      "fetched_at": "2026-06-09T22:09:48.095072Z",
+      "fetched_at": "2026-06-09T22:26:28.024525Z",
+      "display_price": 1487703,
+      "price_source": "zhvi",
+      "redfin_price": null,
       "stats": {
         "median_price": 1487703,
         "yoy_change": -0.0297,
@@ -809,7 +927,10 @@
     "94560": {
       "city": "Newark",
       "tier": 3,
-      "fetched_at": "2026-06-09T22:09:48.095544Z",
+      "fetched_at": "2026-06-09T22:26:28.854187Z",
+      "display_price": 1253153,
+      "price_source": "zhvi",
+      "redfin_price": null,
       "stats": {
         "median_price": 1253153,
         "yoy_change": -0.0552,
@@ -825,8 +946,11 @@
     },
     "94061": {
       "city": "Redwood City",
-      "tier": 3,
-      "fetched_at": "2026-06-09T22:09:48.096018Z",
+      "tier": 2,
+      "fetched_at": "2026-06-09T22:26:29.686451Z",
+      "display_price": 1991109,
+      "price_source": "zhvi",
+      "redfin_price": null,
       "stats": {
         "median_price": 1991109,
         "yoy_change": 0.0189,
@@ -836,14 +960,17 @@
       },
       "tier_check": {
         "suggested_tier": 2,
-        "tier_changed": true,
+        "tier_changed": false,
         "price_m": 1.99
       }
     },
     "94063": {
       "city": "Redwood City",
       "tier": 3,
-      "fetched_at": "2026-06-09T22:09:48.096489Z",
+      "fetched_at": "2026-06-09T22:26:30.518694Z",
+      "display_price": 1296910,
+      "price_source": "zhvi",
+      "redfin_price": null,
       "stats": {
         "median_price": 1296910,
         "yoy_change": -0.0103,
@@ -860,7 +987,10 @@
     "94066": {
       "city": "San Bruno",
       "tier": 3,
-      "fetched_at": "2026-06-09T22:09:48.096965Z",
+      "fetched_at": "2026-06-09T22:26:31.386852Z",
+      "display_price": 1310825,
+      "price_source": "zhvi",
+      "redfin_price": null,
       "stats": {
         "median_price": 1310825,
         "yoy_change": 0.0011,
@@ -877,7 +1007,10 @@
     "94080": {
       "city": "S. San Francisco",
       "tier": 3,
-      "fetched_at": "2026-06-09T22:09:48.097433Z",
+      "fetched_at": "2026-06-09T22:26:32.221476Z",
+      "display_price": 1235840,
+      "price_source": "zhvi",
+      "redfin_price": null,
       "stats": {
         "median_price": 1235840,
         "yoy_change": 0.0112,
@@ -894,7 +1027,10 @@
     "95117": {
       "city": "West San Jose",
       "tier": 3,
-      "fetched_at": "2026-06-09T22:09:48.097911Z",
+      "fetched_at": "2026-06-09T22:26:33.055453Z",
+      "display_price": 1822713,
+      "price_source": "zhvi",
+      "redfin_price": null,
       "stats": {
         "median_price": 1822713,
         "yoy_change": 0.0049,
@@ -911,7 +1047,10 @@
     "95128": {
       "city": "West San Jose",
       "tier": 3,
-      "fetched_at": "2026-06-09T22:09:48.098389Z",
+      "fetched_at": "2026-06-09T22:26:33.886479Z",
+      "display_price": 1495786,
+      "price_source": "zhvi",
+      "redfin_price": null,
       "stats": {
         "median_price": 1495786,
         "yoy_change": -0.0035,
@@ -928,7 +1067,10 @@
     "95130": {
       "city": "West San Jose",
       "tier": 3,
-      "fetched_at": "2026-06-09T22:09:48.098874Z",
+      "fetched_at": "2026-06-09T22:26:34.720323Z",
+      "display_price": 2207725,
+      "price_source": "zhvi",
+      "redfin_price": null,
       "stats": {
         "median_price": 2207725,
         "yoy_change": 0.0084,
@@ -945,7 +1087,10 @@
     "94404": {
       "city": "Foster City",
       "tier": 3,
-      "fetched_at": "2026-06-09T22:09:48.099348Z",
+      "fetched_at": "2026-06-09T22:26:35.584792Z",
+      "display_price": 1763096,
+      "price_source": "zhvi",
+      "redfin_price": null,
       "stats": {
         "median_price": 1763096,
         "yoy_change": -0.0081,
@@ -962,7 +1107,10 @@
     "95123": {
       "city": "San Jose",
       "tier": 3,
-      "fetched_at": "2026-06-09T22:09:48.099822Z",
+      "fetched_at": "2026-06-09T22:26:36.417585Z",
+      "display_price": 1396785,
+      "price_source": "zhvi",
+      "redfin_price": null,
       "stats": {
         "median_price": 1396785,
         "yoy_change": -0.0345,
@@ -979,7 +1127,10 @@
     "95124": {
       "city": "San Jose",
       "tier": 3,
-      "fetched_at": "2026-06-09T22:09:48.100293Z",
+      "fetched_at": "2026-06-09T22:26:37.249778Z",
+      "display_price": 2005760,
+      "price_source": "zhvi",
+      "redfin_price": null,
       "stats": {
         "median_price": 2005760,
         "yoy_change": 0.0109,
@@ -995,8 +1146,11 @@
     },
     "95120": {
       "city": "Almaden Valley",
-      "tier": 3,
-      "fetched_at": "2026-06-09T22:09:48.100763Z",
+      "tier": 2,
+      "fetched_at": "2026-06-09T22:26:38.086480Z",
+      "display_price": 2311979,
+      "price_source": "zhvi",
+      "redfin_price": null,
       "stats": {
         "median_price": 2311979,
         "yoy_change": 0.0219,
@@ -1006,14 +1160,17 @@
       },
       "tier_check": {
         "suggested_tier": 2,
-        "tier_changed": true,
+        "tier_changed": false,
         "price_m": 2.31
       }
     },
     "95008": {
       "city": "Campbell",
       "tier": 3,
-      "fetched_at": "2026-06-09T22:09:48.101236Z",
+      "fetched_at": "2026-06-09T22:26:38.924593Z",
+      "display_price": 1945256,
+      "price_source": "zhvi",
+      "redfin_price": null,
       "stats": {
         "median_price": 1945256,
         "yoy_change": 0.0151,
@@ -1030,7 +1187,10 @@
     "95116": {
       "city": "San Jose East",
       "tier": 3,
-      "fetched_at": "2026-06-09T22:09:48.101712Z",
+      "fetched_at": "2026-06-09T22:26:39.771811Z",
+      "display_price": 948443,
+      "price_source": "zhvi",
+      "redfin_price": null,
       "stats": {
         "median_price": 948443,
         "yoy_change": -0.0354,
@@ -1047,7 +1207,10 @@
     "95122": {
       "city": "San Jose East",
       "tier": 3,
-      "fetched_at": "2026-06-09T22:09:48.102185Z",
+      "fetched_at": "2026-06-09T22:26:40.604043Z",
+      "display_price": 1001672,
+      "price_source": "zhvi",
+      "redfin_price": null,
       "stats": {
         "median_price": 1001672,
         "yoy_change": -0.0403,
@@ -1064,7 +1227,10 @@
     "94509": {
       "city": "Antioch",
       "tier": 4,
-      "fetched_at": "2026-06-09T22:09:48.102661Z",
+      "fetched_at": "2026-06-09T22:26:41.439214Z",
+      "display_price": 540119,
+      "price_source": "zhvi",
+      "redfin_price": null,
       "stats": {
         "median_price": 540119,
         "yoy_change": -0.0425,
@@ -1081,7 +1247,10 @@
     "94531": {
       "city": "Antioch",
       "tier": 4,
-      "fetched_at": "2026-06-09T22:09:48.103132Z",
+      "fetched_at": "2026-06-09T22:26:42.270603Z",
+      "display_price": 668130,
+      "price_source": "zhvi",
+      "redfin_price": null,
       "stats": {
         "median_price": 668130,
         "yoy_change": -0.0287,
@@ -1098,7 +1267,10 @@
     "95376": {
       "city": "Tracy",
       "tier": 4,
-      "fetched_at": "2026-06-09T22:09:48.103603Z",
+      "fetched_at": "2026-06-09T22:26:43.103404Z",
+      "display_price": 598407,
+      "price_source": "zhvi",
+      "redfin_price": null,
       "stats": {
         "median_price": 598407,
         "yoy_change": -0.063,
@@ -1115,7 +1287,10 @@
     "95377": {
       "city": "Tracy",
       "tier": 4,
-      "fetched_at": "2026-06-09T22:09:48.104083Z",
+      "fetched_at": "2026-06-09T22:26:43.966543Z",
+      "display_price": 773240,
+      "price_source": "zhvi",
+      "redfin_price": null,
       "stats": {
         "median_price": 773240,
         "yoy_change": -0.0573,
@@ -1132,7 +1307,10 @@
     "95037": {
       "city": "Morgan Hill",
       "tier": 4,
-      "fetched_at": "2026-06-09T22:09:48.104573Z",
+      "fetched_at": "2026-06-09T22:26:44.800939Z",
+      "display_price": 1358138,
+      "price_source": "zhvi",
+      "redfin_price": null,
       "stats": {
         "median_price": 1358138,
         "yoy_change": 0.0038,
@@ -1149,7 +1327,10 @@
     "95038": {
       "city": "Morgan Hill",
       "tier": 4,
-      "fetched_at": "2026-06-09T22:09:48.104679Z",
+      "fetched_at": "2026-06-09T22:26:45.635297Z",
+      "display_price": null,
+      "price_source": "zhvi",
+      "redfin_price": null,
       "stats": {},
       "tier_check": {
         "suggested_tier": 4,
