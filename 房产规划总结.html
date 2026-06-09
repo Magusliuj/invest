@@ -1232,7 +1232,9 @@
         { name:'Portola Valley',q:'Portola Valley, CA',lat:37.3766,lng:-122.2108,color:tier1,tier:'第一层',note:'I-280西侧山边，马场地产，均价$4M–$8M，比 Los Altos Hills 流动性略低' },
         { name:'Stanford',q:'Stanford, CA',lat:37.4275,lng:-122.1697,color:landmark,tier:'地标',note:'Stanford大学（94305）—极少数住宅为大学教职员工配套，非公开市场' },
         { name:'Moffett Field',q:'Moffett Field, CA',lat:37.4089,lng:-122.0492,color:landmark,tier:'地标',note:'NASA Ames + 联邦军事设施（94035），无住宅市场' },
-        { name:'Millbrae',   q:'Millbrae, CA',   lat:37.5985, lng:-122.3869, color:tier2, tier:'第二层', note:'94030，唯一同时拥有BART+Caltrain的半岛城市，Mills HS 9/10，SFO飞机噪音是主要折价因素，均价$2.1M' },
+        { name:'Millbrae',      q:'Millbrae, CA',           lat:37.5985,lng:-122.3869,color:tier2,tier:'第二层',note:'94030，唯一同时拥有BART+Caltrain的半岛城市，Mills HS 9/10，SFO飞机噪音是主要折价因素，均价$2.1M' },
+        { name:'San Bruno',     q:'San Bruno, CA',          lat:37.6305,lng:-122.4111,color:tier3,tier:'第三层',note:'94066，Capuchino HS 7/10，Caltrain直达，SFO噪音折价，均价$1.5M，性价比之选' },
+        { name:'S. San Francisco',q:'South San Francisco, CA',lat:37.6547,lng:-122.4077,color:tier3,tier:'第三层',note:'94080，全球生物科技总部聚集地（Genentech/Roche），学区弱但就业极强，均价$1.3M' },
         { name:'San Carlos', q:'San Carlos, CA', lat:37.5070, lng:-122.2605, color:tier2, tier:'第二层', note:'94070，Carlmont HS 8/10，半岛中段精致小城，均价$2.3M' },
         { name:'Belmont',    q:'Belmont, CA',    lat:37.5202, lng:-122.2758, color:tier2, tier:'第二层', note:'94002，同属 Carlmont 学区，均价$2.1M，性价比略优于San Carlos' },
         { name:'W. San Jose',q:'West San Jose, CA',lat:37.3065,lng:-121.9986,color:tier2,tier:'第二层',note:'95129（Lynbrook HS 9/10，Cupertino同学区）均价$2.5M，常被低估的宝藏地段' },
@@ -1313,7 +1315,7 @@
         '94103':tier2,'94107':tier2,'94158':tier2,'94105':tier2,
         '95051':tier3,'95050':tier3,'95054':tier3,'94539':tier3,'94538':tier3,
         '94536':tier3,'94537':tier3,'94541':tier3,'94555':tier3,'95035':tier3,'94560':tier3,
-        '94061':tier3,'94063':tier3,
+        '94061':tier3,'94063':tier3,'94066':tier3,'94080':tier3,
         '95117':tier3,'95128':tier3,'95130':tier3,
         '94404':tier3,'95123':tier3,'95124':tier3,'95120':tier3,'95008':tier3,'95116':tier3,'95122':tier3,
         '94509':tier4,'94531':tier4,'95376':tier4,'95377':tier4,'95037':tier4,'95038':tier4,
@@ -1335,7 +1337,7 @@
         }).addTo(map);
       }
 
-      var CACHE_KEY = 'bayarea_zip_geo_v18';
+      var CACHE_KEY = 'bayarea_zip_geo_v19';
       var cached = localStorage.getItem(CACHE_KEY);
       if (cached) {
         try { renderZipLayer(JSON.parse(cached)); } catch(e) { localStorage.removeItem(CACHE_KEY); }

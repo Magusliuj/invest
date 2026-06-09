@@ -1232,7 +1232,9 @@
         { name:'Portola Valley',q:'Portola Valley, CA',lat:37.3766,lng:-122.2108,color:tier1,tier:'第一层',note:'I-280西侧山边，马场地产，均价$4M–$8M，比 Los Altos Hills 流动性略低' },
         { name:'Stanford',q:'Stanford, CA',lat:37.4275,lng:-122.1697,color:landmark,tier:'地标',note:'Stanford大学（94305）—极少数住宅为大学教职员工配套，非公开市场' },
         { name:'Moffett Field',q:'Moffett Field, CA',lat:37.4089,lng:-122.0492,color:landmark,tier:'地标',note:'NASA Ames + 联邦军事设施（94035），无住宅市场' },
-        { name:'Millbrae',   q:'Millbrae, CA',   lat:37.5985, lng:-122.3869, color:tier2, tier:'第二层', note:'94030，唯一同时拥有BART+Caltrain的半岛城市，Mills HS 9/10，SFO飞机噪音是主要折价因素，均价$2.1M' },
+        { name:'Millbrae',      q:'Millbrae, CA',           lat:37.5985,lng:-122.3869,color:tier2,tier:'第二层',note:'94030，唯一同时拥有BART+Caltrain的半岛城市，Mills HS 9/10，SFO飞机噪音是主要折价因素，均价$2.1M' },
+        { name:'San Bruno',     q:'San Bruno, CA',          lat:37.6305,lng:-122.4111,color:tier3,tier:'第三层',note:'94066，Capuchino HS 7/10，Caltrain直达，SFO噪音折价，均价$1.5M，性价比之选' },
+        { name:'S. San Francisco',q:'South San Francisco, CA',lat:37.6547,lng:-122.4077,color:tier3,tier:'第三层',note:'94080，全球生物科技总部聚集地（Genentech/Roche），学区弱但就业极强，均价$1.3M' },
         { name:'San Carlos', q:'San Carlos, CA', lat:37.5070, lng:-122.2605, color:tier2, tier:'第二层', note:'94070，Carlmont HS 8/10，半岛中段精致小城，均价$2.3M' },
         { name:'Belmont',    q:'Belmont, CA',    lat:37.5202, lng:-122.2758, color:tier2, tier:'第二层', note:'94002，同属 Carlmont 学区，均价$2.1M，性价比略优于San Carlos' },
         { name:'W. San Jose',q:'West San Jose, CA',lat:37.3065,lng:-121.9986,color:tier2,tier:'第二层',note:'95129（Lynbrook HS 9/10，Cupertino同学区）均价$2.5M，常被低估的宝藏地段' },
@@ -1313,7 +1315,7 @@
         '94103':tier2,'94107':tier2,'94158':tier2,'94105':tier2,
         '95051':tier3,'95050':tier3,'95054':tier3,'94539':tier3,'94538':tier3,
         '94536':tier3,'94537':tier3,'94541':tier3,'94555':tier3,'95035':tier3,'94560':tier3,
-        '94061':tier3,'94063':tier3,
+        '94061':tier3,'94063':tier3,'94066':tier3,'94080':tier3,
         '95117':tier3,'95128':tier3,'95130':tier3,
         '94404':tier3,'95123':tier3,'95124':tier3,'95120':tier3,'95008':tier3,'95116':tier3,'95122':tier3,
         '94509':tier4,'94531':tier4,'95376':tier4,'95377':tier4,'95037':tier4,'95038':tier4,
@@ -1335,7 +1337,7 @@
         }).addTo(map);
       }
 
-      var CACHE_KEY = 'bayarea_zip_geo_v18';
+      var CACHE_KEY = 'bayarea_zip_geo_v19';
       var cached = localStorage.getItem(CACHE_KEY);
       if (cached) {
         try { renderZipLayer(JSON.parse(cached)); } catch(e) { localStorage.removeItem(CACHE_KEY); }
@@ -2419,6 +2421,100 @@
             <span class="lc-tag w">噪音需确认</span>
           </div>
           <div class="lc-note">Millbrae 最低入场价，步行至 BART/Caltrain 双站。购前必须实地确认该具体街道的飞机噪音情况，噪音差异在 Millbrae 内部可以相差很大。适合通勤极度依赖公共交通的家庭。</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 94066 San Bruno -->
+    <div class="zip-block">
+      <div class="zip-header">
+        <div class="zip-left">
+          <span class="zip-code">94066</span>
+          <span class="zip-city">San Bruno</span>
+        </div>
+        <div class="zip-stats">
+          <div class="zstat"><span class="zval neutral">$1.52M</span><span class="zlabel">中位成交价</span></div>
+          <div class="zstat"><span class="zval neutral">↑2.8%</span><span class="zlabel">同比涨幅</span></div>
+          <div class="zstat"><span class="zval neutral">16天</span><span class="zlabel">平均成交</span></div>
+          <div class="zstat"><span class="zval school">★★★☆☆</span><span class="zlabel">学区评级</span></div>
+          <div class="zstat"><span class="zval neutral">100%</span><span class="zlabel">成交/要价比</span></div>
+        </div>
+      </div>
+      <div class="zip-school-note">🏫 <strong>Capuchino High School</strong> 7/10 · <strong>Parkside Intermediate</strong> 6/10 · <strong>Rollingwood Elementary</strong> 7/10 — 与 Millbrae 同属 SM Union 高中区，但进 Capuchino 而非 Mills，学区差一档是主要价差来源</div>
+      <div class="zip-commute">🚗 <strong>通勤：</strong>近 <span class="ctag">Caltrain</span><span class="ctag">US-101</span><span class="ctag">I-280</span> · SF市中心 <strong>25分钟</strong>（Caltrain） · Meta HQ <strong>25分钟</strong> · Apple Park <strong>35分钟</strong> · SFO机场 <strong>5分钟</strong>（经常出差者的隐藏优势）</div>
+      <div class="zip-profile">👥 <strong>典型住户：</strong><span class="ptag">航空/机场从业者</span><span class="ptag">半岛刚需上车</span><span class="ptag">SFO周边就业家庭</span> · 多元族裔，生活配套完整，价格是吸引力的核心</div>
+      <div class="zip-multi" style="background:#fff8e8; border:1px solid #e8d8a0; border-radius:10px; padding:12px 16px; margin:10px 0; font-size:0.84rem; color:#5a4a10;">
+        ✈️ <strong>与 Millbrae 的关键差异：</strong>两城相邻，均价差约 $500K，核心原因是高中学区——Millbrae 进 Mills HS（9/10），San Bruno 进 Capuchino HS（7/10）。若子女教育是首要考量，多 $500K 买 Millbrae 的逻辑成立；若学区不是优先项，San Bruno 性价比明显更高。
+      </div>
+      <div class="listing-row">
+        <div class="listing-card">
+          <div class="lc-price t3">$1,620,000</div>
+          <div class="lc-addr">San Bruno 山坡住宅区</div>
+          <div class="lc-spec">4卧 / 2浴 / 1,700 sqft · 近 I-280</div>
+          <div class="lc-tags">
+            <span class="lc-tag g">Caltrain步行圈</span>
+            <span class="lc-tag g">半岛低价入场</span>
+            <span class="lc-tag w">Capuchino学区</span>
+          </div>
+          <div class="lc-note">半岛 Caltrain 沿线最低价段之一，通勤便利但学区是短板。适合子女尚小、未来可能送私校，或本身学区需求不强的双职工家庭。</div>
+        </div>
+        <div class="listing-card">
+          <div class="lc-price t3">$1,350,000</div>
+          <div class="lc-addr">San Bruno 近 101 平地区</div>
+          <div class="lc-spec">3卧 / 2浴 / 1,400 sqft</div>
+          <div class="lc-tags">
+            <span class="lc-tag g">半岛最低门槛</span>
+            <span class="lc-tag w">SFO噪音较重</span>
+            <span class="lc-tag w">近高速</span>
+          </div>
+          <div class="lc-note">San Bruno 最低入场价，近 101 的平地区。飞机噪音和高速噪音都需要实地确认。纯粹以通勤便利和极低价格换取其他条件。</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 94080 South San Francisco -->
+    <div class="zip-block">
+      <div class="zip-header">
+        <div class="zip-left">
+          <span class="zip-code">94080</span>
+          <span class="zip-city">South San Francisco</span>
+        </div>
+        <div class="zip-stats">
+          <div class="zstat"><span class="zval neutral">$1.28M</span><span class="zlabel">中位成交价</span></div>
+          <div class="zstat"><span class="zval neutral">↑2.1%</span><span class="zlabel">同比涨幅</span></div>
+          <div class="zstat"><span class="zval neutral">18天</span><span class="zlabel">平均成交</span></div>
+          <div class="zstat"><span class="zval school">★★★☆☆</span><span class="zlabel">学区评级</span></div>
+          <div class="zstat"><span class="zval neutral">99%</span><span class="zlabel">成交/要价比</span></div>
+        </div>
+      </div>
+      <div class="zip-school-note">🏫 <strong>South San Francisco High School</strong> 6/10 · <strong>Westborough Middle</strong> 5/10 · <strong>Sunshine Gardens Elementary</strong> 6/10 — SSF Unified 整体偏弱，学区是主要短板；购房驱动力几乎完全来自就业而非学区</div>
+      <div class="zip-commute">🚗 <strong>通勤：</strong>近 <span class="ctag">Caltrain</span><span class="ctag">US-101</span><span class="ctag">I-380</span> · SF市中心 <strong>20分钟</strong>（Caltrain） · Genentech HQ <strong>5分钟</strong> · SFO <strong>10分钟</strong> · Meta HQ <strong>30分钟</strong></div>
+      <div class="zip-profile">👥 <strong>典型住户：</strong><span class="ptag">Genentech/Roche员工</span><span class="ptag">生物科技从业者</span><span class="ptag">菲裔/华裔家庭</span> · 就业导向极强，Genentech 是区域最大单一雇主，员工福利包括班车和弹性工时</div>
+      <div class="zip-multi" style="background:#f0f4ff; border:1px solid #c0ccee; border-radius:10px; padding:12px 16px; margin:10px 0; font-size:0.84rem; color:#2a3a6a;">
+        🧬 <strong>生物科技聚集效应：</strong>South San Francisco 是全球生物技术产业的发源地——Genentech 1976年创立于此，此后形成强大的产业集群。Genentech、Roche、Denali Therapeutics、Arcus Biosciences 等公司提供大量高薪就业（年包 $250K–$500K+）。这批员工构成了 SSF 及周边 San Bruno/Millbrae 购房的主要需求来源之一。
+      </div>
+      <div class="listing-row">
+        <div class="listing-card">
+          <div class="lc-price t3">$1,380,000</div>
+          <div class="lc-addr">SSF 山坡住宅区</div>
+          <div class="lc-spec">4卧 / 2浴 / 1,600 sqft · 山景</div>
+          <div class="lc-tags">
+            <span class="lc-tag g">Genentech步行圈</span>
+            <span class="lc-tag g">山景</span>
+            <span class="lc-tag w">学区弱</span>
+          </div>
+          <div class="lc-note">SSF 西侧山坡段，远离工业区，环境比想象中好。Genentech HQ 5 分钟车程，是生物科技工程师的高性价比选择。学区需走私校路线。</div>
+        </div>
+        <div class="listing-card">
+          <div class="lc-price t3">$1,050,000</div>
+          <div class="lc-addr">SSF 近 Caltrain 站区域</div>
+          <div class="lc-spec">3卧 / 1浴 / 1,200 sqft · 老屋</div>
+          <div class="lc-tags">
+            <span class="lc-tag g">半岛百万入场</span>
+            <span class="lc-tag g">Caltrain直达SF</span>
+            <span class="lc-tag w">老屋需翻新</span>
+          </div>
+          <div class="lc-note">半岛最低价段之一，百万出头可上车。老屋翻新预算需另备 $150–250K。纯通勤/就业逻辑，不适合以学区为核心的家庭。</div>
         </div>
       </div>
     </div>
