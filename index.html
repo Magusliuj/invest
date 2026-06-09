@@ -1276,67 +1276,76 @@
         circle.bindTooltip(c.name, { permanent: true, direction: 'right', offset: [8,0], className: 'map-label' });
       });
 
-      // ── 城市区域圈（直接用 L.circle，不依赖外部 API）──
-      // radius 单位：米，根据各城市实际面积估算
-      var zones = [
-        // 第一层 — 绿
-        { lat:37.4634, lng:-122.1977, r:1400,  color:tier1 }, // Atherton
-        { lat:37.4419, lng:-122.1430, r:3200,  color:tier1 }, // Palo Alto
-        { lat:37.3852, lng:-122.1141, r:1900,  color:tier1 }, // Los Altos
-        { lat:37.3230, lng:-122.0322, r:1900,  color:tier1 }, // Cupertino
-        { lat:37.2638, lng:-122.0230, r:2100,  color:tier1 }, // Saratoga
-        { lat:37.5485, lng:-122.3647, r:1400,  color:tier1 }, // Hillsborough
-        // 第二层 — 琥珀
-        { lat:37.2358, lng:-121.9624, r:2000,  color:tier2 }, // Los Gatos
-        { lat:37.4530, lng:-122.1817, r:2300,  color:tier2 }, // Menlo Park
-        { lat:37.5841, lng:-122.3661, r:1400,  color:tier2 }, // Burlingame
-        { lat:37.3861, lng:-122.0839, r:2000,  color:tier2 }, // Mountain View
-        { lat:37.3688, lng:-122.0363, r:2700,  color:tier2 }, // Sunnyvale
-        { lat:37.5630, lng:-122.3255, r:2000,  color:tier2 }, // San Mateo
-        { lat:37.7502, lng:-122.4337, r:800,   color:tier2 }, // Noe Valley SF
-        // 第三层 — 橙红
-        { lat:37.3541, lng:-121.9552, r:2500,  color:tier3 }, // Santa Clara
-        { lat:37.4323, lng:-121.8996, r:2200,  color:tier3 }, // Milpitas
-        { lat:37.5485, lng:-121.9886, r:4500,  color:tier3 }, // Fremont
-        { lat:37.5585, lng:-122.2711, r:1100,  color:tier3 }, // Foster City
-        { lat:37.2969, lng:-121.9020, r:5500,  color:tier3 }, // San Jose
-        // 第四层 — 深红
-        { lat:37.9963, lng:-121.8058, r:3200,  color:tier4 }, // Antioch
-        { lat:37.7397, lng:-121.4252, r:3000,  color:tier4 }, // Tracy
-        // 周边未分析城市 — 灰色
-        { lat:37.4849, lng:-122.2364, r:2200,  color:'#bbb' }, // Redwood City
-        { lat:37.5074, lng:-122.2603, r:1100,  color:'#bbb' }, // San Carlos
-        { lat:37.5210, lng:-122.2758, r:1000,  color:'#bbb' }, // Belmont
-        { lat:37.3748, lng:-122.1174, r:1200,  color:'#bbb' }, // Los Altos Hills
-        { lat:37.2872, lng:-121.9500, r:1800,  color:'#bbb' }, // Campbell
-        { lat:37.8044, lng:-122.2712, r:5500,  color:'#bbb' }, // Oakland
-        { lat:37.8716, lng:-122.2727, r:2800,  color:'#bbb' }, // Berkeley
-        { lat:37.6688, lng:-122.0808, r:3500,  color:'#bbb' }, // Hayward
-        { lat:37.5941, lng:-122.0652, r:2200,  color:'#bbb' }, // Union City
-        { lat:37.5294, lng:-121.9961, r:1800,  color:'#bbb' }, // Newark
-        { lat:37.6624, lng:-121.8777, r:2500,  color:'#bbb' }, // Pleasanton
-        { lat:37.7021, lng:-121.9358, r:2500,  color:'#bbb' }, // Dublin
-        { lat:37.6879, lng:-121.7721, r:3000,  color:'#bbb' }, // Livermore
-        { lat:37.9101, lng:-122.0652, r:2800,  color:'#bbb' }, // Walnut Creek
-        { lat:37.6879, lng:-122.4702, r:2000,  color:'#bbb' }, // Daly City
-        { lat:37.6305, lng:-122.4111, r:1500,  color:'#bbb' }, // San Bruno
-        { lat:37.6547, lng:-122.4077, r:1500,  color:'#bbb' }, // South SF
-        { lat:37.7249, lng:-122.1561, r:2500,  color:'#bbb' }, // San Leandro
-      ];
+      // ── ZIP Code 真实边界（Census TIGERweb Layer 1, field ZCTA5CE20）──
+      var zipColors = {
+        '94027':tier1,'94022':tier1,'94024':tier1,'94301':tier1,'94303':tier1,'94304':tier1,
+        '94306':tier1,'95014':tier1,'95070':tier1,
+        // 94010 = Hillsborough（tier1），Burlingame 与 Hillsborough 共用此 ZIP，标为 tier1
+        '94010':tier1,
+        '94025':tier2,'95030':tier2,'95032':tier2,'94040':tier2,'94041':tier2,
+        '94043':tier2,'94087':tier2,'94086':tier2,'94085':tier2,'94089':tier2,
+        // Burlingame 无独立 ZCTA，94011 是 PO Box；用 San Mateo ZIPs 代表该段
+        '94401':tier2,'94402':tier2,'94403':tier2,'94114':tier2,'94115':tier2,
+        '95051':tier3,'95050':tier3,'95054':tier3,'94539':tier3,'94538':tier3,
+        '94536':tier3,'94537':tier3,'94541':tier3,'94555':tier3,'95035':tier3,
+        '94404':tier3,'95123':tier3,'95124':tier3,'95120':tier3,'95008':tier3,'95116':tier3,'95122':tier3,
+        '94509':tier4,'94531':tier4,'95376':tier4,'95377':tier4,
+      };
 
-      zones.forEach(function(z) {
-        var isDefault = z.color === '#bbb';
-        L.circle([z.lat, z.lng], {
-          radius: z.r,
-          color: z.color,
-          weight: isDefault ? 1.2 : 1.8,
-          opacity: isDefault ? 0.4 : 0.65,
-          dashArray: isDefault ? null : '6,4',
-          fillColor: z.color,
-          fillOpacity: isDefault ? 0.04 : 0.13,
-          interactive: false
+      function renderZipLayer(data) {
+        if (!data || !data.features || !data.features.length) return;
+        L.geoJSON(data, {
+          interactive: false,
+          style: function(f) {
+            var zip = f.properties.GEOID || f.properties.ZCTA5 || '';
+            var color = zipColors[zip] || null;
+            if (!color) return { opacity:0, fillOpacity:0 };
+            return {
+              color: color, weight: 2, opacity: 0.75,
+              fillColor: color, fillOpacity: 0.15
+            };
+          }
         }).addTo(map);
-      });
+      }
+
+      var CACHE_KEY = 'bayarea_zip_geo_v6';
+      var cached = localStorage.getItem(CACHE_KEY);
+      if (cached) {
+        renderZipLayer(JSON.parse(cached));
+      } else {
+        var zips = Object.keys(zipColors);
+        var whereClause = "GEOID IN (" + zips.map(function(z){ return "'" + z + "'"; }).join(',') + ")";
+        var censusUrl = 'https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/PUMA_TAD_TAZ_UGA_ZCTA/MapServer/1/query'
+          + '?where=' + encodeURIComponent(whereClause)
+          + '&outFields=GEOID&returnGeometry=true&outSR=4326&f=geojson';
+
+        // Try direct → corsproxy.io → allorigins.win
+        var attempts = [
+          censusUrl,
+          'https://corsproxy.io/?' + encodeURIComponent(censusUrl),
+          'https://api.allorigins.win/raw?url=' + encodeURIComponent(censusUrl)
+        ];
+
+        function tryNext(i) {
+          if (i >= attempts.length) {
+            console.warn('All ZIP boundary fetch attempts failed');
+            return;
+          }
+          fetch(attempts[i])
+            .then(function(r){ return r.json(); })
+            .then(function(data){
+              if (data.features && data.features.length) {
+                try { localStorage.setItem(CACHE_KEY, JSON.stringify(data)); } catch(e){}
+                renderZipLayer(data);
+              } else {
+                console.warn('Attempt', i, 'returned 0 features, trying next...');
+                tryNext(i + 1);
+              }
+            })
+            .catch(function(){ tryNext(i + 1); });
+        }
+        tryNext(0);
+      }
 
       // 样式
       var s = document.createElement('style');
@@ -1673,6 +1682,64 @@
             <span class="lc-tag g">开盘即售</span>
           </div>
           <div class="lc-note">原建于1972年，2025年底完成全面翻新（含地基加固、新屋顶、全新厨卫、开放式改造）。装修到位，直接入住，是老地段+新状态的最优组合。</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 94024 Los Altos Hills -->
+    <div class="zip-block">
+      <div class="zip-header">
+        <div class="zip-left">
+          <span class="zip-code">94024</span>
+          <span class="zip-city">Los Altos Hills</span>
+        </div>
+        <div class="zip-stats">
+          <div class="zstat"><span class="zval up">$5.8M</span><span class="zlabel">中位成交价</span></div>
+          <div class="zstat"><span class="zval neutral">~20天</span><span class="zlabel">平均成交</span></div>
+          <div class="zstat"><span class="zval school">★★★★★</span><span class="zlabel">学区评级</span></div>
+          <div class="zstat"><span class="zval up">103%</span><span class="zlabel">成交/要价比</span></div>
+        </div>
+      </div>
+      <div class="zip-school-note">🏫 <strong>Los Altos High School</strong> 10/10（与 Los Altos 94022 共用）· <strong>Gardner Bullis Elementary</strong> 10/10 · <strong>Santa Rita Elementary</strong> 10/10 — 全市最低建筑密度，地块最小 1 英亩，学区与 Los Altos 相同但均价更高</div>
+      <div class="zip-commute">🚗 <strong>通勤：</strong>近 <span class="ctag">I-280</span><span class="ctag">CA-85</span> · Apple Park <strong>12分钟</strong> · Google MTV <strong>18分钟</strong> · Meta HQ <strong>28分钟</strong> · SF <strong>45分钟</strong>（早高峰 +20分钟）· 无 Caltrain，无街灯，需依赖私家车</div>
+      <div class="zip-profile">👥 <strong>典型住户：</strong><span class="ptag">科技公司 C-suite</span><span class="ptag">创业者 / VC 合伙人</span><span class="ptag">老牌湾区家庭</span> · 年收入 $1M+，追求极度私密、大地块、无商业干扰，马场、泳池、独立 Guest House 常见</div>
+      <div class="zip-multi" style="background:#f0f7f4; border:1px solid #c8e0d4; border-radius:10px; padding:12px 16px; margin:10px 0; font-size:0.84rem; color:#2a4a3a;">
+        💡 <strong>Los Altos Hills vs Los Altos：</strong>学区完全相同，但 LAH 地块更大（最小 1 英亩，不可再分割）、私密性更强、无商业区。价格比 Los Altos 贵 20–40%，流动性略低（买家圈子更窄）。更适合已实现财富自由、追求空间和私密的家庭；首次置业更推荐 Los Altos 94022。
+      </div>
+      <div class="listing-row">
+        <div class="listing-card">
+          <div class="lc-price">$5,200,000</div>
+          <div class="lc-addr">Moody Rd 区域</div>
+          <div class="lc-spec">4卧 / 3.5浴 / 3,200 sqft · 1.2 英亩地块 · 建于1970年代</div>
+          <div class="lc-tags">
+            <span class="lc-tag g">超大地块</span>
+            <span class="lc-tag g">10/10 学区</span>
+            <span class="lc-tag w">需更新内装</span>
+          </div>
+          <div class="lc-note">LAH 典型入门段：地块超过 1 英亩，私密性极强，可加建 Guest House 或马厩。房子本身需要更新，但地块价值是核心资产，同等地块在 Atherton 要贵 60%+。</div>
+        </div>
+        <div class="listing-card">
+          <div class="lc-price">$6,800,000</div>
+          <div class="lc-addr">Elena Rd 附近</div>
+          <div class="lc-spec">5卧 / 5浴 / 4,500 sqft · 2 英亩 · 含泳池 + Guest House</div>
+          <div class="lc-tags">
+            <span class="lc-tag g">独立 Guest House</span>
+            <span class="lc-tag g">山景</span>
+            <span class="lc-tag g">半翻新状态</span>
+          </div>
+          <div class="lc-note">含独立 Guest House（2/1），主宅厨卫已翻新，保留加州中世纪现代风格。泳池 + 山景 + 极度私密，是 LAH 最受欢迎的产品类型，20 天成交。</div>
+        </div>
+        <div class="listing-card" style="background:#f6fdf8; border-left:3px solid #4a7c6f;">
+          <div class="lc-price">$8,500,000</div>
+          <div class="lc-addr">🆕 Foothill Expy 山边</div>
+          <div class="lc-spec">6卧 / 6.5浴 / 5,800 sqft · 1.8 英亩 · 2024年新建</div>
+          <div class="lc-tags">
+            <span class="lc-tag g">全新建成</span>
+            <span class="lc-tag g">全景山景</span>
+            <span class="lc-tag g">太阳能 + 储能</span>
+            <span class="lc-tag g">买了即住</span>
+          </div>
+          <div class="lc-note">LAH 极稀少的新建项目：当代风格，全开放式设计，Fleetwood 推拉门直通泳池甲板，主卧观景台可见旧金山湾。此类新建在 LAH 每年不超过 5 套，供应近乎稀缺。</div>
         </div>
       </div>
     </div>
