@@ -1187,209 +1187,108 @@
     <span class="divider-sub">Redfin 2026年数据 · 按 ZIP Code 分层对比</span>
   </div>
 
-  <!-- BAY AREA MAP -->
+  <!-- BAY AREA MAP (Leaflet) -->
   <div style="margin:0 0 28px; background:var(--card); border:1px solid var(--border); border-radius:14px; overflow:hidden;">
-    <div style="padding:14px 18px 6px; font-weight:700; font-size:0.95rem; color:var(--text);">🗺 湾区各区域地理分布（K型分化四层）</div>
-    <svg viewBox="0 0 700 500" xmlns="http://www.w3.org/2000/svg" style="width:100%; height:auto; display:block;">
+    <div style="padding:14px 18px 8px; font-weight:700; font-size:0.95rem; color:var(--text);">🗺 湾区各区域地理分布（K型分化四层）</div>
 
-      <!-- Background land -->
-      <rect width="700" height="500" fill="#ede8df"/>
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css"/>
 
-      <!-- Pacific Ocean (left strip) -->
-      <polygon points="0,0 88,0 88,120 82,200 78,300 75,400 70,500 0,500" fill="#c5d9e8" opacity="0.7"/>
+    <div id="bayarea-map" style="height:460px; width:100%;"></div>
 
-      <!-- SF Bay water body -->
-      <polygon points="
-        193,68 390,68
-        428,108 458,188 462,278 448,340 430,392 402,430 372,450 322,457
-        274,447 250,430 237,404 226,364 218,312 210,257 204,202 198,152 193,105
-      " fill="#b0ccdf"/>
+    <!-- Legend -->
+    <div style="display:flex; flex-wrap:wrap; gap:12px; padding:10px 18px 14px; font-size:0.8rem; color:var(--text); border-top:1px solid var(--border); background:#faf8f5;">
+      <span><span style="display:inline-block;width:11px;height:11px;border-radius:50%;background:#3a8c5c;margin-right:4px;vertical-align:middle;"></span>第一层 稀缺资产</span>
+      <span><span style="display:inline-block;width:11px;height:11px;border-radius:50%;background:#c9880a;margin-right:4px;vertical-align:middle;"></span>第二层 优质实用</span>
+      <span><span style="display:inline-block;width:11px;height:11px;border-radius:50%;background:#c0623a;margin-right:4px;vertical-align:middle;"></span>第三层 明显短板房</span>
+      <span><span style="display:inline-block;width:11px;height:11px;border-radius:50%;background:#b04a38;margin-right:4px;vertical-align:middle;"></span>第四层 远郊消费品</span>
+      <span><span style="display:inline-block;width:11px;height:11px;border-radius:50%;background:#3d6b9e;margin-right:4px;vertical-align:middle;"></span>科技园区</span>
+    </div>
 
-      <!-- San Pablo Bay hint (north) -->
-      <polygon points="193,68 390,68 408,44 225,38 193,52" fill="#bcd6e5" opacity="0.8"/>
+    <!-- Leaflet JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+    <script>
+    (function() {
+      var map = L.map('bayarea-map', { zoomControl: true, scrollWheelZoom: false })
+                 .setView([37.42, -122.05], 10);
 
-      <!-- Peninsula land -->
-      <polygon points="
-        88,68 193,68 198,152 204,202 210,257 218,312 226,364 237,404 250,430
-        238,442 218,447 196,442 176,432 158,415 142,393 130,365 120,335
-        112,298 108,258 106,212 108,168 113,128 120,95 88,68
-      " fill="#e2dcd2"/>
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '© OpenStreetMap contributors',
+        maxZoom: 14
+      }).addTo(map);
 
-      <!-- East Bay -->
-      <polygon points="
-        390,68 498,68 548,102 568,155 562,225 545,292 525,352 498,402 472,438 448,452
-        422,455 402,430 372,450 322,457 274,447 250,430
-        257,455 280,462 330,462 380,455 415,458 445,450 468,434 495,400 522,350 542,290 562,222 568,152 548,102 498,68
-      " fill="#e2dcd2"/>
+      var tier1 = '#3a8c5c', tier2 = '#c9880a', tier3 = '#c0623a', tier4 = '#b04a38', tech = '#3d6b9e';
 
-      <!-- Far east (Antioch/Tracy area) -->
-      <polygon points="498,68 700,68 700,500 498,500 472,438 498,402 525,352 545,292 562,225 568,155 548,102" fill="#dad4c8"/>
+      var cities = [
+        // Tier 1
+        { name:'Atherton', lat:37.4634, lng:-122.1977, color:tier1, tier:'第一层', note:'顶级学区 + VC圈层，成交/要价比 105%' },
+        { name:'Palo Alto', lat:37.4419, lng:-122.1430, color:tier1, tier:'第一层', note:'Stanford效应，AI财富聚集，学区顶尖' },
+        { name:'Los Altos', lat:37.3852, lng:-122.1141, color:tier1, tier:'第一层', note:'Loyola/Covington 10/10，家庭终极居住区' },
+        { name:'Cupertino', lat:37.3230, lng:-122.0322, color:tier1, tier:'第一层', note:'Monta Vista HS，华裔科技家庭首选，Apple步行圈' },
+        { name:'Saratoga', lat:37.2638, lng:-122.0230, color:tier1, tier:'第一层', note:'Saratoga HS 10/10，低密度豪宅，静谧' },
+        { name:'Los Gatos', lat:37.2358, lng:-121.9624, color:tier1, tier:'第一层', note:'精致小镇，Los Gatos HS 9/10，I-280 红利' },
+        { name:'Hillsborough', lat:37.5485, lng:-122.3647, color:tier1, tier:'第一层', note:'全市纯住宅，无商业区，半岛老钱聚居' },
 
-      <!-- South Bay land closure -->
-      <polygon points="274,447 322,457 372,450 402,430 422,455 445,450 462,468 440,480 380,480 295,480 255,470 240,452 250,430" fill="#e2dcd2"/>
+        // Tier 2
+        { name:'Menlo Park', lat:37.4530, lng:-122.1817, color:tier2, tier:'第二层', note:'Meta HQ 步行圈，VC集中，西侧 Allied Arts 溢价高' },
+        { name:'Burlingame', lat:37.5841, lng:-122.3661, color:tier2, tier:'第二层', note:'半岛精致生活，Caltrain直达，成交/要价比 102%' },
+        { name:'Mountain View', lat:37.3861, lng:-122.0839, color:tier2, tier:'第二层（下段）', note:'Google HQ步行，Caltrain，2026年交易量收缩' },
+        { name:'Sunnyvale', lat:37.3688, lng:-122.0363, color:tier2, tier:'第二层（下段）', note:'Apple通勤优，2026年5月成交已砍价出售' },
+        { name:'San Mateo', lat:37.5630, lng:-122.3255, color:tier2, tier:'第二层（下段）', note:'Hillsdale HS 9/10，Caltrain沿线，半岛中段' },
+        { name:'Noe Valley (SF)', lat:37.7502, lng:-122.4337, color:tier2, tier:'第二层（下段）', note:'AI人才圈，步行生活，OpenAI/Anthropic 15分钟' },
 
-      <!-- ===== HIGHWAYS ===== -->
-      <!-- US-101 (coral red) -->
-      <polyline points="193,108 189,158 191,202 196,252 202,282 216,320 242,352 268,377 313,417 358,447 402,432"
-                stroke="#c0623a" stroke-width="2" fill="none" opacity="0.65"/>
-      <!-- I-280 (blue) -->
-      <polyline points="162,108 165,158 170,208 180,255 193,297 208,333 225,370 232,402 222,432"
-                stroke="#3d6b9e" stroke-width="2" fill="none" opacity="0.65"/>
-      <!-- CA-85 (purple) -->
-      <polyline points="234,330 240,348 242,372 232,402"
-                stroke="#8a5090" stroke-width="1.8" fill="none" opacity="0.6"/>
-      <!-- CA-237 (olive) -->
-      <polyline points="258,350 315,344 355,340 398,338"
-                stroke="#6a8040" stroke-width="1.8" fill="none" opacity="0.6"/>
-      <!-- I-680 (brown) -->
-      <polyline points="420,128 422,188 424,258 424,332 422,392 420,440"
-                stroke="#8a6020" stroke-width="1.8" fill="none" opacity="0.6"/>
-      <!-- I-880 (dashed brown) -->
-      <polyline points="402,152 405,218 410,288 416,348 420,405 422,445"
-                stroke="#9a7030" stroke-width="1.5" fill="none" opacity="0.5" stroke-dasharray="5,3"/>
-      <!-- CA-4 → Antioch -->
-      <polyline points="422,160 472,152 525,148 565,145"
-                stroke="#8a6020" stroke-width="1.3" fill="none" opacity="0.4"/>
-      <!-- I-205 → Tracy -->
-      <polyline points="488,425 548,408 602,392 648,382"
-                stroke="#8a6020" stroke-width="1.3" fill="none" opacity="0.4"/>
+        // Tier 3
+        { name:'Santa Clara', lat:37.3541, lng:-121.9552, color:tier3, tier:'第三层', note:'Nvidia/Intel步行，无学区溢价，功能性地段' },
+        { name:'Milpitas', lat:37.4323, lng:-121.8996, color:tier3, tier:'第三层', note:'气味问题，BART可达，成交/要价比 97%' },
+        { name:'Fremont MSJ', lat:37.5485, lng:-121.9886, color:tier3, tier:'第三层', note:'Mission San Jose HS 10/10，但通勤早高峰 90min' },
+        { name:'Foster City', lat:37.5585, lng:-122.2711, color:tier3, tier:'第三层', note:'填海造地，海平面风险，成交/要价比 98%' },
+        { name:'San Jose', lat:37.2969, lng:-121.9020, color:tier3, tier:'第三层', note:'Blossom Valley代表，无稀缺性，高利率敏感' },
 
-      <!-- Highway labels -->
-      <text x="198" y="316" font-size="8.5" fill="#c0623a" font-weight="800" font-family="sans-serif" opacity="0.9">101</text>
-      <text x="150" y="268" font-size="8.5" fill="#3d6b9e" font-weight="800" font-family="sans-serif" opacity="0.9">280</text>
-      <text x="246" y="345" font-size="8" fill="#8a5090" font-weight="800" font-family="sans-serif" opacity="0.9">85</text>
-      <text x="322" y="336" font-size="8" fill="#6a8040" font-weight="800" font-family="sans-serif" opacity="0.9">237</text>
-      <text x="428" y="295" font-size="8" fill="#8a6020" font-weight="800" font-family="sans-serif" opacity="0.9">680</text>
-      <text x="410" y="240" font-size="8" fill="#9a7030" font-weight="800" font-family="sans-serif" opacity="0.8">880</text>
+        // Tier 4
+        { name:'Antioch', lat:37.9963, lng:-121.8058, color:tier4, tier:'第四层', note:'通勤 90min，WFH退潮后需求萎缩，学区差' },
+        { name:'Tracy', lat:37.7397, lng:-121.4252, color:tier4, tier:'第四层', note:'通勤 110min，37天成交，流动性极差' },
 
-      <!-- ===== CITY DOTS + LABELS ===== -->
+        // Tech campuses
+        { name:'🍎 Apple Park', lat:37.3349, lng:-122.0090, color:tech, tier:'科技园区', note:'Apple HQ，约12–15万员工，Cupertino/Sunnyvale核心' },
+        { name:'🔍 Google HQ', lat:37.4220, lng:-122.0841, color:tech, tier:'科技园区', note:'Googleplex，Mountain View，湾区约7–8万员工' },
+        { name:'👥 Meta HQ', lat:37.4848, lng:-122.1484, color:tech, tier:'科技园区', note:'Meta Menlo Park，约6–7万员工，Reality Labs在Burlingame' },
+        { name:'🟢 Nvidia HQ', lat:37.3688, lng:-121.9905, color:tech, tier:'科技园区', note:'Santa Clara，约2万+员工，AI芯片龙头，增速最快' },
+        { name:'🤖 OpenAI', lat:37.7864, lng:-122.3892, color:'#6a3090', tier:'AI公司', note:'SF Mission District，约3000–5000人，薪资密度极高' },
+      ];
 
-      <!-- TIER 1 — green -->
-      <!-- Hillsborough -->
-      <circle cx="174" cy="186" r="6" fill="#3a8c5c" stroke="white" stroke-width="1.2"/>
-      <text x="112" y="183" font-size="9" fill="#1a4a2c" font-weight="700" font-family="sans-serif">Hillsborough</text>
-      <!-- Atherton -->
-      <circle cx="192" cy="256" r="7" fill="#3a8c5c" stroke="white" stroke-width="1.2"/>
-      <text x="135" y="252" font-size="9" fill="#1a4a2c" font-weight="700" font-family="sans-serif">Atherton</text>
-      <!-- Palo Alto -->
-      <circle cx="200" cy="274" r="7" fill="#3a8c5c" stroke="white" stroke-width="1.2"/>
-      <text x="204" y="271" font-size="9" fill="#1a4a2c" font-weight="700" font-family="sans-serif">Palo Alto</text>
-      <!-- Los Altos -->
-      <circle cx="213" cy="300" r="6" fill="#3a8c5c" stroke="white" stroke-width="1.2"/>
-      <text x="218" y="297" font-size="9" fill="#1a4a2c" font-weight="700" font-family="sans-serif">Los Altos</text>
-      <!-- Cupertino -->
-      <circle cx="240" cy="368" r="8" fill="#3a8c5c" stroke="white" stroke-width="1.2"/>
-      <text x="246" y="365" font-size="9.5" fill="#1a4a2c" font-weight="700" font-family="sans-serif">Cupertino</text>
-      <!-- Saratoga -->
-      <circle cx="218" cy="393" r="6" fill="#3a8c5c" stroke="white" stroke-width="1.2"/>
-      <text x="224" y="390" font-size="9" fill="#1a4a2c" font-weight="700" font-family="sans-serif">Saratoga</text>
-      <!-- Los Gatos -->
-      <circle cx="205" cy="414" r="6" fill="#3a8c5c" stroke="white" stroke-width="1.2"/>
-      <text x="145" y="418" font-size="9" fill="#1a4a2c" font-weight="700" font-family="sans-serif">Los Gatos</text>
+      cities.forEach(function(c) {
+        var radius = (c.tier === '第一层') ? 10 :
+                     (c.tier.startsWith('第二层')) ? 9 :
+                     (c.tier.startsWith('第三层')) ? 8 :
+                     (c.tier === '第四层') ? 9 : 7;
+        var circle = L.circleMarker([c.lat, c.lng], {
+          radius: radius,
+          fillColor: c.color,
+          color: 'white',
+          weight: 1.8,
+          opacity: 1,
+          fillOpacity: 0.88
+        }).addTo(map);
 
-      <!-- TIER 2 — amber -->
-      <!-- Noe Valley SF -->
-      <circle cx="159" cy="108" r="6" fill="#c9880a" stroke="white" stroke-width="1.2"/>
-      <text x="164" y="105" font-size="9" fill="#6a4000" font-weight="700" font-family="sans-serif">Noe Valley SF</text>
-      <!-- Burlingame -->
-      <circle cx="170" cy="174" r="6" fill="#c9880a" stroke="white" stroke-width="1.2"/>
-      <text x="105" y="170" font-size="9" fill="#6a4000" font-weight="700" font-family="sans-serif">Burlingame</text>
-      <!-- San Mateo -->
-      <circle cx="186" cy="200" r="6" fill="#c9880a" stroke="white" stroke-width="1.2"/>
-      <text x="192" y="197" font-size="9" fill="#6a4000" font-weight="700" font-family="sans-serif">San Mateo</text>
-      <!-- Menlo Park -->
-      <circle cx="193" cy="245" r="6" fill="#c9880a" stroke="white" stroke-width="1.2"/>
-      <text x="154" y="242" font-size="9" fill="#6a4000" font-weight="700" font-family="sans-serif">Menlo Park</text>
-      <!-- Mountain View -->
-      <circle cx="232" cy="326" r="7" fill="#c9880a" stroke="white" stroke-width="1.2"/>
-      <text x="238" y="322" font-size="9" fill="#6a4000" font-weight="700" font-family="sans-serif">Mtn View</text>
-      <!-- Sunnyvale -->
-      <circle cx="257" cy="347" r="7" fill="#c9880a" stroke="white" stroke-width="1.2"/>
-      <text x="263" y="343" font-size="9" fill="#6a4000" font-weight="700" font-family="sans-serif">Sunnyvale</text>
+        circle.bindPopup(
+          '<strong style="font-size:13px;">' + c.name + '</strong><br>' +
+          '<span style="color:#888;font-size:11px;">' + c.tier + '</span><br>' +
+          '<span style="font-size:12px;">' + c.note + '</span>',
+          { maxWidth: 220 }
+        );
 
-      <!-- TIER 3 — orange -->
-      <!-- Foster City -->
-      <circle cx="214" cy="207" r="5" fill="#c0623a" stroke="white" stroke-width="1.2"/>
-      <text x="220" y="204" font-size="8.5" fill="#6a2a10" font-weight="700" font-family="sans-serif">Foster City</text>
-      <!-- Santa Clara -->
-      <circle cx="265" cy="360" r="7" fill="#c0623a" stroke="white" stroke-width="1.2"/>
-      <text x="272" y="373" font-size="9" fill="#6a2a10" font-weight="700" font-family="sans-serif">Santa Clara</text>
-      <!-- San Jose -->
-      <circle cx="308" cy="418" r="8" fill="#c0623a" stroke="white" stroke-width="1.2"/>
-      <text x="314" y="415" font-size="9.5" fill="#6a2a10" font-weight="700" font-family="sans-serif">San Jose</text>
-      <!-- Milpitas -->
-      <circle cx="332" cy="340" r="6" fill="#c0623a" stroke="white" stroke-width="1.2"/>
-      <text x="338" y="337" font-size="9" fill="#6a2a10" font-weight="700" font-family="sans-serif">Milpitas</text>
-      <!-- Fremont MSJ -->
-      <circle cx="422" cy="330" r="7" fill="#c0623a" stroke="white" stroke-width="1.2"/>
-      <text x="428" y="327" font-size="9" fill="#6a2a10" font-weight="700" font-family="sans-serif">Fremont MSJ</text>
+        circle.bindTooltip(c.name, { permanent: true, direction: 'right', offset: [8, 0],
+          className: 'map-label' });
+      });
 
-      <!-- TIER 4 — dark red -->
-      <!-- Antioch -->
-      <circle cx="538" cy="148" r="7" fill="#b04a38" stroke="white" stroke-width="1.2"/>
-      <text x="544" y="145" font-size="9" fill="#5a1810" font-weight="700" font-family="sans-serif">Antioch</text>
-      <!-- Tracy -->
-      <circle cx="635" cy="385" r="7" fill="#b04a38" stroke="white" stroke-width="1.2"/>
-      <text x="580" y="381" font-size="9" fill="#5a1810" font-weight="700" font-family="sans-serif">Tracy</text>
+      // Custom tooltip style
+      var style = document.createElement('style');
+      style.textContent = '.map-label { background:none; border:none; box-shadow:none; font-size:10px; font-weight:700; color:#2a2018; text-shadow:0 0 3px #fff, 0 0 3px #fff; white-space:nowrap; } .map-label::before { display:none; }';
+      document.head.appendChild(style);
+    })();
+    </script>
+    <div style="font-size:0.72rem; color:var(--muted); padding:0 18px 10px; text-align:center;">点击城市标记查看详情 · 滚轮缩放已关闭，可双指/双击缩放</div>
 
-      <!-- ===== TECH CAMPUS STARS ===== -->
-      <!-- Apple Park -->
-      <text x="238" y="383" font-size="11" font-family="sans-serif" opacity="0.85">🍎</text>
-      <!-- Google HQ -->
-      <text x="230" y="340" font-size="11" font-family="sans-serif" opacity="0.85">🔍</text>
-      <!-- Meta HQ -->
-      <text x="188" y="262" font-size="11" font-family="sans-serif" opacity="0.85">👥</text>
-      <!-- Nvidia -->
-      <text x="263" y="374" font-size="11" font-family="sans-serif" opacity="0.85">🟢</text>
-      <!-- OpenAI/Anthropic -->
-      <text x="155" y="122" font-size="11" font-family="sans-serif" opacity="0.85">🤖</text>
-
-      <!-- ===== BAY LABEL ===== -->
-      <text x="318" y="195" font-size="15" fill="#7aa8c8" font-weight="700" font-family="sans-serif" text-anchor="middle" opacity="0.75">旧金山湾</text>
-      <text x="318" y="212" font-size="9.5" fill="#7aa8c8" font-family="sans-serif" text-anchor="middle" opacity="0.65">San Francisco Bay</text>
-
-      <!-- ===== LEGEND ===== -->
-      <rect x="492" y="232" width="190" height="182" rx="9" fill="white" opacity="0.9" stroke="#d0c8be" stroke-width="1"/>
-      <text x="504" y="250" font-size="10.5" font-weight="700" fill="#3a3028" font-family="sans-serif">图例 Legend</text>
-
-      <circle cx="506" cy="265" r="5.5" fill="#3a8c5c"/>
-      <text x="517" y="269" font-size="9" fill="#3a3028" font-family="sans-serif">第一层 · 稀缺资产区</text>
-
-      <circle cx="506" cy="283" r="5.5" fill="#c9880a"/>
-      <text x="517" y="287" font-size="9" fill="#3a3028" font-family="sans-serif">第二层 · 优质实用区</text>
-
-      <circle cx="506" cy="301" r="5.5" fill="#c0623a"/>
-      <text x="517" y="305" font-size="9" fill="#3a3028" font-family="sans-serif">第三层 · 明显短板房</text>
-
-      <circle cx="506" cy="319" r="5.5" fill="#b04a38"/>
-      <text x="517" y="323" font-size="9" fill="#3a3028" font-family="sans-serif">第四层 · 远郊消费品</text>
-
-      <line x1="499" y1="336" x2="514" y2="336" stroke="#c0623a" stroke-width="2" opacity="0.7"/>
-      <text x="518" y="340" font-size="9" fill="#3a3028" font-family="sans-serif">US-101</text>
-
-      <line x1="499" y1="352" x2="514" y2="352" stroke="#3d6b9e" stroke-width="2" opacity="0.7"/>
-      <text x="518" y="356" font-size="9" fill="#3a3028" font-family="sans-serif">I-280</text>
-
-      <line x1="499" y1="368" x2="514" y2="368" stroke="#8a5090" stroke-width="1.8" opacity="0.7"/>
-      <text x="518" y="372" font-size="9" fill="#3a3028" font-family="sans-serif">CA-85</text>
-
-      <line x1="499" y1="384" x2="514" y2="384" stroke="#6a8040" stroke-width="1.8" opacity="0.7"/>
-      <text x="518" y="388" font-size="9" fill="#3a3028" font-family="sans-serif">CA-237</text>
-
-      <text x="518" y="404" font-size="9" fill="#3a3028" font-family="sans-serif">🍎🔍👥 科技园区</text>
-
-      <!-- North arrow -->
-      <text x="645" y="72" font-size="18" fill="#888" font-family="sans-serif" text-anchor="middle">↑</text>
-      <text x="645" y="88" font-size="9" fill="#888" font-family="sans-serif" text-anchor="middle" font-weight="700">N</text>
-
-      <!-- Scale bar -->
-      <line x1="500" y1="458" x2="556" y2="458" stroke="#888" stroke-width="1.5"/>
-      <line x1="500" y1="454" x2="500" y2="462" stroke="#888" stroke-width="1.5"/>
-      <line x1="556" y1="454" x2="556" y2="462" stroke="#888" stroke-width="1.5"/>
-      <text x="510" y="472" font-size="8" fill="#888" font-family="sans-serif">≈ 10 miles</text>
-
-    </svg>
-    <div style="font-size:0.72rem; color:var(--muted); padding:6px 18px 12px; text-align:center;">示意图，非精确地理比例 · 城市点位为近似位置 · 公路走向已简化</div>
   </div>
 
   <div class="risk-box" style="margin-bottom:32px; color:#5a3020; background:#fdf5f0; border-color:#e8c4a8; border-left-color:#c0623a;">
