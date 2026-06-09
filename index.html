@@ -1232,6 +1232,7 @@
         { name:'Portola Valley',q:'Portola Valley, CA',lat:37.3766,lng:-122.2108,color:tier1,tier:'第一层',note:'I-280西侧山边，马场地产，均价$4M–$8M，比 Los Altos Hills 流动性略低' },
         { name:'Stanford',q:'Stanford, CA',lat:37.4275,lng:-122.1697,color:landmark,tier:'地标',note:'Stanford大学（94305）—极少数住宅为大学教职员工配套，非公开市场' },
         { name:'Moffett Field',q:'Moffett Field, CA',lat:37.4089,lng:-122.0492,color:landmark,tier:'地标',note:'NASA Ames + 联邦军事设施（94035），无住宅市场' },
+        { name:'Millbrae',   q:'Millbrae, CA',   lat:37.5985, lng:-122.3869, color:tier2, tier:'第二层', note:'94030，唯一同时拥有BART+Caltrain的半岛城市，Mills HS 9/10，SFO飞机噪音是主要折价因素，均价$2.1M' },
         { name:'San Carlos', q:'San Carlos, CA', lat:37.5070, lng:-122.2605, color:tier2, tier:'第二层', note:'94070，Carlmont HS 8/10，半岛中段精致小城，均价$2.3M' },
         { name:'Belmont',    q:'Belmont, CA',    lat:37.5202, lng:-122.2758, color:tier2, tier:'第二层', note:'94002，同属 Carlmont 学区，均价$2.1M，性价比略优于San Carlos' },
         { name:'W. San Jose',q:'West San Jose, CA',lat:37.3065,lng:-121.9986,color:tier2,tier:'第二层',note:'95129（Lynbrook HS 9/10，Cupertino同学区）均价$2.5M，常被低估的宝藏地段' },
@@ -1307,7 +1308,7 @@
         '95129':tier2,
         // Burlingame 无独立 ZCTA，94011 是 PO Box；用 San Mateo ZIPs 代表该段
         '94401':tier2,'94402':tier2,'94403':tier2,'94114':tier2,'94115':tier2,
-        '94065':tier2,'94070':tier2,'94002':tier2,
+        '94065':tier2,'94070':tier2,'94002':tier2,'94030':tier2,
         // SF AI district — SoMa / Mission Bay
         '94103':tier2,'94107':tier2,'94158':tier2,'94105':tier2,
         '95051':tier3,'95050':tier3,'95054':tier3,'94539':tier3,'94538':tier3,
@@ -1334,7 +1335,7 @@
         }).addTo(map);
       }
 
-      var CACHE_KEY = 'bayarea_zip_geo_v17';
+      var CACHE_KEY = 'bayarea_zip_geo_v18';
       var cached = localStorage.getItem(CACHE_KEY);
       if (cached) {
         try { renderZipLayer(JSON.parse(cached)); } catch(e) { localStorage.removeItem(CACHE_KEY); }
@@ -2371,6 +2372,53 @@
             <span class="lc-tag g">交钥匙即住</span>
           </div>
           <div class="lc-note">2024年经历了"每一寸都重新设计"的全面翻新，达到新建同等品质。Burlingame Village 是半岛最受欢迎的家庭社区之一，这类精装翻新盘上市即售。</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 94030 Millbrae -->
+    <div class="zip-block">
+      <div class="zip-header">
+        <div class="zip-left">
+          <span class="zip-code">94030</span>
+          <span class="zip-city">Millbrae</span>
+        </div>
+        <div class="zip-stats">
+          <div class="zstat"><span class="zval up">$2.08M</span><span class="zlabel">中位成交价</span></div>
+          <div class="zstat"><span class="zval up">↑3.9%</span><span class="zlabel">同比涨幅</span></div>
+          <div class="zstat"><span class="zval neutral">14天</span><span class="zlabel">平均成交</span></div>
+          <div class="zstat"><span class="zval school">★★★★☆</span><span class="zlabel">学区评级</span></div>
+          <div class="zstat"><span class="zval neutral">102%</span><span class="zlabel">成交/要价比</span></div>
+        </div>
+      </div>
+      <div class="zip-school-note">🏫 <strong>Mills High School</strong> 9/10 · <strong>Taylor Middle School</strong> 7/10 · <strong>Green Hills Elementary</strong> 9/10 — 半岛中被低估的学区，Mills HS 与 Burlingame High 同属 SM Union 高中区，学区品质接近但价格低 15–20%</div>
+      <div class="zip-commute">🚗 <strong>通勤：</strong>近 <span class="ctag">BART</span><span class="ctag">Caltrain</span><span class="ctag">US-101</span> · SF市中心 <strong>20分钟</strong>（BART）· Palo Alto <strong>25分钟</strong>（Caltrain）· Meta HQ <strong>20分钟</strong> · Apple Park <strong>30分钟</strong> · 半岛唯一 BART+Caltrain 双系统换乘站，无车族最优解</div>
+      <div class="zip-profile">👥 <strong>典型住户：</strong><span class="ptag">华裔家庭</span><span class="ptag">无车通勤族</span><span class="ptag">SF外迁+子女学区需求</span> · 华人文化配套完善（Ranch 99、中餐馆密集），社区成熟稳定</div>
+      <div class="zip-multi" style="background:#fff8e8; border:1px solid #e8d8a0; border-radius:10px; padding:12px 16px; margin:10px 0; font-size:0.84rem; color:#5a4a10;">
+        ✈️ <strong>SFO 飞机噪音策略：</strong>Millbrae 部分街区直接在 SFO 进场航线下方，早 6 点至晚 11 点飞机频繁。购房前建议：① 用 FlightAware 查看目标地址的航线高度；② 周末白天在房子里待 1 小时感受实际噪音；③ 优先选择 El Camino Real 以西的山坡侧街区（地势较高，噪音相对小）。靠近 101 的平地区噪音最重。
+      </div>
+      <div class="listing-row">
+        <div class="listing-card">
+          <div class="lc-price t2">$2,280,000</div>
+          <div class="lc-addr">Millbrae 山坡侧住宅区</div>
+          <div class="lc-spec">4卧 / 2浴 / 1,900 sqft · El Camino 以西</div>
+          <div class="lc-tags">
+            <span class="lc-tag g">Mills HS 9/10</span>
+            <span class="lc-tag g">BART+Caltrain步行圈</span>
+            <span class="lc-tag g">噪音相对小</span>
+          </div>
+          <div class="lc-note">El Camino 以西山坡段，远离 101 飞机噪音最重区域。Mills HS 9/10 学区与 Burlingame 相当，均价低约 $500K。双站点通勤优势稀缺，适合以公共交通为主的科技家庭。</div>
+        </div>
+        <div class="listing-card">
+          <div class="lc-price t2">$1,780,000</div>
+          <div class="lc-addr">Millbrae 近 BART 站区域</div>
+          <div class="lc-spec">3卧 / 2浴 / 1,500 sqft · 步行至 Millbrae 站</div>
+          <div class="lc-tags">
+            <span class="lc-tag g">BART步行5分钟</span>
+            <span class="lc-tag g">半岛入场价</span>
+            <span class="lc-tag w">噪音需确认</span>
+          </div>
+          <div class="lc-note">Millbrae 最低入场价，步行至 BART/Caltrain 双站。购前必须实地确认该具体街道的飞机噪音情况，噪音差异在 Millbrae 内部可以相差很大。适合通勤极度依赖公共交通的家庭。</div>
         </div>
       </div>
     </div>
