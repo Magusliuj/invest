@@ -34,8 +34,10 @@ SESSION.headers.update({
     "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
                   "AppleWebKit/537.36 (KHTML, like Gecko) "
                   "Chrome/124.0.0.0 Safari/537.36",
+    "Accept": "application/json, text/plain, */*",
     "Accept-Language": "en-US,en;q=0.9",
     "Referer": "https://www.redfin.com/",
+    "X-Requested-With": "XMLHttpRequest",
 })
 
 # ── ZIP Registry ─────────────────────────────────────────────────────────────
@@ -140,10 +142,10 @@ def redfin_get(path: str, params: dict) -> dict:
     return json.loads(text)
 
 
-def get_region_id(zip_code: str) -> str | None:
+def get_region_id(zip_code: str):
     """Resolve a ZIP code to Redfin's internal region ID."""
     try:
-        data = redfin_get("/api/v1/search/autocomplete", {"location": zip_code, "v": 2})
+        data = redfin_get("/do/location-autocomplete", {"location": zip_code, "v": 2})
         for item in data.get("payload", {}).get("sections", []):
             for result in item.get("rows", []):
                 if result.get("type") == 2:  # type 2 = ZIP
@@ -214,7 +216,7 @@ def get_recent_sales(region_id: str, zip_code: str, count: int = 3) -> list:
 
 # ── Tier auto-detection ───────────────────────────────────────────────────────
 
-def suggest_tier(median_price: float | None, current_tier: int) -> dict:
+def suggest_tier(median_price, current_tier: int) -> dict:
     """Compare median price against thresholds; flag if tier may have changed."""
     if median_price is None:
         return {"suggested_tier": current_tier, "tier_changed": False}
