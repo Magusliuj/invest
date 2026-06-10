@@ -52,7 +52,20 @@
   <!-- 住户画像：职业标签 + 收入 + 购房动机 -->
   <div class="zip-profile">👥 <strong>典型住户：</strong><span class="ptag">标签1</span><span class="ptag">标签2</span> · 年收入 $XXX–$XXXK，购房动机说明</div>
 
-  <!-- Listing 卡片：1–3 张 -->
+  <!--
+    zip-multi（可选）：同城市内各 ZIP / 子区域差异对比。
+    用 ztag-good（吉/推荐）、ztag-mid（中性）、ztag-bad（慎选/凶）三级标签，2-3 个均可。
+    例：94010 Burlingame Village/Broadway ★★★★☆ 学区最好，生活配套齐全，$2.8M–3.5M /
+        94010 Ray Park/Easton Addition ★★★☆☆ 安静住宅，稍远 Downtown，$2.5M 附近 /
+        94010 靠近 101/SFO 航线下方 ★★☆☆☆ 飞机噪音严重，白天不定期轰鸣，同价位坚决避开
+  -->
+  <div class="zip-multi">🗺 <strong>City Name 各 ZIP 差异：</strong>
+    <span class="ztag-good">94XXX 区域A名称 ★★★★☆</span> 优势说明，价格区间 $X.XM–$X.XM
+    <span class="ztag-mid">94XXX 区域B名称 ★★★☆☆</span> 中性说明，价格区间 $X.XM 附近
+    <span class="ztag-bad">94XXX 区域C名称 ★★☆☆☆</span> 风险/劣势说明，同价位坚决避开
+  </div>
+
+  <!-- Listing 卡片：1–3 张（同一城市内不同 ZIP 共用真实房源时不要为凑数而虚构不同 listing） -->
   <div class="listing-row">
     <div class="listing-card">
       <div class="lc-price t2">$X,XXX,000</div>
