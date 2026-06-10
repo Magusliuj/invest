@@ -21,6 +21,7 @@ import re
 import sys
 from datetime import date, datetime
 from pathlib import Path
+from typing import Optional, Tuple
 
 ROOT        = Path(__file__).parent.parent
 LATEST_PATH = ROOT / "data" / "latest.json"
@@ -73,25 +74,38 @@ def price_class(yoy) -> str:
     return "up" if yoy >= 0 else "down"
 
 
-def build_stats_html(zip_code: str, data: dict) -> str:
-    """Build the zip-stats div content from fetched data."""
-    stats = data.get("stats", {})
-    mp    = stats.get("median_price")
-    yoy   = stats.get("yoy_change")
-    dom   = stats.get("median_dom")
-    s2l   = stats.get("sale_to_list")
-    cls   = price_class(yoy)
-
-    return (
-        f'<div class="zstat"><span class="zval {cls}">{fmt_price_clean(mp)}</span>'
-        f'<span class="zlabel">中位成交价</span></div>'
-        f'<div class="zstat"><span class="zval {cls}">{fmt_yoy(yoy)}</span>'
-        f'<span class="zlabel">同比涨幅</span></div>'
-        f'<div class="zstat"><span class="zval neutral">{fmt_dom(dom)}</span>'
-        f'<span class="zlabel">平均成交</span></div>'
-        f'<div class="zstat"><span class="zval neutral">{fmt_ratio(s2l)}</span>'
-        f'<span class="zlabel">成交/要价比</span></div>'
+def update_zstat(block: str, label: str, new_value: str, new_class: str) -> Tuple[str, bool]:
+    """Within a zip-block substring, update the value+class of the zstat whose zlabel matches."""
+    pattern = re.compile(
+        r'(<div class="zstat"><span class="zval )([\w\s-]+)(">)([^<]*)(</span><span class="zlabel">'
+        + re.escape(label) + r'</span></div>)'
     )
+    def repl(m):
+        return m.group(1) + new_class + m.group(3) + new_value + m.group(5)
+    new_block, n = pattern.subn(repl, block, count=1)
+    return new_block, n > 0
+
+
+def current_price_usd(block: str) -> Optional[int]:
+    """Parse the existing 中位成交价 value (e.g. '$14.8M' or '$3.6M–4.1M') into a dollar int.
+    Ranges return the midpoint. Returns None if unparseable."""
+    m = re.search(
+        r'<div class="zstat"><span class="zval [\w\s-]+">([^<]*)</span>'
+        r'<span class="zlabel">中位成交价</span></div>',
+        block,
+    )
+    if not m:
+        return None
+    raw = m.group(1).replace(',', '').replace('$', '').strip()
+    nums = re.findall(r'(\d+(?:\.\d+)?)\s*M', raw)
+    if not nums:
+        return None
+    vals = [float(n) * 1_000_000 for n in nums]
+    return int(sum(vals) / len(vals))
+
+
+# Skip a price update if the new value differs from current by more than this fraction.
+PRICE_DRIFT_THRESHOLD = 0.25
 
 
 def build_listings_html(zip_code: str, data: dict) -> str:
@@ -138,32 +152,64 @@ def build_listings_html(zip_code: str, data: dict) -> str:
 
 def patch_zip_block(html: str, zip_code: str, zip_data: dict) -> str:
     """
-    Find the zip-block for a given ZIP in the HTML and update:
-    - The zip-stats section (price, YoY, DOM, ratio)
-    - Auto-listing markers if present
+    Surgically update the price (中位成交价) and YoY (同比涨幅) zstats inside
+    the zip-block for this ZIP. Hand-curated DOM/school/ratio stats are left
+    untouched (Zillow doesn't have ZIP-level DOM or sale/list ratio anyway).
+
+    Auto-listing markers, if present, are also refreshed.
     """
 
-    # ── 1. Update stats ──────────────────────────────────────────────────────
-    # Find the zip-block that contains this zip code
-    # Strategy: find <span class="zip-code">94027</span> then walk forward
-    # to the zip-stats div and replace its contents.
+    # ── 1. Locate this zip-block's slice of the HTML ─────────────────────────
+    anchor = f'<span class="zip-code">{zip_code}</span>'
+    start = html.find(anchor)
+    if start == -1:
+        return html
+    # Block ends at the next zip-block opening, or end of file
+    next_block = html.find('<div class="zip-block">', start + len(anchor))
+    end = next_block if next_block != -1 else len(html)
+    block = html[start:end]
 
-    zip_pattern = re.compile(
-        r'(<span class="zip-code">' + re.escape(zip_code) + r'</span>.*?'
-        r'<div class="zip-stats">)(.*?)(</div>\s*</div>\s*</div>)',
-        re.DOTALL
-    )
+    # ── 2. Update price + YoY in place ───────────────────────────────────────
+    # Price update rules (guard against ZHVI smearing over hand-curated medians):
+    #   (a) only accept Redfin prices — ZHVI is a smoothed model of all housing
+    #       stock and routinely diverges from actual sale medians.
+    #   (b) skip if the new value differs from the existing value by more than
+    #       PRICE_DRIFT_THRESHOLD — likely a metric mismatch or ZIP miscoverage.
+    redfin_price = zip_data.get("redfin_price")
+    stats  = zip_data.get("stats", {})
+    yoy    = stats.get("yoy_change")
+    cls    = price_class(yoy)
+    source = zip_data.get("price_source", "")
 
-    stats_html = build_stats_html(zip_code, zip_data)
+    updates = []
+    skips = []
 
-    def replace_stats(m):
-        return m.group(1) + "\n          " + stats_html + "\n        " + m.group(3)
+    if redfin_price is None:
+        skips.append(f"price skipped (no redfin: source={source})")
+    else:
+        current = current_price_usd(block)
+        if current and abs(redfin_price - current) / current > PRICE_DRIFT_THRESHOLD:
+            skips.append(
+                f"price skipped (drift {fmt_price_clean(current)}→"
+                f"{fmt_price_clean(redfin_price)} exceeds {int(PRICE_DRIFT_THRESHOLD*100)}%)"
+            )
+        else:
+            block, ok = update_zstat(block, "中位成交价", fmt_price_clean(redfin_price), cls)
+            if ok:
+                updates.append(f"price={fmt_price_clean(redfin_price)}[redfin]")
 
-    html, n = re.subn(zip_pattern, replace_stats, html, count=1)
-    if n:
-        print(f"  [{zip_code}] stats updated")
+    if yoy is not None:
+        block, ok = update_zstat(block, "同比涨幅", fmt_yoy(yoy), cls)
+        if ok:
+            updates.append(f"yoy={fmt_yoy(yoy)}")
 
-    # ── 2. Update auto-listing markers ────────────────────────────────────────
+    msg = " ".join(updates + skips)
+    if msg:
+        print(f"  [{zip_code}] {msg}")
+
+    html = html[:start] + block + html[end:]
+
+    # ── 3. Update auto-listing markers ────────────────────────────────────────
     marker_start = f"<!-- AUTO_LISTINGS:{zip_code} -->"
     marker_end   = f"<!-- /AUTO_LISTINGS:{zip_code} -->"
     new_listings = build_listings_html(zip_code, zip_data)
@@ -180,17 +226,6 @@ def patch_zip_block(html: str, zip_code: str, zip_data: dict) -> str:
         )
         print(f"  [{zip_code}] auto-listings updated")
 
-    return html
-
-
-def update_last_updated(html: str, today: str) -> str:
-    """Update or insert a 'last updated' badge near the top of the page."""
-    badge = f'<span id="last-updated" style="font-size:0.75rem;color:var(--muted);margin-left:12px;">数据更新：{today}</span>'
-    if 'id="last-updated"' in html:
-        html = re.sub(r'<span id="last-updated"[^>]*>.*?</span>', badge, html)
-    else:
-        # Insert after the first <h1>
-        html = re.sub(r'(<h1[^>]*>.*?</h1>)', r'\1\n    ' + badge, html, count=1, flags=re.DOTALL)
     return html
 
 
@@ -225,14 +260,9 @@ def main():
             continue
         html = patch_zip_block(html, zip_code, zip_data)
 
-    # Update timestamp
-    html = update_last_updated(html, today)
-
-    # Write tier alerts as an HTML comment for visibility
-    if alerts:
-        alert_block = "\n<!-- TIER ALERTS " + today + ":\n" + "\n".join(alerts) + "\n-->\n"
-        html = re.sub(r'<!-- TIER ALERTS.*?-->\n?', '', html, flags=re.DOTALL)
-        html = alert_block + html
+    # Strip any stale tier-alert comment block left by older versions of this
+    # script — alerts are stdout-only now.
+    html = re.sub(r'<!-- TIER ALERTS.*?-->\n?', '', html, flags=re.DOTALL)
 
     HTML_PATH.write_text(html, encoding="utf-8")
     print(f"\n✓ index.html patched")
