@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head><meta charset="UTF-8"><title>ZIP Block Template</title></head>
+<body>
+<!--
+  ZIP BLOCK 标准结构
+  ==================
+  复制 <div class="zip-block"> 整段新增区块。
+  所有 5 项统计必须存在，zlabel 文字不可修改（patcher 依赖精确匹配）。
+
+  zval class：
+    up      正向数值（价格上涨、高成交比）
+    down    负向数值（价格下跌）
+    neutral 中性 / 无方向
+    school  学区评级专用（★ 星级）
+
+  zip-block tier class：
+    t1  Tier 1 ($2.8M+)
+    t2  Tier 2 ($1.6–2.8M)
+    t3  Tier 3 ($0.9–1.6M)
+    t4  Tier 4 (<$0.9M)
+
+  自动更新 vs 手动维护：
+    ① 中位成交价  — patch_html.py 每日自动更新（ZHVI / Redfin）
+    ② 同比涨幅    — patch_html.py 每日自动更新（ZHVI YoY）
+    ③ 平均成交    — 手动维护（天数）
+    ④ 学区评级    — 手动维护（★☆ 五星）
+    ⑤ 成交/要价比 — 手动维护（>100% 表示抢价）
+-->
+
+<div class="zip-block t2">
+  <div class="zip-header">
+    <div class="zip-left">
+      <span class="zip-code">94XXX</span>
+      <span class="zip-city">City Name</span>
+    </div>
+    <div class="zip-stats">
+      <div class="zstat"><span class="zval up">$X.XXM</span><span class="zlabel">中位成交价</span></div>
+      <div class="zstat"><span class="zval up">↑X.X%</span><span class="zlabel">同比涨幅</span></div>
+      <div class="zstat"><span class="zval neutral">XX天</span><span class="zlabel">平均成交</span></div>
+      <div class="zstat"><span class="zval school">★★★★☆</span><span class="zlabel">学区评级</span></div>
+      <div class="zstat"><span class="zval neutral">100%</span><span class="zlabel">成交/要价比</span></div>
+    </div>
+  </div>
+
+  <!-- 学区详情：小学 / 初中 / 高中 + GreatSchools 评分 -->
+  <div class="zip-school-note">🏫 <strong>Elementary</strong> X/10 · <strong>Middle</strong> X/10 · <strong>High School</strong> X/10 — 补充说明</div>
+
+  <!-- 通勤：高速/Caltrain + 到主要科技公司车程 -->
+  <div class="zip-commute">🚗 <strong>通勤：</strong>近 <span class="ctag">US-101</span><span class="ctag">I-280</span> · 公司A <strong>X分钟</strong> · 公司B <strong>X分钟</strong> · SF <strong>X分钟</strong></div>
+
+  <!-- 住户画像：职业标签 + 收入 + 购房动机 -->
+  <div class="zip-profile">👥 <strong>典型住户：</strong><span class="ptag">标签1</span><span class="ptag">标签2</span> · 年收入 $XXX–$XXXK，购房动机说明</div>
+
+  <!-- Listing 卡片：1–3 张 -->
+  <div class="listing-row">
+    <div class="listing-card">
+      <div class="lc-price t2">$X,XXX,000</div>
+      <div class="lc-addr">Street / 区域描述</div>
+      <div class="lc-spec">X卧 / X浴 / X,XXX sqft</div>
+      <div class="lc-tags">
+        <span class="lc-tag g">亮点</span>
+        <span class="lc-tag">普通</span>
+        <span class="lc-tag w">风险</span>
+      </div>
+      <div class="lc-note">成交背景、竞争情况、买家特征等 1–2 句。</div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

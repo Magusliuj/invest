@@ -1,3 +1,24 @@
+
+<!-- TIER ALERTS 2026-06-09:
+⚠ TIER ALERT: 94062 Woodside — current=tier1, suggested=tier2 (median $2.71M)
+⚠ TIER ALERT: 94303 Palo Alto — current=tier1, suggested=tier2 (median $2.14M)
+⚠ TIER ALERT: 94043 Mountain View — current=tier2, suggested=tier3 (median $1.6M)
+⚠ TIER ALERT: 94087 Sunnyvale — current=tier2, suggested=tier1 (median $2.9M)
+⚠ TIER ALERT: 94401 San Mateo — current=tier2, suggested=tier3 (median $1.22M)
+⚠ TIER ALERT: 95051 Santa Clara — current=tier3, suggested=tier2 (median $1.93M)
+⚠ TIER ALERT: 95050 Santa Clara — current=tier3, suggested=tier2 (median $1.66M)
+⚠ TIER ALERT: 95117 West San Jose — current=tier3, suggested=tier2 (median $1.82M)
+⚠ TIER ALERT: 95130 West San Jose — current=tier3, suggested=tier2 (median $2.21M)
+⚠ TIER ALERT: 94404 Foster City — current=tier3, suggested=tier2 (median $1.76M)
+⚠ TIER ALERT: 95124 San Jose — current=tier3, suggested=tier2 (median $2.01M)
+⚠ TIER ALERT: 95008 Campbell — current=tier3, suggested=tier2 (median $1.95M)
+⚠ TIER ALERT: 95037 Morgan Hill — current=tier4, suggested=tier3 (median $1.36M)
+-->
+<!--
+  ZIP BLOCK 标准结构 — 见 scripts/zip_block_template.html
+  5 项统计（zlabel 不可改）：中位成交价 / 同比涨幅 / 平均成交 / 学区评级 / 成交/要价比
+  ① ② 由 patch_html.py 每日自动更新；③ ④ ⑤ 手动维护
+-->
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -650,6 +671,7 @@
 <div class="hero">
   <div class="hero-eyebrow">2026 · 湾区置业研究报告</div>
   <h1>买房<em>深度解读</em></h1>
+    <span id="last-updated" style="font-size:0.75rem;color:var(--muted);margin-left:12px;">数据更新：2026-06-09</span>
   <div class="hero-lead">
     好区持续升值，普通区越来越难涨——这是结构性分化，不是短期波动。本报告梳理各地段的学区质量、通勤成本与价格走势，建立一套可执行的置业判断框架。
   </div>
@@ -1203,6 +1225,7 @@
       <span><span style="display:inline-block;width:11px;height:11px;border-radius:50%;background:#c0623a;margin-right:4px;vertical-align:middle;"></span>第三层 明显短板房</span>
       <span><span style="display:inline-block;width:11px;height:11px;border-radius:50%;background:#b04a38;margin-right:4px;vertical-align:middle;"></span>第四层 远郊消费品</span>
       <span><span style="display:inline-block;width:11px;height:11px;border-radius:50%;background:#3d6b9e;margin-right:4px;vertical-align:middle;"></span>科技园区</span>
+      <span><span style="display:inline-block;width:11px;height:11px;border-radius:50%;background:#5a7a52;margin-right:4px;vertical-align:middle;"></span>圣克鲁兹山脉（野火风险区）</span>
     </div>
 
     <!-- Leaflet JS -->
@@ -1218,7 +1241,7 @@
         maxZoom: 14
       }).addTo(map);
 
-      var tier1 = '#3a8c5c', tier2 = '#c9880a', tier3 = '#c0623a', tier4 = '#b04a38', tech = '#3d6b9e', landmark = '#7b5ea7';
+      var tier1 = '#3a8c5c', tier2 = '#c9880a', tier3 = '#c0623a', tier4 = '#b04a38', tech = '#3d6b9e', landmark = '#7b5ea7', mountain = '#5a7a52';
 
       var cities = [
         // Tier 1 — 稀缺资产（10/10学区 + 极强稀缺性）
@@ -1241,8 +1264,6 @@
         { name:'Belmont',    q:'Belmont, CA',    lat:37.5202, lng:-122.2758, color:tier2, tier:'第二层', note:'94002，同属 Carlmont 学区，均价$2.1M，性价比略优于San Carlos' },
         { name:'W. San Jose',q:'West San Jose, CA',lat:37.3065,lng:-121.9986,color:tier2,tier:'第二层',note:'95129（Lynbrook HS 9/10，Cupertino同学区）均价$2.5M，常被低估的宝藏地段' },
         { name:'Morgan Hill', q:'Morgan Hill, CA', lat:37.1305,lng:-121.6544,color:tier4,tier:'第四层',note:'95037/95038，Los Gatos以南15英里，均价$1.2M，通勤45–60分钟，完全不同的市场逻辑' },
-        { name:'圣克鲁兹山脉', q:'Santa Cruz Mountains, CA', lat:37.19,lng:-122.04,color:'#888888',tier:'地理边界',note:'硅谷居民区的南端终点——Hwy 17穿越山脉至Scotts Valley，山区（Lexington Hills 95033）有少量住宅但属野火高风险区，非通勤市场' },
-
         // ── VC & AI 地标 ──
         { name:'Sand Hill Rd', q:'Sand Hill Road, Menlo Park, CA', lat:37.4196,lng:-122.2025,color:'#1a6fa8',tier:'VC 走廊',note:'全球VC密度最高的3英里——Sequoia、a16z、Kleiner Perkins、Benchmark、NEA 均在此，紧邻 Menlo Park 94025' },
         { name:'OpenAI · xAI', q:'SoMa San Francisco, CA', lat:37.7749,lng:-122.4094,color:'#1a6fa8',tier:'AI 总部',note:'SoMa/Mission Bay（94103/94107/94158）——OpenAI、Anthropic、xAI、Scale AI 等 AI 巨头聚集，带动 SF 租房需求逆势走强' },
@@ -1272,6 +1293,16 @@
         // Tier 4
         { name:'Antioch',     q:'Antioch, CA',     lat:37.9963, lng:-121.8058, color:tier4, tier:'第四层', note:'通勤 90min，WFH退潮后需求萎缩，学区差' },
         { name:'Tracy',       q:'Tracy, CA',       lat:37.7397, lng:-121.4252, color:tier4, tier:'第四层', note:'通勤 110min，37天成交，流动性极差' },
+
+        // 圣克鲁兹山脉 山区城镇
+        { name:'Boulder Creek', q:'Boulder Creek, CA', lat:37.1263, lng:-122.1219, color:mountain, tier:'山区', note:'95006 — 圣克鲁兹山脉核心，野火高风险区（VHFHSZ），均价约 $0.8–1.2M，保险费用高昂，Hwy 9 通勤至 Cupertino 约 45–60 分钟，非主流居住市场' },
+        { name:'Felton',        q:'Felton, CA',        lat:37.0519, lng:-122.0672, color:mountain, tier:'山区', note:'95018 — 红木林中的小镇，基础设施弱，野火 + 洪水双重风险，少量艺术家/自然爱好者定居，非通勤市场' },
+        { name:'Los Gatos Mtns',q:'Lexington Hills, CA',lat:37.1872,lng:-122.0417,color:mountain, tier:'山区', note:'95033 — Lexington Hills，I-17 沿线山区，Los Gatos 学区但通勤极难，每年野火季高度紧张，保险拒保率上升' },
+        { name:'Pescadero',     q:'Pescadero, CA',     lat:37.2554,lng:-122.3840,color:mountain, tier:'山区/海岸', note:'94060 — Hwy 1 沿线海岸农业小镇，圣克鲁兹山脉西坡出口。极度偏远，无通勤可能性，以农场/牧场地产为主，均价 $0.8–1.5M，买家多为第二套度假屋或农业用地' },
+        { name:'La Honda',      q:'La Honda, CA',      lat:37.3210,lng:-122.2760,color:mountain, tier:'山区', note:'94020 — 圣克鲁兹山脉中段，Woodside 以西沿 La Honda Rd。极少量住宅，无商业配套，野火风险高，到 Woodside 约 20 分钟但山路蜿蜒，非通勤市场' },
+        { name:'Loma Mar',      q:'Loma Mar, CA',      lat:37.2710,lng:-122.3190,color:mountain, tier:'山区', note:'94021 — La Honda 与 Pescadero 之间，Pescadero Creek 谷地，极小社区，无商业配套，山路崎岖，非通勤市场' },
+        { name:'Half Moon Bay', q:'Half Moon Bay, CA', lat:37.4634,lng:-122.4286,color:tier3,    tier:'第三层', note:'94019 — 太平洋海岸城市，均价 $1.3–1.6M。海岸生活质量高，翻山到 Woodside/280 约 25–30 分钟，Half Moon Bay HS 约 7/10，流动性偏弱，买家圈子窄' },
+        { name:'San Gregorio',  q:'San Gregorio, CA',  lat:37.3274,lng:-122.3927,color:mountain,  tier:'山区/海岸', note:'94074 — Half Moon Bay 与 Pescadero 之间的海岸农场小村，无商业配套，农业/牧场地产为主，非居住通勤市场' },
 
         // Tech campuses（无边界）
         { name:'🍎 Apple Park', lat:37.3349, lng:-122.0090, color:tech,     tier:'科技园区', note:'Apple HQ，约12–15万员工，Cupertino/Sunnyvale核心' },
@@ -1321,6 +1352,18 @@
         '95117':tier3,'95128':tier3,'95130':tier3,
         '94404':tier3,'95123':tier3,'95124':tier3,'95120':tier2,'95008':tier3,'95116':tier3,'95122':tier3,
         '94509':tier4,'94531':tier4,'95376':tier4,'95377':tier4,'95037':tier4,'95038':tier4,
+        // 圣克鲁兹山脉 — 野火风险区，非通勤市场
+        '95006':mountain, // Boulder Creek
+        '95007':mountain, // Brookdale
+        '95005':mountain, // Ben Lomond
+        '95018':mountain, // Felton
+        '95033':mountain, // Los Gatos Mountains / Lexington Hills
+        '95017':mountain, // Corralitos / Eureka Canyon
+        '94060':mountain, // Pescadero — 海岸农业小镇，Hwy 1 沿线
+        '94074':mountain, // San Gregorio — Half Moon Bay 与 Pescadero 之间，农场小村
+        '94019':tier3,    // Half Moon Bay — 海岸城市，Tier 3
+        '94020':mountain, // La Honda — 圣克鲁兹山脉中段，Woodside 西边
+        '94021':mountain, // Loma Mar — La Honda 与 Pescadero 之间，Pescadero Creek 谷地
       };
 
       function renderZipLayer(data) {
@@ -1339,7 +1382,7 @@
         }).addTo(map);
       }
 
-      var CACHE_KEY = 'bayarea_zip_geo_v20';
+      var CACHE_KEY = 'bayarea_zip_geo_v26';
       var cached = localStorage.getItem(CACHE_KEY);
       if (cached) {
         try { renderZipLayer(JSON.parse(cached)); } catch(e) { localStorage.removeItem(CACHE_KEY); }
@@ -1378,7 +1421,7 @@
 
       // 样式
       var s = document.createElement('style');
-      s.textContent = '.map-label{background:none;border:none;box-shadow:none;font-size:10px;font-weight:700;color:#2a2018;text-shadow:0 0 3px #fff,0 0 3px #fff;white-space:nowrap;}.map-label::before{display:none;}';
+      s.textContent = '.map-label{background:none;border:none;box-shadow:none;font-size:10px;font-weight:700;color:#2a2018;text-shadow:0 0 3px #fff,0 0 3px #fff;white-space:nowrap;}.map-label::before{display:none;}.mountain-label{background:none;border:none;box-shadow:none;font-size:11px;font-weight:700;color:#3d5c38;text-shadow:0 0 4px rgba(255,255,255,0.9),0 0 4px rgba(255,255,255,0.9);white-space:nowrap;letter-spacing:0.5px;}.mountain-label::before{display:none;}';
       document.head.appendChild(s);
     })();
     </script>
@@ -1585,8 +1628,8 @@
           <span class="zip-city">Hillsborough</span>
         </div>
         <div class="zip-stats">
-          <div class="zstat"><span class="zval up">$5.8M</span><span class="zlabel">城市中位价</span></div>
-          <div class="zstat"><span class="zval down">↓24.1%</span><span class="zlabel">同比涨幅</span></div>
+          <div class="zstat"><span class="zval up">$5.8M</span><span class="zlabel">中位成交价</span></div>
+          <div class="zstat"><span class="zval up">↑5.9%</span><span class="zlabel">同比涨幅</span></div>
           <div class="zstat"><span class="zval neutral">30天+</span><span class="zlabel">平均成交</span></div>
           <div class="zstat"><span class="zval school">★★★★☆</span><span class="zlabel">学区评级</span></div>
           <div class="zstat"><span class="zval down">97%</span><span class="zlabel">成交/要价比</span></div>
@@ -1646,8 +1689,8 @@
           <span class="zip-city">Los Altos</span>
         </div>
         <div class="zip-stats">
-          <div class="zstat"><span class="zval up">$3.47M</span><span class="zlabel">中位成交价</span></div>
-          <div class="zstat"><span class="zval down">↓25.8%</span><span class="zlabel">同比涨幅</span></div>
+          <div class="zstat"><span class="zval up">$5.15M</span><span class="zlabel">中位成交价</span></div>
+          <div class="zstat"><span class="zval up">↑4.6%</span><span class="zlabel">同比涨幅</span></div>
           <div class="zstat"><span class="zval neutral">10天</span><span class="zlabel">平均成交</span></div>
           <div class="zstat"><span class="zval school">★★★★★</span><span class="zlabel">学区评级</span></div>
           <div class="zstat"><span class="zval up">109%</span><span class="zlabel">成交/要价比</span></div>
@@ -2039,10 +2082,10 @@
           <span class="zip-city">Menlo Park</span>
         </div>
         <div class="zip-stats">
-          <div class="zstat"><span class="zval neutral">$3.0M</span><span class="zlabel">全市中位价 · 2026年3月</span></div>
-          <div class="zstat"><span class="zval down">↓5.4%</span><span class="zlabel">同比涨幅</span></div>
+          <div class="zstat"><span class="zval neutral">$3.0M</span><span class="zlabel">中位成交价</span></div>
+          <div class="zstat"><span class="zval up">↑5.2%</span><span class="zlabel">同比涨幅</span></div>
           <div class="zstat"><span class="zval neutral">西侧14天 / 东侧30天+</span><span class="zlabel">平均成交（内部分化）</span></div>
-          <div class="zstat"><span class="zval school">★★★★★</span><span class="zlabel">西侧学区</span></div>
+          <div class="zstat"><span class="zval school">★★★★★</span><span class="zlabel">学区评级</span></div>
           <div class="zstat"><span class="zval neutral">102%</span><span class="zlabel">成交/要价比</span></div>
         </div>
       </div>
@@ -2152,8 +2195,8 @@
           <span class="zip-city">Cupertino</span>
         </div>
         <div class="zip-stats">
-          <div class="zstat"><span class="zval up">$2.90M</span><span class="zlabel">中位成交价</span></div>
-          <div class="zstat"><span class="zval up">↑5.2%</span><span class="zlabel">同比涨幅</span></div>
+          <div class="zstat"><span class="zval up">$3.18M</span><span class="zlabel">中位成交价</span></div>
+          <div class="zstat"><span class="zval up">↑1.8%</span><span class="zlabel">同比涨幅</span></div>
           <div class="zstat"><span class="zval neutral">8天</span><span class="zlabel">平均成交</span></div>
           <div class="zstat"><span class="zval school">★★★★★</span><span class="zlabel">学区评级</span></div>
           <div class="zstat"><span class="zval up">112%</span><span class="zlabel">成交/要价比</span></div>
@@ -2446,7 +2489,7 @@
           <span class="zip-city">Mountain View</span>
         </div>
         <div class="zip-stats">
-          <div class="zstat"><span class="zval neutral">$2.91M</span><span class="zlabel">中位成交价</span></div>
+          <div class="zstat"><span class="zval up">$2.91M</span><span class="zlabel">中位成交价</span></div>
           <div class="zstat"><span class="zval up">↑3.0%</span><span class="zlabel">同比涨幅</span></div>
           <div class="zstat"><span class="zval neutral">18天</span><span class="zlabel">平均成交</span></div>
           <div class="zstat"><span class="zval school">★★★☆☆</span><span class="zlabel">学区评级</span></div>
@@ -2518,7 +2561,7 @@
           <span class="zip-city">Sunnyvale</span>
         </div>
         <div class="zip-stats">
-          <div class="zstat"><span class="zval neutral">$2.90M</span><span class="zlabel">中位成交价</span></div>
+          <div class="zstat"><span class="zval up">$2.90M</span><span class="zlabel">中位成交价</span></div>
           <div class="zstat"><span class="zval up">↑1.0%</span><span class="zlabel">同比涨幅</span></div>
           <div class="zstat"><span class="zval neutral">24天</span><span class="zlabel">平均成交</span></div>
           <div class="zstat"><span class="zval school">★★★☆☆</span><span class="zlabel">学区评级</span></div>
@@ -2642,7 +2685,7 @@
           <span class="zip-city">Redwood City</span>
         </div>
         <div class="zip-stats">
-          <div class="zstat"><span class="zval up">$1.85M</span><span class="zlabel">中位成交价</span></div>
+          <div class="zstat"><span class="zval down">$1.85M</span><span class="zlabel">中位成交价</span></div>
           <div class="zstat"><span class="zval down">↓1.5%</span><span class="zlabel">同比涨幅</span></div>
           <div class="zstat"><span class="zval neutral">14天</span><span class="zlabel">平均成交</span></div>
           <div class="zstat"><span class="zval school">★★★☆☆</span><span class="zlabel">学区评级</span></div>
@@ -2743,7 +2786,7 @@
           <div class="zstat"><span class="zval up">$1.91M</span><span class="zlabel">中位成交价</span></div>
           <div class="zstat"><span class="zval up">↑10.9%</span><span class="zlabel">同比涨幅</span></div>
           <div class="zstat"><span class="zval neutral">11天</span><span class="zlabel">平均成交</span></div>
-          <div class="zstat"><span class="zval school">★★★★☆</span><span class="zlabel">位置/人群</span></div>
+          <div class="zstat"><span class="zval school">★★★★☆</span><span class="zlabel">学区评级</span></div>
           <div class="zstat"><span class="zval neutral">104%</span><span class="zlabel">成交/要价比</span></div>
         </div>
       </div>
@@ -2814,7 +2857,7 @@
           <div class="zstat"><span class="zval up">$1.46M</span><span class="zlabel">中位成交价</span></div>
           <div class="zstat"><span class="zval up">↑7.9%</span><span class="zlabel">同比涨幅</span></div>
           <div class="zstat"><span class="zval neutral">18天</span><span class="zlabel">平均成交</span></div>
-          <div class="zstat"><span class="zval school">★★☆☆☆</span><span class="zlabel">公立学区</span></div>
+          <div class="zstat"><span class="zval school">★★☆☆☆</span><span class="zlabel">学区评级</span></div>
           <div class="zstat"><span class="zval neutral">100%</span><span class="zlabel">成交/要价比</span></div>
         </div>
       </div>
@@ -2920,7 +2963,7 @@
           <span class="zip-city">San Bruno</span>
         </div>
         <div class="zip-stats">
-          <div class="zstat"><span class="zval neutral">$1.31M</span><span class="zlabel">中位成交价</span></div>
+          <div class="zstat"><span class="zval up">$1.31M</span><span class="zlabel">中位成交价</span></div>
           <div class="zstat"><span class="zval up">↑0.1%</span><span class="zlabel">同比涨幅</span></div>
           <div class="zstat"><span class="zval neutral">16天</span><span class="zlabel">平均成交</span></div>
           <div class="zstat"><span class="zval school">★★★☆☆</span><span class="zlabel">学区评级</span></div>
@@ -2967,7 +3010,7 @@
           <span class="zip-city">South San Francisco</span>
         </div>
         <div class="zip-stats">
-          <div class="zstat"><span class="zval neutral">$1.24M</span><span class="zlabel">中位成交价</span></div>
+          <div class="zstat"><span class="zval up">$1.24M</span><span class="zlabel">中位成交价</span></div>
           <div class="zstat"><span class="zval up">↑1.1%</span><span class="zlabel">同比涨幅</span></div>
           <div class="zstat"><span class="zval neutral">18天</span><span class="zlabel">平均成交</span></div>
           <div class="zstat"><span class="zval school">★★★☆☆</span><span class="zlabel">学区评级</span></div>
@@ -3074,7 +3117,7 @@
           <span class="zip-city">Newark</span>
         </div>
         <div class="zip-stats">
-          <div class="zstat"><span class="zval neutral">$1.25M</span><span class="zlabel">中位成交价</span></div>
+          <div class="zstat"><span class="zval down">$1.25M</span><span class="zlabel">中位成交价</span></div>
           <div class="zstat"><span class="zval down">↓5.5%</span><span class="zlabel">同比涨幅</span></div>
           <div class="zstat"><span class="zval neutral">18天</span><span class="zlabel">平均成交</span></div>
           <div class="zstat"><span class="zval school">★★★☆☆</span><span class="zlabel">学区评级</span></div>
@@ -3121,7 +3164,7 @@
           <span class="zip-city">Fremont（Mission San Jose）</span>
         </div>
         <div class="zip-stats">
-          <div class="zstat"><span class="zval neutral">$2.26M</span><span class="zlabel">中位成交价</span></div>
+          <div class="zstat"><span class="zval down">$2.26M</span><span class="zlabel">中位成交价</span></div>
           <div class="zstat"><span class="zval down">↓1.6%</span><span class="zlabel">同比涨幅</span></div>
           <div class="zstat"><span class="zval neutral">18天</span><span class="zlabel">平均成交</span></div>
           <div class="zstat"><span class="zval school">★★★★★</span><span class="zlabel">学区评级</span></div>
@@ -3174,7 +3217,7 @@
           <span class="zip-city">Milpitas</span>
         </div>
         <div class="zip-stats">
-          <div class="zstat"><span class="zval neutral">$1.49M</span><span class="zlabel">中位成交价</span></div>
+          <div class="zstat"><span class="zval down">$1.49M</span><span class="zlabel">中位成交价</span></div>
           <div class="zstat"><span class="zval down">↓3.0%</span><span class="zlabel">同比涨幅</span></div>
           <div class="zstat"><span class="zval neutral">16天</span><span class="zlabel">平均成交</span></div>
           <div class="zstat"><span class="zval school">★★★☆☆</span><span class="zlabel">学区评级</span></div>
@@ -3220,7 +3263,7 @@
           <span class="zip-city">Foster City</span>
         </div>
         <div class="zip-stats">
-          <div class="zstat"><span class="zval neutral">$1.76M</span><span class="zlabel">中位成交价</span></div>
+          <div class="zstat"><span class="zval down">$1.76M</span><span class="zlabel">中位成交价</span></div>
           <div class="zstat"><span class="zval down">↓0.8%</span><span class="zlabel">同比涨幅</span></div>
           <div class="zstat"><span class="zval neutral">21天</span><span class="zlabel">平均成交</span></div>
           <div class="zstat"><span class="zval school">★★★☆☆</span><span class="zlabel">学区评级</span></div>
@@ -3267,7 +3310,7 @@
           <span class="zip-city">San Jose（Blossom Valley）</span>
         </div>
         <div class="zip-stats">
-          <div class="zstat"><span class="zval neutral">$1.40M</span><span class="zlabel">中位成交价</span></div>
+          <div class="zstat"><span class="zval down">$1.40M</span><span class="zlabel">中位成交价</span></div>
           <div class="zstat"><span class="zval down">↓3.5%</span><span class="zlabel">同比涨幅</span></div>
           <div class="zstat"><span class="zval neutral">22天</span><span class="zlabel">平均成交</span></div>
           <div class="zstat"><span class="zval school">★★★☆☆</span><span class="zlabel">学区评级</span></div>
@@ -3378,7 +3421,7 @@
           <span class="zip-city">Antioch</span>
         </div>
         <div class="zip-stats">
-          <div class="zstat"><span class="zval neutral">$0.54M</span><span class="zlabel">中位成交价</span></div>
+          <div class="zstat"><span class="zval down">$0.54M</span><span class="zlabel">中位成交价</span></div>
           <div class="zstat"><span class="zval down">↓4.2%</span><span class="zlabel">同比涨幅</span></div>
           <div class="zstat"><span class="zval down">21天</span><span class="zlabel">平均成交</span></div>
           <div class="zstat"><span class="zval school">★★☆☆☆</span><span class="zlabel">学区评级</span></div>
@@ -3421,7 +3464,7 @@
           <span class="zip-city">Tracy</span>
         </div>
         <div class="zip-stats">
-          <div class="zstat"><span class="zval neutral">$0.60M</span><span class="zlabel">中位成交价</span></div>
+          <div class="zstat"><span class="zval down">$0.60M</span><span class="zlabel">中位成交价</span></div>
           <div class="zstat"><span class="zval down">↓6.3%</span><span class="zlabel">同比涨幅</span></div>
           <div class="zstat"><span class="zval down">37天</span><span class="zlabel">平均成交（慢）</span></div>
           <div class="zstat"><span class="zval school">★★☆☆☆</span><span class="zlabel">学区评级</span></div>
